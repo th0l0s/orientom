@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OrientoTommy — Scegli il Tuo Futuro | Adda Martesana 2026/27</title>
-  <meta name="description" content="Guida interattiva per scegliere la scuola superiore nell'area Adda Martesana. Scopri licei, tecnici, professionali e programmi internazionali." />
+  <meta name="description" content="Guida interattiva per scegliere la scuola superiore nell'area Adda Martesana. Scopri licei, tecnici, professionali, CFP e programmi internazionali." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
@@ -33,6 +33,7 @@
       --radius-lg: 24px;
       --shadow:  0 8px 32px rgba(0,0,0,0.4);
       --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --nav-h: 64px;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -80,32 +81,61 @@
 
     /* ── LAYOUT ── */
     .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
-    section { position: relative; z-index: 1; scroll-margin-top: 72px; }
+    section { position: relative; z-index: 1; scroll-margin-top: var(--nav-h); }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(8,12,24,0.8); backdrop-filter: blur(20px);
+      background: rgba(8,12,24,0.88); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--card-border);
-      padding: 14px 24px;
+      height: var(--nav-h);
+      padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between;
       transition: var(--transition);
     }
     .nav-logo { font-family: 'Space Grotesk',sans-serif; font-weight: 700; font-size: 1.2rem; }
     .nav-logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+    .nav-links { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
     .nav-link {
-      padding: 7px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 500;
+      padding: 7px 13px; border-radius: 8px; font-size: 0.85rem; font-weight: 500;
       color: var(--text2); background: transparent; border: none;
-      transition: var(--transition);
+      transition: var(--transition); cursor: pointer;
     }
     .nav-link:hover { color: var(--text); background: var(--glass); }
+    .nav-link.active { color: var(--text); background: var(--glass); border-bottom: 2px solid var(--primary); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
     .nav-cta {
       padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
       background: var(--primary); color: white; border: none;
-      transition: var(--transition);
+      transition: var(--transition); cursor: pointer;
     }
     .nav-cta:hover { background: #4f46e5; box-shadow: 0 0 20px var(--primary-glow); }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 8px; padding: 8px; cursor: pointer;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: var(--text2);
+      border-radius: 2px; transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU DRAWER ── */
+    .mobile-drawer {
+      display: none; position: fixed; top: var(--nav-h); left: 0; right: 0;
+      background: rgba(8,12,24,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 16px 24px 24px; z-index: 99;
+      flex-direction: column; gap: 8px;
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer .nav-link { font-size: 1rem; padding: 12px 16px; }
+    .mobile-drawer .nav-cta { padding: 12px 16px; font-size: 1rem; text-align: center; }
 
     /* ── HERO ── */
     #hero {
@@ -152,14 +182,14 @@
       background: linear-gradient(135deg, var(--primary), #4f46e5);
       color: white; border: none;
       box-shadow: 0 0 30px var(--primary-glow);
-      transition: var(--transition);
+      transition: var(--transition); cursor: pointer;
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px var(--primary-glow); }
     .btn-outline {
       padding: 14px 32px; border-radius: 12px; font-size: 1rem; font-weight: 600;
       background: transparent; color: var(--text);
       border: 1px solid var(--card-border);
-      transition: var(--transition);
+      transition: var(--transition); cursor: pointer;
     }
     .btn-outline:hover { border-color: var(--primary); background: var(--glass); transform: translateY(-2px); }
 
@@ -224,7 +254,7 @@
     .quiz-nav { display: flex; justify-content: space-between; margin-top: 28px; }
     .quiz-btn {
       padding: 11px 24px; border-radius: 10px; font-size: 0.95rem; font-weight: 600;
-      border: none; transition: var(--transition);
+      border: none; transition: var(--transition); cursor: pointer;
     }
     .quiz-btn.back { background: var(--glass); color: var(--text2); border: 1px solid var(--glass-border); }
     .quiz-btn.next { background: var(--primary); color: white; }
@@ -250,7 +280,6 @@
       background: var(--glass); border: 1px solid var(--glass-border);
       font-size: 0.9rem; font-weight: 500;
     }
-    .result-school-chip .chip-int { font-size: 0.75rem; color: var(--gold); }
     .quiz-restart {
       display: block; margin: 24px auto 0; padding: 11px 28px;
       border-radius: 10px; background: var(--glass); border: 1px solid var(--glass-border);
@@ -305,6 +334,7 @@
     .filter-btn:hover { color: var(--text); border-color: var(--primary); }
     .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
     .filter-btn.gold-filter.active { background: var(--gold); border-color: var(--gold); color: #1a1100; }
+    .filter-btn.cfp-filter.active { background: var(--green); border-color: var(--green); color: white; }
 
     .schools-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -313,7 +343,7 @@
     .school-card {
       background: var(--card-bg); border: 1px solid var(--card-border);
       border-radius: var(--radius-lg); overflow: hidden;
-      transition: var(--transition); cursor: pointer;
+      transition: var(--transition);
       position: relative;
     }
     .school-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
@@ -331,7 +361,8 @@
     .badge-liceo    { background: rgba(99,102,241,0.2); color: #a5b4fc; }
     .badge-tecnico  { background: rgba(34,211,238,0.2); color: #67e8f9; }
     .badge-prof     { background: rgba(16,185,129,0.2); color: #6ee7b7; }
-    .badge-cfp      { background: rgba(245,158,11,0.2); color: #fcd34d; }
+    .badge-cfp      { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+    .badge-privato  { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
     .badge-intl {
       background: rgba(245,158,11,0.15); color: var(--gold);
       border: 1px solid rgba(245,158,11,0.3);
@@ -352,7 +383,7 @@
     .intl-item-flag { font-size: 1.2rem; width: 28px; text-align: center; }
     .intl-item-name { font-size: 0.875rem; font-weight: 600; }
     .intl-item-desc { font-size: 0.8rem; color: var(--text3); }
-    .school-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+    .school-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; flex-wrap: wrap; gap: 8px; }
     .school-link {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 8px 16px; border-radius: 8px;
@@ -364,28 +395,55 @@
 
     /* ── TIMELINE ── */
     #timeline { padding: 100px 0; background: var(--bg2); }
-    .timeline-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0 32px; max-width: 900px; margin: 0 auto; }
-    .timeline-col { display: flex; flex-direction: column; gap: 0; }
-    .timeline-col.right { align-items: flex-end; }
-    .timeline-center { display: flex; flex-direction: column; align-items: center; }
-    .tl-line { width: 2px; flex: 1; background: linear-gradient(180deg, var(--primary), var(--cyan)); min-height: 20px; }
-    .tl-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--primary); border: 3px solid var(--bg2); box-shadow: 0 0 0 4px var(--primary-glow); flex-shrink: 0; }
-    .tl-dot.gold { background: var(--gold); box-shadow: 0 0 0 4px var(--gold-glow); }
+
+    /* Single vertical timeline */
+    .tl-container {
+      max-width: 680px; margin: 0 auto;
+      position: relative; padding-left: 48px;
+    }
+    .tl-container::before {
+      content: '';
+      position: absolute; left: 15px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--primary) 0%, var(--cyan) 60%, var(--gold) 100%);
+      border-radius: 2px;
+    }
+    .tl-event {
+      position: relative; padding-bottom: 36px;
+    }
+    .tl-event:last-child { padding-bottom: 0; }
+    .tl-dot-wrap {
+      position: absolute; left: -48px; top: 4px;
+      width: 32px; display: flex; justify-content: center;
+    }
+    .tl-dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg2);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+      flex-shrink: 0;
+    }
+    .tl-dot.gold {
+      background: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
     .tl-item {
       padding: 20px 24px; border-radius: var(--radius);
       background: var(--card-bg); border: 1px solid var(--card-border);
-      margin-bottom: 24px; position: relative;
+      position: relative;
     }
-    .tl-item.gold-item { border-color: rgba(245,158,11,0.25); }
+    .tl-item.gold-item { border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.04); }
+    .tl-year-tag {
+      display: inline-block; padding: 2px 10px; border-radius: 100px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(99,102,241,0.15); color: #a5b4fc;
+      margin-bottom: 8px;
+    }
+    .tl-year-tag.third { background: rgba(245,158,11,0.15); color: var(--gold); }
     .tl-date { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); margin-bottom: 6px; }
     .tl-date.gold { color: var(--gold); }
-    .tl-item-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
-    .tl-item-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.5; }
-    .timeline-label {
-      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text3); text-align: center;
-      padding: 12px 0; margin-bottom: 8px;
-    }
+    .tl-item-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .tl-item-desc { font-size: 0.85rem; color: var(--text2); line-height: 1.5; }
 
     /* ── ERASMUS INFO ── */
     #erasmus { padding: 80px 0; }
@@ -433,16 +491,17 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 12px 16px; }
+      nav { padding: 0 16px; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
       .quiz-options { grid-template-columns: 1fr; }
       .intl-banner-inner { grid-template-columns: 1fr; }
       .intl-globe { display: none; }
-      .timeline-grid { grid-template-columns: 1fr; gap: 0; }
-      .timeline-col.right { align-items: flex-start; }
-      .timeline-center { display: none; }
       .schools-grid { grid-template-columns: 1fr; }
       .hero-stats { gap: 24px; }
+      .tl-container { padding-left: 36px; }
+      .tl-dot-wrap { left: -36px; }
     }
     @media (max-width: 480px) {
       .quiz-card { padding: 28px 20px; }
@@ -461,32 +520,47 @@
 </div>
 
 <!-- NAV -->
-<nav>
+<nav id="mainNav">
   <div class="nav-logo">Oriento<span>Tommy</span></div>
-  <div class="nav-links">
-    <button class="nav-link" onclick="scrollToSection('#quiz')">Quiz</button>
-    <button class="nav-link" onclick="scrollToSection('#schools')">Scuole</button>
-    <button class="nav-link" onclick="scrollToSection('#intl-banner')">Internazionale</button>
-    <button class="nav-link" onclick="scrollToSection('#timeline')">Quando</button>
-    <button class="nav-link" onclick="scrollToSection('#risorse')">Risorse</button>
+  <div class="nav-links" id="navLinks">
+    <button type="button" class="nav-link" data-section="quiz"        onclick="scrollTo('quiz')">Quiz</button>
+    <button type="button" class="nav-link" data-section="schools"     onclick="scrollTo('schools')">Scuole</button>
+    <button type="button" class="nav-link" data-section="intl-banner" onclick="scrollTo('intl-banner')">Internazionale</button>
+    <button type="button" class="nav-link" data-section="timeline"    onclick="scrollTo('timeline')">Quando</button>
+    <button type="button" class="nav-link" data-section="risorse"     onclick="scrollTo('risorse')">Risorse</button>
   </div>
-  <button class="nav-cta" onclick="scrollToSection('#quiz')">Scopri la tua scuola →</button>
+  <div class="nav-right">
+    <button type="button" class="nav-cta" onclick="scrollTo('quiz')">Scopri la tua scuola →</button>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <button type="button" class="nav-link" onclick="scrollTo('quiz');toggleMobileMenu()">🎯 Quiz</button>
+  <button type="button" class="nav-link" onclick="scrollTo('schools');toggleMobileMenu()">🏫 Scuole</button>
+  <button type="button" class="nav-link" onclick="scrollTo('intl-banner');toggleMobileMenu()">🌍 Internazionale</button>
+  <button type="button" class="nav-link" onclick="scrollTo('timeline');toggleMobileMenu()">📅 Quando</button>
+  <button type="button" class="nav-link" onclick="scrollTo('risorse');toggleMobileMenu()">🔗 Risorse</button>
+  <button type="button" class="nav-cta" onclick="scrollTo('quiz');toggleMobileMenu()">Scopri la tua scuola →</button>
+</div>
 
 <!-- HERO -->
 <section id="hero">
   <div class="hero-content">
     <div class="hero-badge"><span class="dot"></span> Adda Martesana · A.S. 2026/2027</div>
     <h1 class="hero-title">Scegli il tuo<br><span class="grad">futuro con sicurezza</span></h1>
-    <p class="hero-sub">La guida interattiva per ragazzi di 2ª e 3ª media e famiglie. Esplora licei, tecnici, professionali e scopri i percorsi con esperienze internazionali.</p>
+    <p class="hero-sub">La guida interattiva per ragazzi di 2ª e 3ª media e famiglie. Esplora licei, tecnici, professionali, CFP e scopri i percorsi con esperienze internazionali.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="scrollToSection('#quiz')">🎯 Trova la tua scuola ideale</button>
-      <button class="btn-outline" onclick="scrollToSection('#schools')">🏫 Esplora tutte le scuole</button>
+      <button type="button" class="btn-primary" onclick="scrollTo('quiz')">🎯 Trova la tua scuola ideale</button>
+      <button type="button" class="btn-outline" onclick="scrollTo('schools')">🏫 Esplora tutte le scuole</button>
     </div>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Istituti mappati</div></div>
-      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Comuni</div></div>
-      <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Indirizzi</div></div>
+      <div class="stat-item"><div class="stat-num">11+</div><div class="stat-label">Istituti mappati</div></div>
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Comuni</div></div>
+      <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Indirizzi</div></div>
       <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Scuole con programmi 🌍</div></div>
     </div>
   </div>
@@ -502,7 +576,6 @@
       <p class="section-sub">5 domande per orientarti verso il percorso più adatto a te</p>
     </div>
     <div class="quiz-card reveal">
-      <!-- Progress -->
       <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgress" style="width:20%"></div></div>
 
       <!-- Q1 -->
@@ -510,14 +583,14 @@
         <div class="quiz-icon">🧠</div>
         <div class="quiz-q">Come preferisci imparare?</div>
         <div class="quiz-options">
-          <button class="quiz-opt" data-val="teoria" onclick="selectOpt(this)"><span class="opt-icon">📚</span>Studio teoria, concetti, libri</button>
-          <button class="quiz-opt" data-val="pratica" onclick="selectOpt(this)"><span class="opt-icon">🔧</span>Lavoro con le mani, pratica sul campo</button>
-          <button class="quiz-opt" data-val="mix" onclick="selectOpt(this)"><span class="opt-icon">⚖️</span>Un mix di entrambe</button>
-          <button class="quiz-opt" data-val="arte" onclick="selectOpt(this)"><span class="opt-icon">🎨</span>Creo, disegno, esprimo idee visive</button>
+          <button type="button" class="quiz-opt" data-val="teoria" onclick="selectOpt(this)"><span class="opt-icon">📚</span>Studio teoria, concetti, libri</button>
+          <button type="button" class="quiz-opt" data-val="pratica" onclick="selectOpt(this)"><span class="opt-icon">🔧</span>Lavoro con le mani, pratica sul campo</button>
+          <button type="button" class="quiz-opt" data-val="mix" onclick="selectOpt(this)"><span class="opt-icon">⚖️</span>Un mix di entrambe</button>
+          <button type="button" class="quiz-opt" data-val="arte" onclick="selectOpt(this)"><span class="opt-icon">🎨</span>Creo, disegno, esprimo idee visive</button>
         </div>
         <div class="quiz-nav">
-          <button class="quiz-btn back" disabled>← Indietro</button>
-          <button class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
+          <button type="button" class="quiz-btn back" disabled>← Indietro</button>
+          <button type="button" class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
         </div>
         <p class="quiz-counter">1 di 5</p>
       </div>
@@ -527,14 +600,14 @@
         <div class="quiz-icon">🌍</div>
         <div class="quiz-q">Quanto è importante per te un'esperienza all'estero?</div>
         <div class="quiz-options">
-          <button class="quiz-opt" data-val="intl-high" onclick="selectOpt(this)"><span class="opt-icon">✈️</span>Fondamentale! Voglio studiare/lavorare fuori Italia</button>
-          <button class="quiz-opt" data-val="intl-med" onclick="selectOpt(this)"><span class="opt-icon">🌐</span>Mi piacerebbe, ma non è prioritaria</button>
-          <button class="quiz-opt" data-val="intl-low" onclick="selectOpt(this)"><span class="opt-icon">🏠</span>Preferisco restare sul territorio</button>
-          <button class="quiz-opt" data-val="intl-work" onclick="selectOpt(this)"><span class="opt-icon">💼</span>Solo per opportunità di lavoro internazionale</button>
+          <button type="button" class="quiz-opt" data-val="intl-high" onclick="selectOpt(this)"><span class="opt-icon">✈️</span>Fondamentale! Voglio studiare/lavorare fuori Italia</button>
+          <button type="button" class="quiz-opt" data-val="intl-med" onclick="selectOpt(this)"><span class="opt-icon">🌐</span>Mi piacerebbe, ma non è prioritaria</button>
+          <button type="button" class="quiz-opt" data-val="intl-low" onclick="selectOpt(this)"><span class="opt-icon">🏠</span>Preferisco restare sul territorio</button>
+          <button type="button" class="quiz-opt" data-val="intl-work" onclick="selectOpt(this)"><span class="opt-icon">💼</span>Solo per opportunità di lavoro internazionale</button>
         </div>
         <div class="quiz-nav">
-          <button class="quiz-btn back" onclick="prevStep()">← Indietro</button>
-          <button class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
+          <button type="button" class="quiz-btn back" onclick="prevStep()">← Indietro</button>
+          <button type="button" class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
         </div>
         <p class="quiz-counter">2 di 5</p>
       </div>
@@ -544,14 +617,14 @@
         <div class="quiz-icon">🔭</div>
         <div class="quiz-q">Quale area ti appassiona di più?</div>
         <div class="quiz-options">
-          <button class="quiz-opt" data-val="scienze" onclick="selectOpt(this)"><span class="opt-icon">🔬</span>Scienze, matematica, tecnologia</button>
-          <button class="quiz-opt" data-val="lingue" onclick="selectOpt(this)"><span class="opt-icon">🗣️</span>Lingue, letteratura, storia, filosofia</button>
-          <button class="quiz-opt" data-val="economia" onclick="selectOpt(this)"><span class="opt-icon">📊</span>Economia, marketing, diritto, turismo</button>
-          <button class="quiz-opt" data-val="umano" onclick="selectOpt(this)"><span class="opt-icon">❤️</span>Persone, salute, sociale, psicologia</button>
+          <button type="button" class="quiz-opt" data-val="scienze" onclick="selectOpt(this)"><span class="opt-icon">🔬</span>Scienze, matematica, tecnologia</button>
+          <button type="button" class="quiz-opt" data-val="lingue" onclick="selectOpt(this)"><span class="opt-icon">🗣️</span>Lingue, letteratura, storia, filosofia</button>
+          <button type="button" class="quiz-opt" data-val="economia" onclick="selectOpt(this)"><span class="opt-icon">📊</span>Economia, marketing, diritto, turismo</button>
+          <button type="button" class="quiz-opt" data-val="umano" onclick="selectOpt(this)"><span class="opt-icon">❤️</span>Persone, salute, sociale, psicologia</button>
         </div>
         <div class="quiz-nav">
-          <button class="quiz-btn back" onclick="prevStep()">← Indietro</button>
-          <button class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
+          <button type="button" class="quiz-btn back" onclick="prevStep()">← Indietro</button>
+          <button type="button" class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
         </div>
         <p class="quiz-counter">3 di 5</p>
       </div>
@@ -561,14 +634,14 @@
         <div class="quiz-icon">🎓</div>
         <div class="quiz-q">Dopo il diploma, cosa vorresti fare?</div>
         <div class="quiz-options">
-          <button class="quiz-opt" data-val="uni" onclick="selectOpt(this)"><span class="opt-icon">🏛️</span>Università, di sicuro</button>
-          <button class="quiz-opt" data-val="lavoro" onclick="selectOpt(this)"><span class="opt-icon">💼</span>Lavorare subito</button>
-          <button class="quiz-opt" data-val="its" onclick="selectOpt(this)"><span class="opt-icon">⚙️</span>ITS / percorso tecnico superiore</button>
-          <button class="quiz-opt" data-val="nonlosaccora" onclick="selectOpt(this)"><span class="opt-icon">🤔</span>Non lo so ancora, voglio tenermi aperte le opzioni</button>
+          <button type="button" class="quiz-opt" data-val="uni" onclick="selectOpt(this)"><span class="opt-icon">🏛️</span>Università, di sicuro</button>
+          <button type="button" class="quiz-opt" data-val="lavoro" onclick="selectOpt(this)"><span class="opt-icon">💼</span>Lavorare subito</button>
+          <button type="button" class="quiz-opt" data-val="its" onclick="selectOpt(this)"><span class="opt-icon">⚙️</span>ITS / percorso tecnico superiore</button>
+          <button type="button" class="quiz-opt" data-val="nonlosaccora" onclick="selectOpt(this)"><span class="opt-icon">🤔</span>Non lo so ancora, voglio tenermi aperte le opzioni</button>
         </div>
         <div class="quiz-nav">
-          <button class="quiz-btn back" onclick="prevStep()">← Indietro</button>
-          <button class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
+          <button type="button" class="quiz-btn back" onclick="prevStep()">← Indietro</button>
+          <button type="button" class="quiz-btn next" onclick="nextStep()" disabled>Avanti →</button>
         </div>
         <p class="quiz-counter">4 di 5</p>
       </div>
@@ -578,14 +651,14 @@
         <div class="quiz-icon">⚡</div>
         <div class="quiz-q">Come ti descriveresti meglio?</div>
         <div class="quiz-options">
-          <button class="quiz-opt" data-val="curioso" onclick="selectOpt(this)"><span class="opt-icon">🔍</span>Curioso/a, amo capire come funzionano le cose</button>
-          <button class="quiz-opt" data-val="creativo" onclick="selectOpt(this)"><span class="opt-icon">✨</span>Creativo/a, mi piace inventare e fare cose nuove</button>
-          <button class="quiz-opt" data-val="pratico" onclick="selectOpt(this)"><span class="opt-icon">🛠️</span>Pratico/a, voglio un risultato concreto</button>
-          <button class="quiz-opt" data-val="sociale" onclick="selectOpt(this)"><span class="opt-icon">🤝</span>Empatico/a, mi importa aiutare gli altri</button>
+          <button type="button" class="quiz-opt" data-val="curioso" onclick="selectOpt(this)"><span class="opt-icon">🔍</span>Curioso/a, amo capire come funzionano le cose</button>
+          <button type="button" class="quiz-opt" data-val="creativo" onclick="selectOpt(this)"><span class="opt-icon">✨</span>Creativo/a, mi piace inventare e fare cose nuove</button>
+          <button type="button" class="quiz-opt" data-val="pratico" onclick="selectOpt(this)"><span class="opt-icon">🛠️</span>Pratico/a, voglio un risultato concreto</button>
+          <button type="button" class="quiz-opt" data-val="sociale" onclick="selectOpt(this)"><span class="opt-icon">🤝</span>Empatico/a, mi importa aiutare gli altri</button>
         </div>
         <div class="quiz-nav">
-          <button class="quiz-btn back" onclick="prevStep()">← Indietro</button>
-          <button class="quiz-btn next" id="showResultBtn" onclick="showResult()" disabled>Vedi il risultato ✨</button>
+          <button type="button" class="quiz-btn back" onclick="prevStep()">← Indietro</button>
+          <button type="button" class="quiz-btn next" onclick="nextStep()" disabled>Vedi il risultato ✨</button>
         </div>
         <p class="quiz-counter">5 di 5</p>
       </div>
@@ -599,7 +672,7 @@
           <div class="result-desc" id="resultDesc"></div>
         </div>
         <div class="result-schools" id="resultSchools"></div>
-        <button class="quiz-restart" onclick="restartQuiz()">🔄 Rifai il quiz</button>
+        <button type="button" class="quiz-restart" onclick="restartQuiz()">🔄 Rifai il quiz</button>
       </div>
     </div>
   </div>
@@ -612,7 +685,7 @@
       <div>
         <div class="intl-must-badge">⭐ MUST — Percorsi Internazionali</div>
         <h2 class="intl-title">Il mondo <span class="accent">è la tua classe</span></h2>
-        <p class="intl-desc">Nell'area Adda Martesana esistono percorsi che includono esperienze formative <strong>fuori dall'Italia</strong>: Erasmus+, ESABAC (diploma doppio italo-francese), scambi culturali, tirocini in aziende europee e molto altro. Queste esperienze sono considerate <strong>imprescindibili</strong> per la formazione completa.</p>
+        <p class="intl-desc">Nell'area Adda Martesana esistono percorsi che includono esperienze formative <strong>fuori dall'Italia</strong>: Erasmus+, ESABAC (diploma doppio italo-francese), scambi culturali, tirocini in aziende europee e molto altro. Queste esperienze sono <strong>imprescindibili</strong> per una formazione completa.</p>
         <div class="intl-programs-mini">
           <div class="intl-prog-row">
             <span class="prog-flag">🇪🇺</span>
@@ -647,14 +720,15 @@
     <div class="section-header reveal">
       <div class="section-tag">🏫 Istituti</div>
       <h2 class="section-title">Esplora tutte le scuole</h2>
-      <p class="section-sub">Clicca su un istituto per scoprire indirizzi e programmi internazionali</p>
+      <p class="section-sub">Istituti pubblici, paritari e CFP dell'area Adda Martesana e dintorni</p>
     </div>
     <div class="filter-bar reveal">
-      <button class="filter-btn active" data-filter="all" onclick="filterSchools(this,'all')">Tutti gli istituti</button>
-      <button class="filter-btn" data-filter="liceo" onclick="filterSchools(this,'liceo')">Liceo</button>
-      <button class="filter-btn" data-filter="tecnico" onclick="filterSchools(this,'tecnico')">Tecnico</button>
-      <button class="filter-btn" data-filter="professionale" onclick="filterSchools(this,'professionale')">Professionale</button>
-      <button class="filter-btn gold-filter" data-filter="intl" onclick="filterSchools(this,'intl')">🌍 Solo internazionali</button>
+      <button type="button" class="filter-btn active" data-filter="all"          onclick="filterSchools(this,'all')">Tutti</button>
+      <button type="button" class="filter-btn"         data-filter="liceo"        onclick="filterSchools(this,'liceo')">Liceo</button>
+      <button type="button" class="filter-btn"         data-filter="tecnico"      onclick="filterSchools(this,'tecnico')">Tecnico</button>
+      <button type="button" class="filter-btn"         data-filter="professionale" onclick="filterSchools(this,'professionale')">Professionale</button>
+      <button type="button" class="filter-btn cfp-filter" data-filter="cfp"      onclick="filterSchools(this,'cfp')">🎓 CFP / IeFP</button>
+      <button type="button" class="filter-btn gold-filter" data-filter="intl"    onclick="filterSchools(this,'intl')">🌍 Solo internazionali</button>
     </div>
     <div class="schools-grid" id="schoolsGrid">
 
@@ -663,10 +737,10 @@
         <div class="school-card-accent" style="background:linear-gradient(90deg,#6366f1,#818cf8)"></div>
         <div class="school-card-body">
           <div class="school-card-top">
-            <div><div class="school-name">Liceo Giordano Bruno</div><div class="school-city">📍 Cassano d'Adda</div></div>
+            <div><div class="school-name">Liceo Giordano Bruno</div><div class="school-city">📍 Cassano d'Adda · Melzo</div></div>
             <div class="school-badges"><span class="badge badge-liceo">Liceo</span><span class="badge badge-intl">⭐ MUST Internazionale</span></div>
           </div>
-          <p class="school-desc">Il liceo di riferimento per Cassano d'Adda con forte vocazione internazionale e linguistica. ESABAC, scambi con UK e conferenze con ricercatori internazionali.</p>
+          <p class="school-desc">Liceo di riferimento per Cassano e Melzo (due sedi) con forte vocazione internazionale. ESABAC, scambi con UK, conferenze con ricercatori internazionali e programma Lions Club.</p>
           <div class="school-programs">
             <span class="prog-tag">Scientifico</span>
             <span class="prog-tag">Scienze Applicate</span>
@@ -674,14 +748,13 @@
           </div>
           <div class="school-intl">
             <div class="school-intl-title">🌍 Programmi Internazionali</div>
-            <div class="intl-item"><span class="intl-item-flag">🇫🇷</span><div><div class="intl-item-name">ESABAC</div><div class="intl-item-desc">Diploma doppio italo-francese riconosciuto in Francia</div></div></div>
+            <div class="intl-item"><span class="intl-item-flag">🇫🇷</span><div><div class="intl-item-name">ESABAC</div><div class="intl-item-desc">Diploma doppio italo-francese, accesso diretto università FR</div></div></div>
             <div class="intl-item"><span class="intl-item-flag">🇬🇧</span><div><div class="intl-item-name">Scambi Birmingham</div><div class="intl-item-desc">Exchange con UK, soggiorno in famiglia ospitante</div></div></div>
             <div class="intl-item"><span class="intl-item-flag">🌍</span><div><div class="intl-item-name">Lions Club Exchange</div><div class="intl-item-desc">Borse di studio per scambi giovanili internazionali</div></div></div>
-            <div class="intl-item"><span class="intl-item-flag">✈️</span><div><div class="intl-item-name">Soggiorni studio</div><div class="intl-item-desc">UK · Germania · Francia · Spagna (con famiglie/college)</div></div></div>
             <div class="intl-item"><span class="intl-item-flag">🎓</span><div><div class="intl-item-name">Conferenze in lingua</div><div class="intl-item-desc">Ricercatori universitari internazionali (EN/FR/DE/ES)</div></div></div>
           </div>
           <div class="school-footer">
-            <a href="https://www.liceo-melzocassano.edu.it" target="_blank" class="school-link">🔗 Sito ufficiale</a>
+            <a href="https://www.liceo-melzocassano.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
             <span style="font-size:0.8rem;color:var(--text3)">📞 02 9552257</span>
           </div>
         </div>
@@ -695,7 +768,7 @@
             <div><div class="school-name">ITSOS Marie Curie</div><div class="school-city">📍 Cernusco s/Naviglio</div></div>
             <div class="school-badges"><span class="badge badge-tecnico">Tecnico/Liceo</span><span class="badge badge-intl">⭐ MUST Internazionale</span></div>
           </div>
-          <p class="school-desc">La massima varietà della zona: 7 indirizzi. Erasmus+ consolidato con tirocini retribuiti in aziende europee per gli studenti del 5° anno.</p>
+          <p class="school-desc">Massima varietà della zona: 7 indirizzi tra licei e tecnici. Erasmus+ consolidato con tirocini retribuiti in aziende europee per gli studenti del 5° anno.</p>
           <div class="school-programs">
             <span class="prog-tag">Classico</span>
             <span class="prog-tag">Scientifico</span>
@@ -709,10 +782,10 @@
             <div class="school-intl-title">🌍 Programmi Internazionali</div>
             <div class="intl-item"><span class="intl-item-flag">🇪🇺</span><div><div class="intl-item-name">Erasmus+ KA1 VET</div><div class="intl-item-desc">Tirocini in aziende estere per studenti 5° anno (Set-Nov)</div></div></div>
             <div class="intl-item"><span class="intl-item-flag">🌐</span><div><div class="intl-item-name">Progetto West22</div><div class="intl-item-desc">Mobilità europea, 66 studenti coinvolti nei cicli recenti</div></div></div>
-            <div class="intl-item"><span class="intl-item-flag">✈️</span><div><div class="intl-item-name">Europa in cattedra</div><div class="intl-item-desc">Programma di internazionalizzazione e classi CLIL</div></div></div>
+            <div class="intl-item"><span class="intl-item-flag">✈️</span><div><div class="intl-item-name">Europa in cattedra</div><div class="intl-item-desc">Classi CLIL e programma di internazionalizzazione</div></div></div>
           </div>
           <div class="school-footer">
-            <a href="https://www.itsos-mariecurie.edu.it" target="_blank" class="school-link">🔗 Sito ufficiale</a>
+            <a href="https://www.itsos-mariecurie.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
           </div>
         </div>
       </div>
@@ -739,7 +812,7 @@
             <div class="intl-item"><span class="intl-item-flag">💻</span><div><div class="intl-item-name">ICDL International</div><div class="intl-item-desc">Certificazione informatica riconosciuta a livello mondiale</div></div></div>
           </div>
           <div class="school-footer">
-            <a href="https://www.zenale.edu.it" target="_blank" class="school-link">🔗 Sito ufficiale</a>
+            <a href="https://www.zenale.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
           </div>
         </div>
       </div>
@@ -764,7 +837,7 @@
             <div class="intl-item"><span class="intl-item-flag">🇬🇧</span><div><div class="intl-item-name">CLIL — 5° anno</div><div class="intl-item-desc">30% delle ore di una materia in lingua inglese</div></div></div>
           </div>
           <div class="school-footer">
-            <a href="https://www.iisbellisario.edu.it" target="_blank" class="school-link">🔗 Sito ufficiale</a>
+            <a href="https://www.iisbellisario.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
           </div>
         </div>
       </div>
@@ -777,7 +850,7 @@
             <div><div class="school-name">IIS Argentia-Majorana</div><div class="school-city">📍 Gorgonzola</div></div>
             <div class="school-badges"><span class="badge badge-tecnico">Tecnico</span></div>
           </div>
-          <p class="school-desc">Tecnico-professionali concreti con la varietà più ampia per indirizzi economici, agrari, moda e costruzioni. L'indirizzo RIM punta sulle relazioni internazionali.</p>
+          <p class="school-desc">Varietà più ampia del territorio per indirizzi economici, agrari, moda e costruzioni. L'indirizzo RIM punta su relazioni internazionali e commercio estero.</p>
           <div class="school-programs">
             <span class="prog-tag">AFM</span>
             <span class="prog-tag">RIM (Relazioni Internazionali)</span>
@@ -790,6 +863,9 @@
           <div class="school-intl">
             <div class="school-intl-title">🌍 Orientamento Internazionale</div>
             <div class="intl-item"><span class="intl-item-flag">🌍</span><div><div class="intl-item-name">RIM — Relazioni Internazionali</div><div class="intl-item-desc">Indirizzo AFM con focus su commercio estero e lingue</div></div></div>
+          </div>
+          <div class="school-footer">
+            <a href="https://www.argentia.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
           </div>
         </div>
       </div>
@@ -808,6 +884,9 @@
             <span class="prog-tag">Informatica</span>
             <span class="prog-tag">Meccanica</span>
           </div>
+          <div class="school-footer">
+            <a href="https://www.iisarchimede.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
+          </div>
         </div>
       </div>
 
@@ -819,11 +898,14 @@
             <div><div class="school-name">IIS Oberdan</div><div class="school-city">📍 Treviglio</div></div>
             <div class="school-badges"><span class="badge badge-tecnico">Tecnico/Liceo</span></div>
           </div>
-          <p class="school-desc">Polo economico-sociale di riferimento per la Bassa Bergamasca. AFM, Scienze Umane e Economia Sociale.</p>
+          <p class="school-desc">Polo economico-sociale di riferimento per la Bassa Bergamasca. AFM, Scienze Umane e indirizzo Economia Sociale per chi vuole lavorare nel terzo settore.</p>
           <div class="school-programs">
             <span class="prog-tag">AFM</span>
             <span class="prog-tag">Liceo Scienze Umane</span>
             <span class="prog-tag">Economia Sociale</span>
+          </div>
+          <div class="school-footer">
+            <a href="https://www.iisoberdan.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
           </div>
         </div>
       </div>
@@ -836,14 +918,99 @@
             <div><div class="school-name">IIS Gaetano Cantoni</div><div class="school-city">📍 Treviglio</div></div>
             <div class="school-badges"><span class="badge badge-tecnico">Tecnico Agrario</span></div>
           </div>
-          <p class="school-desc">L'unico istituto agrario della zona — raro e prezioso per chi ama natura, sostenibilità e agroalimentare. Possibili stage in aziende agricole europee.</p>
+          <p class="school-desc">L'unico istituto agrario della zona — raro e prezioso per chi ama natura, sostenibilità e agroalimentare. Stage in aziende agricole europee tramite Erasmus+.</p>
           <div class="school-programs">
             <span class="prog-tag">Tecnico Agrario</span>
             <span class="prog-tag">Scientifico (potenziamento scienze)</span>
           </div>
           <div class="school-intl">
             <div class="school-intl-title">🌱 Opportunità</div>
-            <div class="intl-item"><span class="intl-item-flag">🌱</span><div><div class="intl-item-name">Tirocini agri-europei</div><div class="intl-item-desc">Possibili stage in aziende agricole europee tramite Erasmus+</div></div></div>
+            <div class="intl-item"><span class="intl-item-flag">🌱</span><div><div class="intl-item-name">Tirocini agri-europei</div><div class="intl-item-desc">Stage in aziende agricole europee tramite Erasmus+</div></div></div>
+          </div>
+          <div class="school-footer">
+            <a href="https://www.iisgaetanocantoni.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ★ NUOVO: IIS PRIMO LEVI (Pioltello) ★ -->
+      <div class="school-card" data-type="tecnico" data-intl="false">
+        <div class="school-card-accent" style="background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+        <div class="school-card-body">
+          <div class="school-card-top">
+            <div><div class="school-name">IIS Primo Levi</div><div class="school-city">📍 Pioltello (MI)</div></div>
+            <div class="school-badges"><span class="badge badge-tecnico">Tecnico IT</span></div>
+          </div>
+          <p class="school-desc">Istituto tecnico di riferimento per la zona ovest dell'Adda Martesana. Forte orientamento informatico, elettronico e scientifico con laboratori attrezzati e stage aziendali.</p>
+          <div class="school-programs">
+            <span class="prog-tag">Informatica e Telecomunicazioni</span>
+            <span class="prog-tag">Elettronica ed Elettrotecnica</span>
+            <span class="prog-tag">AFM</span>
+            <span class="prog-tag">Liceo Scientifico</span>
+          </div>
+          <div class="school-intl">
+            <div class="school-intl-title">💡 Orientamento</div>
+            <div class="intl-item"><span class="intl-item-flag">🖥️</span><div><div class="intl-item-name">Stage aziendali (PCTO)</div><div class="intl-item-desc">Tirocini in aziende IT e manifatturiere del territorio</div></div></div>
+          </div>
+          <div class="school-footer">
+            <a href="https://www.iisprimo-levi.edu.it" target="_blank" rel="noopener" class="school-link">🔗 Sito ufficiale</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ★ NUOVO: CFP / IeFP ★ -->
+      <div class="school-card" data-type="cfp" data-intl="false">
+        <div class="school-card-accent" style="background:linear-gradient(90deg,#10b981,#059669)"></div>
+        <div class="school-card-body">
+          <div class="school-card-top">
+            <div><div class="school-name">CFP / IeFP — Formazione Professionale</div><div class="school-city">📍 Area Milanese e Bergamasca</div></div>
+            <div class="school-badges"><span class="badge badge-cfp">CFP / IeFP</span></div>
+          </div>
+          <p class="school-desc">I Centri di Formazione Professionale (ENAIP, IAL, AFOL MI-EST, ENGIM Don Bosco) offrono qualifiche triennali e diplomi quadriennali riconosciuti a livello nazionale. Non sono "scuole superiori" tradizionali, ma percorsi equivalenti con forte orientamento pratico e sbocchi lavorativi immediati.</p>
+          <div class="school-programs">
+            <span class="prog-tag">Operatore Informatico</span>
+            <span class="prog-tag">Operatore della Ristorazione</span>
+            <span class="prog-tag">Estetica e Benessere</span>
+            <span class="prog-tag">Meccanica / Manutenzione</span>
+            <span class="prog-tag">Grafica Multimediale</span>
+            <span class="prog-tag">Elettricità e Impiantistica</span>
+          </div>
+          <div class="school-intl">
+            <div class="school-intl-title">📋 Come funziona</div>
+            <div class="intl-item"><span class="intl-item-flag">🎓</span><div><div class="intl-item-name">3 anni → Qualifica professionale</div><div class="intl-item-desc">Titolo regionale, accesso diretto al lavoro</div></div></div>
+            <div class="intl-item"><span class="intl-item-flag">📜</span><div><div class="intl-item-name">4 anni → Diploma professionale</div><div class="intl-item-desc">Accesso anche a ITS Academy e alcune Università</div></div></div>
+            <div class="intl-item"><span class="intl-item-flag">🇪🇺</span><div><div class="intl-item-name">Erasmus+ VET</div><div class="intl-item-desc">Alcuni CFP offrono tirocini in aziende europee</div></div></div>
+          </div>
+          <div class="school-footer">
+            <a href="https://www.enaip.lombardia.it" target="_blank" rel="noopener" class="school-link">🔗 ENAIP Lombardia</a>
+            <a href="https://www.iallombardia.it" target="_blank" rel="noopener" class="school-link">🔗 IAL Lombardia</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ★ NUOVO: Scuole Paritarie / Private ★ -->
+      <div class="school-card" data-type="liceo" data-intl="false">
+        <div class="school-card-accent" style="background:linear-gradient(90deg,#a855f7,#c084fc)"></div>
+        <div class="school-card-body">
+          <div class="school-card-top">
+            <div><div class="school-name">Scuole Paritarie e Private</div><div class="school-city">📍 Area Adda Martesana e MI-est</div></div>
+            <div class="school-badges"><span class="badge badge-privato">Paritaria/Privata</span></div>
+          </div>
+          <p class="school-desc">Nel raggio di 30 km esistono istituti paritari cattolici e laici che rilasciano diplomi riconosciuti dallo Stato (valore identico al pubblico). Classi più piccole, attenzione personalizzata, spesso con orientamento internazionale. Tra i più noti: Collegio Ballerini (Seregno), Istituto Gonzaga (Milano), Don Bosco (varie sedi), La Traccia (Calcinate BG).</p>
+          <div class="school-programs">
+            <span class="prog-tag">Liceo Scientifico</span>
+            <span class="prog-tag">Liceo Linguistico</span>
+            <span class="prog-tag">Liceo Classico</span>
+            <span class="prog-tag">Tecnico Economico</span>
+            <span class="prog-tag">Professionale</span>
+          </div>
+          <div class="school-intl">
+            <div class="school-intl-title">🔍 Come cercarle</div>
+            <div class="intl-item"><span class="intl-item-flag">🏛️</span><div><div class="intl-item-name">MIUR — Scuola in Chiaro</div><div class="intl-item-desc">Filtra per "scuola paritaria" nella tua provincia su cercalatuascuola</div></div></div>
+            <div class="intl-item"><span class="intl-item-flag">💶</span><div><div class="intl-item-name">Costi e borse di studio</div><div class="intl-item-desc">Rette variabili; molte offrono borse merito o riduzioni ISEE</div></div></div>
+          </div>
+          <div class="school-footer">
+            <a href="https://unica.istruzione.gov.it/cercalatuascuola" target="_blank" rel="noopener" class="school-link">🔗 Cerca scuole paritarie</a>
           </div>
         </div>
       </div>
@@ -864,7 +1031,7 @@
       <div class="erasmus-card reveal">
         <div class="erasmus-icon">🇪🇺</div>
         <h3>Erasmus+</h3>
-        <p>Il programma UE finanzia mobilità individuale (1 anno) e di gruppo (2-30 giorni) in tutta Europa. Copre vitto, alloggio e trasporto. Disponibile in diverse scuole dell'area.</p>
+        <p>Il programma UE finanzia mobilità individuale (fino a 1 anno) e di gruppo (2–30 giorni) in tutta Europa. Copre vitto, alloggio e trasporto. Disponibile in diverse scuole dell'area.</p>
       </div>
       <div class="erasmus-card reveal">
         <div class="erasmus-icon">🎓</div>
@@ -874,7 +1041,7 @@
       <div class="erasmus-card reveal">
         <div class="erasmus-icon">🏠</div>
         <h3>Scambi & Host Family</h3>
-        <p>Soggiorni brevi (1-4 settimane) in famiglia ospitante. Accrescono autonomia, lingua e apertura mentale. Attivi al Liceo Bruno (UK) e Bellisario (Spagna).</p>
+        <p>Soggiorni brevi (1–4 settimane) in famiglia ospitante. Accrescono autonomia, lingua e apertura mentale. Attivi al Liceo Bruno (UK) e Bellisario (Spagna).</p>
       </div>
       <div class="erasmus-card reveal">
         <div class="erasmus-icon">💼</div>
@@ -889,7 +1056,7 @@
       <div class="erasmus-card reveal">
         <div class="erasmus-icon">🌐</div>
         <h3>CLIL e Lingue</h3>
-        <p>Content and Language Integrated Learning: materie insegnate in inglese. Attivo in più istituti come Bellisario (5° anno) e classi ITSOS. Standard europeo CAF.</p>
+        <p>Content and Language Integrated Learning: materie insegnate in inglese. Attivo in più istituti come Bellisario (5° anno) e classi ITSOS. Standard europeo CEFR.</p>
       </div>
     </div>
   </div>
@@ -901,60 +1068,77 @@
     <div class="section-header reveal">
       <div class="section-tag">📅 Roadmap</div>
       <h2 class="section-title">Quando fare cosa</h2>
-      <p class="section-sub">La mappa del percorso dalla 2ª media alle iscrizioni</p>
+      <p class="section-sub">La mappa del percorso dalla 2ª media alle iscrizioni — in ordine cronologico</p>
     </div>
-    <div class="timeline-grid">
-      <div class="timeline-col">
-        <div class="timeline-label">2ª MEDIA</div>
-        <div class="tl-item reveal">
+
+    <div class="tl-container">
+
+      <!-- Evento 1 -->
+      <div class="tl-event reveal">
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-item">
+          <div class="tl-year-tag">2ª Media</div>
           <div class="tl-date">Marzo – Aprile 2026</div>
-          <div class="tl-item-title">Open Day 2ª media</div>
-          <div class="tl-item-desc">Partecipa agli open day. Prova i laboratori. Fai domande agli studenti.</div>
+          <div class="tl-item-title">Open Day — prima esplorazione</div>
+          <div class="tl-item-desc">Partecipa agli open day ancora senza pressione. Prova i laboratori, fai domande agli studenti. È il momento di scoprire cosa esiste.</div>
         </div>
-        <div class="tl-item reveal">
+      </div>
+
+      <!-- Evento 2 -->
+      <div class="tl-event reveal">
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-item">
+          <div class="tl-year-tag">2ª Media</div>
           <div class="tl-date">Estate 2026</div>
           <div class="tl-item-title">Esplora i tuoi interessi</div>
-          <div class="tl-item-desc">Corsi estivi, esperienze, letture. Capire cosa ti appassiona è il punto di partenza.</div>
+          <div class="tl-item-desc">Corsi estivi, esperienze, letture, attività. Capire cosa ti appassiona davvero è il punto di partenza per scegliere bene.</div>
         </div>
-        <div class="tl-item reveal">
+      </div>
+
+      <!-- Evento 3 -->
+      <div class="tl-event reveal">
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-item">
+          <div class="tl-year-tag">2ª Media → 3ª Media</div>
           <div class="tl-date">Ottobre 2026</div>
-          <div class="tl-item-title">Open day 3ª media pubblicati</div>
-          <div class="tl-item-desc">I siti degli istituti iniziano a pubblicare le date degli open day per il 2026/27.</div>
+          <div class="tl-item-title">Date Open Day 3ª media pubblicate</div>
+          <div class="tl-item-desc">I siti degli istituti iniziano a pubblicare le date degli open day per il 2026/27. Segna i tuoi preferiti sul calendario.</div>
         </div>
       </div>
 
-      <div class="timeline-center">
-        <div class="tl-line"></div>
-        <div class="tl-dot"></div>
-        <div class="tl-line"></div>
-        <div class="tl-dot"></div>
-        <div class="tl-line"></div>
-        <div class="tl-dot gold"></div>
-        <div class="tl-line"></div>
-        <div class="tl-dot gold"></div>
-        <div class="tl-line"></div>
-        <div class="tl-dot gold"></div>
-        <div class="tl-line"></div>
-      </div>
-
-      <div class="timeline-col right">
-        <div class="timeline-label">3ª MEDIA</div>
-        <div class="tl-item reveal" style="margin-top:72px">
+      <!-- Evento 4 -->
+      <div class="tl-event reveal">
+        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+        <div class="tl-item">
+          <div class="tl-year-tag">3ª Media</div>
           <div class="tl-date">Novembre – Dicembre 2026</div>
-          <div class="tl-item-title">Open Day 3ª media</div>
-          <div class="tl-item-desc">Visita almeno 2-3 istituti. Porta i genitori. Parla con professori e studenti.</div>
+          <div class="tl-item-title">Open Day — visita gli istituti</div>
+          <div class="tl-item-desc">Visita almeno 2–3 istituti. Porta i genitori. Parla con professori e studenti. Prendi appunti e confronta le impressioni.</div>
         </div>
-        <div class="tl-item gold-item reveal">
+      </div>
+
+      <!-- Evento 5 -->
+      <div class="tl-event reveal">
+        <div class="tl-dot-wrap"><div class="tl-dot gold"></div></div>
+        <div class="tl-item gold-item">
+          <div class="tl-year-tag third">3ª Media — AZIONE</div>
           <div class="tl-date gold">Gennaio 2027</div>
           <div class="tl-item-title">🚀 Apertura iscrizioni online</div>
-          <div class="tl-item-desc">Piattaforma <strong>unica.istruzione.gov.it</strong> — necessario SPID o CIE del genitore.</div>
-        </div>
-        <div class="tl-item gold-item reveal">
-          <div class="tl-date gold">Febbraio 2027</div>
-          <div class="tl-item-title">⏰ Scadenza iscrizioni</div>
-          <div class="tl-item-desc">Termine ultimo per l'iscrizione alla scuola scelta. Non aspettare l'ultimo giorno.</div>
+          <div class="tl-item-desc">Piattaforma <strong>unica.istruzione.gov.it</strong> — necessario SPID o CIE del genitore. Prepara i documenti in anticipo.</div>
         </div>
       </div>
+
+      <!-- Evento 6 -->
+      <div class="tl-event reveal">
+        <div class="tl-dot-wrap"><div class="tl-dot gold"></div></div>
+        <div class="tl-item gold-item">
+          <div class="tl-year-tag third">3ª Media — SCADENZA</div>
+          <div class="tl-date gold">Febbraio 2027</div>
+          <div class="tl-item-title">⏰ Termine iscrizioni</div>
+          <div class="tl-item-desc">Scadenza ultima per l'iscrizione. Non aspettare l'ultimo giorno — i sistemi ministeriali vanno in sovraccarico.</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -967,37 +1151,45 @@
       <h2 class="section-title">Risorse ufficiali</h2>
     </div>
     <div class="risorse-grid reveal">
-      <a href="https://unica.istruzione.gov.it" target="_blank" class="risorsa-card">
+      <a href="https://unica.istruzione.gov.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">🏛️</span>
-        <div><div class="risorsa-name">Unica — Iscrizioni</div><div class="risorsa-desc">Piattaforma nazionale iscrizioni scolastiche (SPID/CIE)</div></div>
+        <div><div class="risorsa-name">Unica — Iscrizioni</div><div class="risorsa-desc">Piattaforma nazionale iscrizioni (SPID/CIE)</div></div>
       </a>
-      <a href="https://unica.istruzione.gov.it/cercalatuascuola" target="_blank" class="risorsa-card">
+      <a href="https://unica.istruzione.gov.it/cercalatuascuola" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">🔍</span>
         <div><div class="risorsa-name">Scuola in Chiaro</div><div class="risorsa-desc">Cerca e confronta tutte le scuole d'Italia</div></div>
       </a>
-      <a href="https://www.erasmusplus.it" target="_blank" class="risorsa-card">
+      <a href="https://www.erasmusplus.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">🇪🇺</span>
         <div><div class="risorsa-name">Erasmus+ Italia</div><div class="risorsa-desc">Info e scadenze programma europeo 2026</div></div>
       </a>
-      <a href="https://www.istruzione.lombardia.it" target="_blank" class="risorsa-card">
+      <a href="https://www.istruzione.lombardia.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">🏔️</span>
         <div><div class="risorsa-name">Orientamento Lombardia</div><div class="risorsa-desc">Guida regionale ai percorsi scolastici</div></div>
       </a>
-      <a href="https://www.liceo-melzocassano.edu.it" target="_blank" class="risorsa-card">
+      <a href="https://www.liceo-melzocassano.edu.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">📐</span>
-        <div><div class="risorsa-name">Liceo Bruno Cassano</div><div class="risorsa-desc">liceo-melzocassano.edu.it</div></div>
+        <div><div class="risorsa-name">Liceo Bruno Cassano/Melzo</div><div class="risorsa-desc">liceo-melzocassano.edu.it</div></div>
       </a>
-      <a href="https://www.itsos-mariecurie.edu.it" target="_blank" class="risorsa-card">
+      <a href="https://www.itsos-mariecurie.edu.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">⚗️</span>
         <div><div class="risorsa-name">ITSOS Marie Curie</div><div class="risorsa-desc">itsos-mariecurie.edu.it</div></div>
       </a>
-      <a href="https://www.zenale.edu.it" target="_blank" class="risorsa-card">
+      <a href="https://www.zenale.edu.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">🎨</span>
         <div><div class="risorsa-name">ISIS Zenale e Butinone</div><div class="risorsa-desc">zenale.edu.it</div></div>
       </a>
-      <a href="https://www.iisbellisario.edu.it" target="_blank" class="risorsa-card">
+      <a href="https://www.iisbellisario.edu.it" target="_blank" rel="noopener" class="risorsa-card">
         <span class="risorsa-icon">🏥</span>
         <div><div class="risorsa-name">IIS Bellisario Trezzo</div><div class="risorsa-desc">iisbellisario.edu.it</div></div>
+      </a>
+      <a href="https://www.enaip.lombardia.it" target="_blank" rel="noopener" class="risorsa-card">
+        <span class="risorsa-icon">🎓</span>
+        <div><div class="risorsa-name">ENAIP Lombardia (CFP)</div><div class="risorsa-desc">Centri di formazione professionale IeFP</div></div>
+      </a>
+      <a href="https://www.orientamento.it" target="_blank" rel="noopener" class="risorsa-card">
+        <span class="risorsa-icon">🧭</span>
+        <div><div class="risorsa-name">Orientamento.it</div><div class="risorsa-desc">Portale nazionale per l'orientamento scolastico</div></div>
       </a>
     </div>
   </div>
@@ -1007,25 +1199,66 @@
 <footer>
   <div class="footer-logo">Oriento<span>Tommy</span></div>
   <p>Orientamento Scolastico — Adda Martesana — A.S. 2026/2027</p>
-  <p style="margin-top:4px">Cassano d'Adda · Treviglio · Trezzo s/Adda · Gorgonzola · Cernusco s/Naviglio</p>
+  <p style="margin-top:4px">Cassano d'Adda · Melzo · Treviglio · Trezzo s/Adda · Gorgonzola · Cernusco s/Naviglio · Pioltello</p>
   <p style="margin-top:16px;font-size:0.8rem">Informazioni aggiornate ad aprile 2026. Per dettagli ufficiali consultare sempre i siti degli istituti. •
-    <a href="https://unica.istruzione.gov.it" target="_blank">Iscrizioni unica.istruzione.gov.it</a>
+    <a href="https://unica.istruzione.gov.it" target="_blank" rel="noopener">Iscrizioni unica.istruzione.gov.it</a>
   </p>
   <p style="margin-top:16px;font-size:0.8rem;color:var(--text3)">written with ❤️ &amp; <span style="color:var(--primary);font-weight:600">Claude</span></p>
 </footer>
 
 <!-- SCRIPTS -->
 <script>
-  // ── SMOOTH SCROLL ──
-  function scrollToSection(id) {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // ── SCROLL TO SECTION ──
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  // ── MOBILE MENU ──
+  function toggleMobileMenu() {
+    const drawer = document.getElementById('mobileDrawer');
+    const burger = document.getElementById('hamburger');
+    const open = drawer.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  // Close drawer on outside click
+  document.addEventListener('click', function(e) {
+    const drawer = document.getElementById('mobileDrawer');
+    const burger = document.getElementById('hamburger');
+    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !burger.contains(e.target)) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ── NAV ACTIVE STATE (Intersection Observer) ──
+  const navSections = ['quiz', 'schools', 'intl-banner', 'timeline', 'risorse'];
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        document.querySelectorAll('.nav-link[data-section]').forEach(link => {
+          link.classList.toggle('active', link.dataset.section === id);
+        });
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-64px 0px -40% 0px' });
+
+  navSections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) navObserver.observe(el);
+  });
+
   // ── REVEAL ON SCROLL ──
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+    });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   // ── QUIZ LOGIC ──
   let quizStep = 1;
@@ -1043,12 +1276,12 @@
 
   function nextStep() {
     if (!answers[quizStep]) return;
+    if (quizStep >= totalSteps) { showResult(); return; }
     const cur = document.querySelector(`.quiz-step[data-step="${quizStep}"]`);
-    quizStep++;
-    if (quizStep > totalSteps) { showResult(); return; }
-    const nxt = document.querySelector(`.quiz-step[data-step="${quizStep}"]`);
     cur.classList.remove('active');
-    nxt.classList.add('active');
+    quizStep++;
+    const nxt = document.querySelector(`.quiz-step[data-step="${quizStep}"]`);
+    if (nxt) nxt.classList.add('active');
     document.getElementById('quizProgress').style.width = (quizStep / totalSteps * 100) + '%';
   }
 
@@ -1058,43 +1291,43 @@
     cur.classList.remove('active');
     quizStep--;
     const prv = document.querySelector(`.quiz-step[data-step="${quizStep}"]`);
-    prv.classList.add('active');
+    if (prv) prv.classList.add('active');
     document.getElementById('quizProgress').style.width = (quizStep / totalSteps * 100) + '%';
   }
 
   function calcResult() {
     const a = answers;
-    const intlHigh = a[2] === 'intl-high' || a[2] === 'intl-work';
-    const wantsUni = a[4] === 'uni' || a[4] === 'nonlosaccora';
+    const intlHigh  = a[2] === 'intl-high' || a[2] === 'intl-work';
+    const wantsUni  = a[4] === 'uni' || a[4] === 'nonlosaccora';
     const isCreative = a[1] === 'arte' || a[5] === 'creativo';
-    const isSocial = a[3] === 'umano' || a[5] === 'sociale';
-    const isSTEM = a[3] === 'scienze';
-    const isEco = a[3] === 'economia';
+    const isSocial  = a[3] === 'umano' || a[5] === 'sociale';
+    const isSTEM    = a[3] === 'scienze';
+    const isEco     = a[3] === 'economia';
     const isPractical = a[1] === 'pratica' || a[5] === 'pratico';
 
     if (intlHigh && (a[3] === 'lingue' || a[1] === 'teoria')) {
       return { type: 'liceo', label: '📚 Liceo', color: 'badge-liceo',
         emoji: '🌍', title: 'Liceo con vocazione internazionale',
         desc: 'La tua priorità sono lingue, cultura e aprire le porte del mondo. Il percorso liceale con programmi internazionali è il più adatto a te.',
-        schools: ['Liceo Giordano Bruno (Cassano) — ESABAC + Birmingham 🌍', 'ITSOS Marie Curie (Cernusco) — Erasmus+ VET 🇪🇺'] };
+        schools: ['Liceo Giordano Bruno (Cassano/Melzo) — ESABAC + Birmingham 🌍', 'ITSOS Marie Curie (Cernusco) — Erasmus+ VET 🇪🇺'] };
     }
     if (intlHigh && isEco) {
       return { type: 'tecnico', label: '📊 Tecnico Internazionale', color: 'badge-tecnico',
         emoji: '✈️', title: 'Tecnico con focus internazionale',
-        desc: 'Economia, turismo e commercio estero con un occhio al mondo. RIM e turismo internazionale sono fatti per te.',
+        desc: 'Economia, turismo e commercio estero con un occhio al mondo. RIM e Turismo internazionale sono fatti per te.',
         schools: ['ISIS Zenale Butinone (Treviglio) — Turismo + Rondine 🕊️', 'IIS Argentia-Majorana (Gorgonzola) — RIM relazioni internazionali 🌍'] };
     }
     if (isSTEM && wantsUni) {
       return { type: 'liceo', label: '🔬 Liceo Scientifico', color: 'badge-liceo',
         emoji: '🚀', title: 'Liceo Scientifico o Scienze Applicate',
         desc: 'Matematica, fisica, scienze: vuoi capire come funziona il mondo e andare all\'università. Il liceo scientifico è la scelta classica e solida.',
-        schools: ['Liceo Giordano Bruno (Cassano) — Scientifico / Scienze Applicate', 'ITSOS Marie Curie (Cernusco) — Scientifico con scienze motorie'] };
+        schools: ['Liceo Giordano Bruno (Cassano) — Scientifico / Scienze Applicate', 'ITSOS Marie Curie (Cernusco) — Scientifico', 'IIS Primo Levi (Pioltello) — Liceo Scientifico'] };
     }
     if (isCreative) {
       return { type: 'tecnico', label: '🎨 Tecnico Creativo', color: 'badge-tecnico',
         emoji: '✨', title: 'Grafica, Comunicazione o Arte',
         desc: 'Creatività applicata al digitale, alla comunicazione visiva o alla moda. Percorsi pratici con sbocchi reali.',
-        schools: ['ISIS Zenale Butinone (Treviglio) — Grafica e Comunicazione 🎨', 'IIS Argentia-Majorana (Gorgonzola) — Moda'] };
+        schools: ['ISIS Zenale Butinone (Treviglio) — Grafica e Comunicazione 🎨', 'IIS Argentia-Majorana (Gorgonzola) — Moda', 'CFP/IeFP — Grafica Multimediale'] };
     }
     if (isSocial) {
       return { type: 'professionale', label: '❤️ Scienze Umane/Sociali', color: 'badge-prof',
@@ -1103,22 +1336,21 @@
         schools: ['IIS Bellisario (Trezzo) — LSU curvatura biomedica + Spagna 🇪🇸', 'ITSOS Marie Curie (Cernusco) — Scienze Umane', 'IIS Oberdan (Treviglio) — Economia Sociale'] };
     }
     if (isPractical && !wantsUni) {
-      return { type: 'professionale', label: '🔧 Professionale/Tecnico', color: 'badge-prof',
-        emoji: '🛠️', title: 'Tecnico o Professionale',
-        desc: 'Vuoi imparare facendo. Un percorso tecnico o professionale ti dà competenze spendibili subito nel mercato del lavoro.',
-        schools: ['IIS Archimede (Treviglio) — Meccanica/Informatica', 'IIS Bellisario (Trezzo) — Sanità e Assistenza Sociale', 'IIS Cantoni (Treviglio) — Agrario'] };
+      return { type: 'professionale', label: '🔧 Professionale/CFP', color: 'badge-prof',
+        emoji: '🛠️', title: 'Tecnico, Professionale o CFP',
+        desc: 'Vuoi imparare facendo. Un percorso tecnico, professionale o CFP ti dà competenze spendibili subito nel mercato del lavoro.',
+        schools: ['IIS Archimede (Treviglio) — Meccanica/Informatica', 'IIS Bellisario (Trezzo) — Sanità e Assistenza', 'CFP ENAIP / IAL — Qualifica IeFP 3 anni 🎓'] };
     }
     return { type: 'tecnico', label: '⚖️ Tecnico Equilibrato', color: 'badge-tecnico',
       emoji: '🎯', title: 'Istituto Tecnico — apertura totale',
-      desc: 'Teoria e pratica in equilibrio. L\'istituto tecnico ti permette sia di lavorare subito sia di andare all\'università.',
-      schools: ['ITSOS Marie Curie (Cernusco) — 7 indirizzi, massima flessibilità 🇪🇺', 'IIS Argentia-Majorana (Gorgonzola) — ampia varietà'] };
+      desc: 'Teoria e pratica in equilibrio. L\'istituto tecnico ti permette sia di lavorare subito sia di continuare all\'università.',
+      schools: ['ITSOS Marie Curie (Cernusco) — 7 indirizzi, massima flessibilità 🇪🇺', 'IIS Argentia-Majorana (Gorgonzola) — ampia varietà', 'IIS Primo Levi (Pioltello) — IT/Elettronica'] };
   }
 
   function showResult() {
     document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
     document.getElementById('quizProgress').style.width = '100%';
     const result = calcResult();
-    const r = document.getElementById('quizResult');
     document.getElementById('resultEmoji').textContent = result.emoji;
     const rt = document.getElementById('resultType');
     rt.textContent = result.label;
@@ -1127,16 +1359,17 @@
     document.getElementById('resultDesc').textContent = result.desc;
     const sc = document.getElementById('resultSchools');
     sc.innerHTML = result.schools.map(s => `<div class="result-school-chip">${s}</div>`).join('');
-    r.classList.add('show');
+    document.getElementById('quizResult').classList.add('show');
   }
 
   function restartQuiz() {
     quizStep = 1;
-    for (let k in answers) delete answers[k];
+    Object.keys(answers).forEach(k => delete answers[k]);
     document.getElementById('quizResult').classList.remove('show');
     document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
     document.querySelectorAll('.quiz-btn.next').forEach(b => b.disabled = true);
-    document.querySelector('.quiz-step[data-step="1"]').classList.add('active');
+    const first = document.querySelector('.quiz-step[data-step="1"]');
+    if (first) first.classList.add('active');
     document.getElementById('quizProgress').style.width = '20%';
   }
 
@@ -1145,4 +1378,11 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.school-card').forEach(card => {
-      if (filter === 'all') { card.c
+      if (filter === 'all') { card.classList.remove('hidden'); return; }
+      if (filter === 'intl') { card.classList.toggle('hidden', card.dataset.intl !== 'true'); return; }
+      card.classList.toggle('hidden', card.dataset.type !== filter);
+    });
+  }
+</script>
+</body>
+</html>
