@@ -80,7 +80,7 @@
 
     /* ── LAYOUT ── */
     .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
-    section { position: relative; z-index: 1; }
+    section { position: relative; z-index: 1; scroll-margin-top: 72px; }
 
     /* ── NAV ── */
     nav {
@@ -464,13 +464,13 @@
 <nav>
   <div class="nav-logo">Oriento<span>Tommy</span></div>
   <div class="nav-links">
-    <button class="nav-link" onclick="scrollTo('#quiz')">Quiz</button>
-    <button class="nav-link" onclick="scrollTo('#schools')">Scuole</button>
-    <button class="nav-link" onclick="scrollTo('#intl-banner')">Internazionale</button>
-    <button class="nav-link" onclick="scrollTo('#timeline')">Quando</button>
-    <button class="nav-link" onclick="scrollTo('#risorse')">Risorse</button>
+    <button class="nav-link" onclick="scrollToSection('#quiz')">Quiz</button>
+    <button class="nav-link" onclick="scrollToSection('#schools')">Scuole</button>
+    <button class="nav-link" onclick="scrollToSection('#intl-banner')">Internazionale</button>
+    <button class="nav-link" onclick="scrollToSection('#timeline')">Quando</button>
+    <button class="nav-link" onclick="scrollToSection('#risorse')">Risorse</button>
   </div>
-  <button class="nav-cta" onclick="scrollTo('#quiz')">Scopri la tua scuola →</button>
+  <button class="nav-cta" onclick="scrollToSection('#quiz')">Scopri la tua scuola →</button>
 </nav>
 
 <!-- HERO -->
@@ -480,8 +480,8 @@
     <h1 class="hero-title">Scegli il tuo<br><span class="grad">futuro con sicurezza</span></h1>
     <p class="hero-sub">La guida interattiva per ragazzi di 2ª e 3ª media e famiglie. Esplora licei, tecnici, professionali e scopri i percorsi con esperienze internazionali.</p>
     <div class="hero-actions">
-      <button class="btn-primary" onclick="scrollTo('#quiz')">🎯 Trova la tua scuola ideale</button>
-      <button class="btn-outline" onclick="scrollTo('#schools')">🏫 Esplora tutte le scuole</button>
+      <button class="btn-primary" onclick="scrollToSection('#quiz')">🎯 Trova la tua scuola ideale</button>
+      <button class="btn-outline" onclick="scrollToSection('#schools')">🏫 Esplora tutte le scuole</button>
     </div>
     <div class="hero-stats">
       <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Istituti mappati</div></div>
@@ -1011,12 +1011,13 @@
   <p style="margin-top:16px;font-size:0.8rem">Informazioni aggiornate ad aprile 2026. Per dettagli ufficiali consultare sempre i siti degli istituti. •
     <a href="https://unica.istruzione.gov.it" target="_blank">Iscrizioni unica.istruzione.gov.it</a>
   </p>
+  <p style="margin-top:16px;font-size:0.8rem;color:var(--text3)">written with ❤️ &amp; <span style="color:var(--primary);font-weight:600">Claude</span></p>
 </footer>
 
 <!-- SCRIPTS -->
 <script>
   // ── SMOOTH SCROLL ──
-  function scrollTo(id) {
+  function scrollToSection(id) {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -1144,11 +1145,4 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.school-card').forEach(card => {
-      if (filter === 'all') { card.classList.remove('hidden'); return; }
-      if (filter === 'intl') { card.classList.toggle('hidden', card.dataset.intl !== 'true'); return; }
-      card.classList.toggle('hidden', card.dataset.type !== filter);
-    });
-  }
-</script>
-</body>
-</html>
+      if (filter === 'all') { card.c
