@@ -252,7 +252,7 @@
       border-bottom:1px solid rgba(245,158,11,0.15);
     }
     .intl-banner-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-    .intl-globe { text-align:center; display:flex; justify-content:center; align-items:center; }
+    .intl-globe { width:100%; display:block; text-align:center; }
     .intl-must-badge {
       display:inline-flex; align-items:center; gap:8px; padding:6px 16px;
       border-radius:100px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.4);
@@ -618,7 +618,148 @@
           </div>
         </div>
       </div>
-      <div class="intl-globe" aria-hidden="true">&#127757;</div>
+      <div class="intl-globe" aria-hidden="true">
+<svg viewBox="0 0 340 296" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto">
+<defs>
+  <radialGradient id="ig-earth" cx="37%" cy="32%" r="72%">
+    <stop offset="0%" stop-color="#1d4ed8"/>
+    <stop offset="65%" stop-color="#1e3a8a"/>
+    <stop offset="100%" stop-color="#172554"/>
+  </radialGradient>
+  <radialGradient id="ig-moon" cx="33%" cy="30%">
+    <stop offset="0%" stop-color="#e4e4e7"/>
+    <stop offset="55%" stop-color="#a1a1aa"/>
+    <stop offset="100%" stop-color="#52525b"/>
+  </radialGradient>
+  <radialGradient id="ig-space" cx="40%" cy="40%">
+    <stop offset="0%" stop-color="#0d1928"/>
+    <stop offset="100%" stop-color="#04080f"/>
+  </radialGradient>
+  <clipPath id="ig-clip"><circle cx="160" cy="148" r="88"/></clipPath>
+</defs>
+
+<!-- Space background -->
+<rect width="340" height="296" fill="url(#ig-space)" rx="20"/>
+
+<!-- Stars: animated -->
+<circle cx="14" cy="18" r="1.2" fill="white"><animate attributeName="opacity" values="1;0.2;1" dur="2.1s" repeatCount="indefinite"/></circle>
+<circle cx="42" cy="7" r="1" fill="white"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.7s" repeatCount="indefinite"/></circle>
+<circle cx="68" cy="35" r="0.9" fill="white"><animate attributeName="opacity" values="1;0.3;1" dur="3.1s" repeatCount="indefinite"/></circle>
+<circle cx="118" cy="12" r="1" fill="white"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="2.5s" repeatCount="indefinite"/></circle>
+<circle cx="330" cy="14" r="1" fill="white"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.3s" repeatCount="indefinite"/></circle>
+<circle cx="325" cy="90" r="0.9" fill="white"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.8s" repeatCount="indefinite"/></circle>
+<circle cx="330" cy="250" r="1" fill="white"><animate attributeName="opacity" values="1;0.4;1" dur="2.0s" repeatCount="indefinite"/></circle>
+<circle cx="18" cy="265" r="0.9" fill="white"><animate attributeName="opacity" values="0.4;1;0.4" dur="3.0s" repeatCount="indefinite"/></circle>
+<circle cx="8" cy="175" r="1" fill="white"><animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+<circle cx="335" cy="168" r="1" fill="white"><animate attributeName="opacity" values="0.6;1;0.6" dur="2.4s" repeatCount="indefinite"/></circle>
+<circle cx="52" cy="55" r="0.8" fill="white" opacity="0.55"/>
+<circle cx="26" cy="128" r="0.8" fill="white" opacity="0.42"/>
+<circle cx="190" cy="8" r="0.9" fill="white" opacity="0.65"/>
+<circle cx="172" cy="282" r="1" fill="white" opacity="0.5"/>
+<circle cx="28" cy="198" r="0.9" fill="white" opacity="0.42"/>
+<circle cx="318" cy="210" r="1" fill="white" opacity="0.58"/>
+<circle cx="78" cy="280" r="0.8" fill="white" opacity="0.38"/>
+
+<!-- Moon (upper right) with craters -->
+<circle cx="295" cy="50" r="22" fill="url(#ig-moon)"/>
+<circle cx="288" cy="44" r="4" fill="rgba(0,0,0,0.18)"/>
+<circle cx="299" cy="55" r="3" fill="rgba(0,0,0,0.14)"/>
+<circle cx="293" cy="60" r="2.2" fill="rgba(0,0,0,0.12)"/>
+<circle cx="302" cy="44" r="1.8" fill="rgba(0,0,0,0.1)"/>
+<text x="295" y="82" text-anchor="middle" fill="#a1a1aa" font-size="7" font-family="system-ui,sans-serif" letter-spacing="1.5">LUNA</text>
+
+<!-- Artemis trajectory arc Earth to Moon -->
+<path d="M 235,100 Q 270,92 275,68" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3 4" opacity="0.42"/>
+
+<!-- Orbit ring visual — tilted ellipse (BEHIND Earth, drawn first) -->
+<ellipse cx="160" cy="148" rx="120" ry="38" transform="rotate(-22 160 148)" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5 7" opacity="0.38"/>
+
+<!-- Atmosphere glow static -->
+<circle cx="160" cy="148" r="98" fill="none" stroke="#3b82f6" stroke-width="10" opacity="0.07"/>
+<circle cx="160" cy="148" r="91" fill="none" stroke="#60a5fa" stroke-width="3" opacity="0.15"/>
+
+<!-- Atmosphere pulse rings (animate outward) -->
+<circle cx="160" cy="148" r="88" fill="none" stroke="#3b82f6" stroke-width="2">
+  <animate attributeName="r" values="88;148" dur="3s" repeatCount="indefinite" begin="0s"/>
+  <animate attributeName="opacity" values="0.45;0" dur="3s" repeatCount="indefinite" begin="0s"/>
+</circle>
+<circle cx="160" cy="148" r="88" fill="none" stroke="#3b82f6" stroke-width="1.5">
+  <animate attributeName="r" values="88;148" dur="3s" repeatCount="indefinite" begin="1s"/>
+  <animate attributeName="opacity" values="0.35;0" dur="3s" repeatCount="indefinite" begin="1s"/>
+</circle>
+<circle cx="160" cy="148" r="88" fill="none" stroke="#6366f1" stroke-width="1">
+  <animate attributeName="r" values="88;148" dur="3s" repeatCount="indefinite" begin="2s"/>
+  <animate attributeName="opacity" values="0.22;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+</circle>
+
+<!-- EARTH flat 2D globe -->
+<circle cx="160" cy="148" r="88" fill="url(#ig-earth)"/>
+
+<!-- Continents + grid (clipped) -->
+<g clip-path="url(#ig-clip)">
+  <!-- Americas -->
+  <path d="M88,96 Q81,118 83,142 Q87,165 96,175 Q100,196 90,218 Q101,228 113,215 Q119,196 111,178 Q118,161 126,143 Q133,122 126,98 Q118,86 102,85 Z" fill="#15803d" opacity="0.88"/>
+  <path d="M92,220 Q99,243 105,253 Q113,247 117,233 Q108,226 98,221 Z" fill="#15803d" opacity="0.78"/>
+  <!-- Greenland -->
+  <path d="M112,68 Q122,63 130,70 Q133,80 124,86 Q114,83 112,75 Z" fill="#4ade80" opacity="0.52"/>
+  <!-- Europe -->
+  <path d="M150,92 Q158,85 168,89 Q176,97 174,112 Q178,123 175,134 Q168,142 160,138 Q152,131 150,118 Q147,106 150,94 Z" fill="#166534" opacity="0.9"/>
+  <!-- Africa -->
+  <path d="M155,140 Q164,136 173,141 Q181,156 178,178 Q172,202 164,214 Q156,220 150,210 Q144,194 145,175 Q147,157 154,142 Z" fill="#15803d" opacity="0.88"/>
+  <!-- Asia -->
+  <path d="M180,88 Q198,82 218,89 Q232,99 233,116 Q229,133 217,139 Q204,144 192,135 Q181,127 179,112 Q177,99 181,90 Z" fill="#166534" opacity="0.9"/>
+  <!-- SE Asia -->
+  <path d="M200,142 Q214,139 224,148 Q229,162 223,170 Q215,176 205,172 Q197,165 196,154 Q197,144 202,143 Z" fill="#15803d" opacity="0.78"/>
+  <!-- Australia -->
+  <path d="M202,182 Q218,177 228,186 Q233,199 227,210 Q216,218 205,214 Q196,207 195,195 Q196,183 204,181 Z" fill="#15803d" opacity="0.83"/>
+  <!-- Grid meridians/parallels -->
+  <line x1="72" y1="148" x2="248" y2="148" stroke="rgba(255,255,255,0.11)" stroke-width="0.9"/>
+  <line x1="160" y1="60" x2="160" y2="236" stroke="rgba(255,255,255,0.11)" stroke-width="0.9"/>
+  <ellipse cx="160" cy="148" rx="88" ry="23" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="0.7"/>
+  <ellipse cx="160" cy="148" rx="88" ry="52" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.7"/>
+  <ellipse cx="160" cy="148" rx="88" ry="76" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.7"/>
+</g>
+<!-- Earth border -->
+<circle cx="160" cy="148" r="88" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.45"/>
+
+<!-- Orbit ring FRONT half (drawn on top of Earth) -->
+<path transform="translate(160,148) rotate(-22)" d="M -120,0 A 120,38 0 0 1 120,0" fill="none" stroke="#f59e0b" stroke-width="1.2" stroke-dasharray="5 7" opacity="0.48"/>
+
+<!-- SPACECRAFT TRAIL — 3 fading dots, each slightly behind in rotation -->
+<g opacity="0.38">
+  <circle cx="280" cy="148" r="2.5" fill="#f59e0b"/>
+  <animateTransform attributeName="transform" type="rotate" from="20 160 148" to="380 160 148" dur="10s" repeatCount="indefinite"/>
+</g>
+<g opacity="0.18">
+  <circle cx="280" cy="148" r="1.8" fill="#fcd34d"/>
+  <animateTransform attributeName="transform" type="rotate" from="40 160 148" to="400 160 148" dur="10s" repeatCount="indefinite"/>
+</g>
+<g opacity="0.08">
+  <circle cx="280" cy="148" r="1.2" fill="#fde68a"/>
+  <animateTransform attributeName="transform" type="rotate" from="65 160 148" to="425 160 148" dur="10s" repeatCount="indefinite"/>
+</g>
+
+<!-- ARTEMIS ORION CAPSULE — orbiting via animateTransform rotate -->
+<!-- Positioned at (280, 148): 120px right of Earth center (160,148) -->
+<g>
+  <!-- Body (pentagon capsule shape) -->
+  <polygon points="280,141 287,147 285,154 275,154 273,147" fill="#f59e0b" stroke="#fde68a" stroke-width="0.7"/>
+  <!-- Solar panels (horizontal) -->
+  <line x1="268" y1="149" x2="273" y2="149" stroke="#fcd34d" stroke-width="2.5"/>
+  <line x1="287" y1="149" x2="292" y2="149" stroke="#fcd34d" stroke-width="2.5"/>
+  <!-- Engine plume -->
+  <circle cx="280" cy="155" r="3" fill="#fb923c">
+    <animate attributeName="r" values="3;5.5;2.5;5;3" dur="0.42s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0.35;0.95;0.4;0.9" dur="0.42s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Orbit rotation -->
+  <animateTransform attributeName="transform" type="rotate" from="0 160 148" to="360 160 148" dur="10s" repeatCount="indefinite"/>
+</g>
+
+<!-- Label -->
+<text x="160" y="277" text-anchor="middle" fill="#f59e0b" font-size="8" font-family="system-ui,sans-serif" letter-spacing="2.5" opacity="0.5">ARTEMIS · EXPLORATION</text>
+</svg>
+      </div>
     </div>
   </div>
 </section>
@@ -1070,7 +1211,7 @@
     Informazioni aggiornate ad aprile 2026. Per dettagli ufficiali consultare sempre i siti degli istituti. &bull;
     <a href="https://unica.istruzione.gov.it" target="_blank" rel="noopener noreferrer">Iscrizioni unica.istruzione.gov.it</a>
   </p>
-  <p style="margin-top:16px;font-size:0.8rem;color:var(--text3)">written with &hearts; &amp; <span style="color:var(--primary);font-weight:600">Claude</span></p>
+  <p style="margin-top:16px;font-size:0.8rem;color:var(--text3)">written with &hearts; &amp; <span style="color:var(--primary);font-weight:600">Claude - feel free to share or contribute</span></p>
 </footer>
 
 <script>
