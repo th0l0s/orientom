@@ -1,11 +1,11 @@
-# OrientoTommy — Guida Orientamento Adda Martesana
+# OrienTom — Guida Orientamento Adda Martesana
 
 
 
 Sito pubblicato su **https://edu.privix.org** via GitHub Pages + GitHub Actions.
 
 ---
-# Orintamento per l'anno 2026/2027 nella zona dell'Adda e della Martesana.
+# Guida all' orientamento per l'anno 2026/2027 nella zona dell'Adda e della Martesana.
 
 
-# dev with <3 & Claude — Guida Orientamento Adda Martesana
+# write with <3 & codex agent — feel free to contribute or share
