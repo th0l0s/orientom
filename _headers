@@ -1,0 +1,15 @@
+# _headers — Netlify / Cloudflare Pages
+# GitHub Pages NON legge questo file.
+# Opzioni per attivarlo:
+#   A) Migra a Netlify (free) o Cloudflare Pages (free) — questo file viene letto nativamente
+#   B) Se il DNS di edu.privix.org passa per Cloudflare (proxy attivo):
+#      usa Transform Rules > Modify Response Headers per aggiungere questi header
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Content-Security-Policy: default-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'
