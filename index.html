@@ -335,6 +335,44 @@
     }
     .school-link:hover { border-color:var(--primary); color:var(--text); text-decoration:none; }
 
+    /* == CAMPUS ESTIVI == */
+    #campus { padding:100px 0; background:var(--bg2); }
+    .campus-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
+    .campus-card {
+      background:var(--card-bg); border:1px solid var(--card-border);
+      border-radius:var(--radius-lg); overflow:hidden; transition:var(--transition);
+    }
+    .campus-card:hover { transform:translateY(-4px); box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+    .campus-card.hidden { display:none; }
+    .campus-card-accent { height:4px; }
+    .campus-card-body { padding:28px; }
+    .campus-card-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; gap:12px; }
+    .campus-name { font-size:1.1rem; font-weight:700; margin-bottom:4px; }
+    .campus-loc  { font-size:0.85rem; color:var(--text3); }
+    .campus-badges { display:flex; flex-direction:column; gap:6px; align-items:flex-end; flex-shrink:0; }
+    .campus-desc { font-size:0.875rem; color:var(--text2); margin-bottom:16px; line-height:1.6; }
+    .campus-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+    .campus-tag {
+      padding:4px 10px; border-radius:6px;
+      background:var(--glass); border:1px solid var(--glass-border);
+      font-size:0.78rem; color:var(--text2);
+    }
+    .campus-details { padding-top:14px; border-top:1px solid var(--card-border); display:flex; flex-direction:column; gap:6px; }
+    .campus-detail-row { display:flex; align-items:baseline; gap:8px; font-size:0.82rem; color:var(--text3); }
+    .campus-detail-row strong { color:var(--text2); flex-shrink:0; }
+    .campus-footer { display:flex; align-items:center; justify-content:space-between; margin-top:18px; flex-wrap:wrap; gap:8px; }
+    .badge-sport    { background:rgba(34,211,238,0.2);  color:#67e8f9; }
+    .badge-arte     { background:rgba(168,85,247,0.2);  color:#c084fc; }
+    .badge-stem     { background:rgba(99,102,241,0.2);  color:#a5b4fc; }
+    .badge-oratorio { background:rgba(16,185,129,0.2);  color:#6ee7b7; }
+    .badge-comune   { background:rgba(245,158,11,0.15); color:var(--gold); border:1px solid rgba(245,158,11,0.3); }
+    .badge-lingua   { background:rgba(99,102,241,0.15); color:#a5b4fc;  border:1px solid rgba(99,102,241,0.3); }
+    .campus-filter-sport.active    { background:#0ea5e9; border-color:#0ea5e9; color:#fff; }
+    .campus-filter-arte.active     { background:#a855f7; border-color:#a855f7; color:#fff; }
+    .campus-filter-stem.active     { background:var(--primary); border-color:var(--primary); color:#fff; }
+    .campus-filter-oratorio.active { background:var(--green);   border-color:var(--green);   color:#fff; }
+    .campus-filter-comune.active   { background:var(--gold);    border-color:var(--gold);    color:#1a1100; }
+
     /* == TIMELINE == */
     #timeline { padding:100px 0; background:var(--bg2); }
     .tl-container {
@@ -446,6 +484,7 @@
     <button type="button" class="nav-link" data-target="quiz"        onclick="navTo('quiz')">Quiz</button>
     <button type="button" class="nav-link" data-target="schools"     onclick="navTo('schools')">Scuole</button>
     <button type="button" class="nav-link" data-target="intl-banner" onclick="navTo('intl-banner')">Internazionale</button>
+    <button type="button" class="nav-link" data-target="campus"      onclick="navTo('campus')">&#9728;&#65039; Estate</button>
     <button type="button" class="nav-link" data-target="timeline"    onclick="navTo('timeline')">Quando</button>
     <button type="button" class="nav-link" data-target="risorse"     onclick="navTo('risorse')">Risorse</button>
   </div>
@@ -462,6 +501,7 @@
   <button type="button" class="nav-link" onclick="navTo('quiz');toggleDrawer()">&#127919; Quiz</button>
   <button type="button" class="nav-link" onclick="navTo('schools');toggleDrawer()">&#127978; Scuole</button>
   <button type="button" class="nav-link" onclick="navTo('intl-banner');toggleDrawer()">&#127758; Internazionale</button>
+  <button type="button" class="nav-link" onclick="navTo('campus');toggleDrawer()">&#9728;&#65039; Estate</button>
   <button type="button" class="nav-link" onclick="navTo('timeline');toggleDrawer()">&#128197; Quando</button>
   <button type="button" class="nav-link" onclick="navTo('risorse');toggleDrawer()">&#128279; Risorse</button>
   <button type="button" class="nav-cta"  onclick="navTo('quiz');toggleDrawer()">Scopri la tua scuola &rarr;</button>
@@ -1105,6 +1145,398 @@
   </div>
 </section>
 
+<!-- CAMPUS ESTIVI -->
+<section id="campus">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">&#9728;&#65039; Estate 2026</div>
+      <h2 class="section-title">Campus Estivi &mdash; Adda Martesana</h2>
+      <p class="section-sub">Comunali, sportivi, artistici, oratori e STEM: tutta l&rsquo;offerta estiva del territorio in un colpo d&rsquo;occhio</p>
+    </div>
+    <div class="filter-bar reveal">
+      <button type="button" class="filter-btn active"                   onclick="filterCampus(this,'all')">Tutti</button>
+      <button type="button" class="filter-btn campus-filter-comune"     onclick="filterCampus(this,'comune')">&#127963; Comunali</button>
+      <button type="button" class="filter-btn campus-filter-sport"      onclick="filterCampus(this,'sport')">&#9917; Sport</button>
+      <button type="button" class="filter-btn campus-filter-arte"       onclick="filterCampus(this,'arte')">&#127912; Arte &amp; Teatro</button>
+      <button type="button" class="filter-btn campus-filter-stem"       onclick="filterCampus(this,'stem')">&#129302; STEM &amp; Coding</button>
+      <button type="button" class="filter-btn campus-filter-oratorio"   onclick="filterCampus(this,'oratorio')">&#128081; Oratori</button>
+    </div>
+    <div class="campus-grid" id="campusGrid">
+
+      <!-- CRE CERNUSCO -->
+      <div class="campus-card reveal" data-cat="comune">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">CRE Cernusco sul Naviglio</div>
+              <div class="campus-loc">&#128205; Cernusco sul Naviglio &middot; Via Don Milani 4</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-comune">Comunale</span></div>
+          </div>
+          <p class="campus-desc">Centro Ricreativo Estivo comunale a cura del Comune. Moduli settimanali con attivit&agrave; educative e ricreative per la scuola primaria. Iscrizioni sul portale comunale.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127891; Scuola Primaria</span>
+            <span class="campus-tag">&#128198; Giugno 2026</span>
+            <span class="campus-tag">Lun&ndash;Ven</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Periodo:</strong> Modulo 1: 9&ndash;26 giu 2026</div>
+            <div class="campus-detail-row"><strong>Et&agrave;:</strong> Scuola primaria</div>
+            <div class="campus-detail-row"><strong>Info:</strong> Iscrizioni portale comunale</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://comune.cernuscosulnaviglio.mi.it/servizio/centri-ricreativi-estivi/" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Sito ufficiale</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRE COLOGNO MONZESE -->
+      <div class="campus-card reveal" data-cat="comune">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">CRE Cologno Monzese</div>
+              <div class="campus-loc">&#128205; Cologno Monzese &middot; Scuole Via Repubblica e Via King</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-comune">Comunale</span></div>
+          </div>
+          <p class="campus-desc">Servizio comunale confermato per l&rsquo;estate 2026. Fascia oraria estesa con pre e post accoglienza. Tariffe agevolate ISEE per residenti.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127891; Infanzia &amp; Primaria</span>
+            <span class="campus-tag">7:30&ndash;18:00</span>
+            <span class="campus-tag">&#128198; Giu&ndash;Lug 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Primaria:</strong> 10 giu &ndash; 31 lug 2026</div>
+            <div class="campus-detail-row"><strong>Infanzia:</strong> 2 lug &ndash; 31 lug 2026</div>
+            <div class="campus-detail-row"><strong>Costo:</strong> &euro;106/sett residenti &middot; &euro;120 non residenti</div>
+            <div class="campus-detail-row"><strong>Iscrizioni:</strong> Portale Ecivis</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://colognoeasy.comune.colognomonzese.mi.it/action:s_italia:centro.diurno.estivo" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Iscrizioni online</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRE MELZO -->
+      <div class="campus-card reveal" data-cat="comune">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Centro Estivo Melzo</div>
+              <div class="campus-loc">&#128205; Melzo &middot; Scuola secondaria</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-comune">Comunale</span></div>
+          </div>
+          <p class="campus-desc">Centro estivo gestito dal Comune di Melzo per la scuola primaria. Attivit&agrave; ricreative, ludiche e sportive in orario continuato.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127891; Scuola Primaria</span>
+            <span class="campus-tag">8:30&ndash;16:30</span>
+            <span class="campus-tag">&#128198; Lug 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Periodo:</strong> 29 giu &ndash; 31 lug 2026</div>
+            <div class="campus-detail-row"><strong>Orario:</strong> 8:30 &ndash; 16:30</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.comune.melzo.mi.it/it/news/119087/centro-estivo-2026" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Dettagli</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRE GORGONZOLA -->
+      <div class="campus-card reveal" data-cat="comune">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Centro Estivo Gorgonzola</div>
+              <div class="campus-loc">&#128205; Gorgonzola</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-comune">Comunale</span></div>
+          </div>
+          <p class="campus-desc">Il Comune di Gorgonzola organizza il centro estivo con iscrizioni online dedicate. Attivit&agrave; per et&agrave; scolare con operatori qualificati.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127891; Et&agrave; scolari</span>
+            <span class="campus-tag">Iscrizione online</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Iscrizioni:</strong> Apertura sul portale comunale</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://comune.gorgonzola.mi.it/servizio/apertura-iscrizioni-centro-estivo/" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Iscrizioni</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMOS MILAN CAMP -->
+      <div class="campus-card reveal" data-cat="sport">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#ef4444,#f87171)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Promos Milan Camp</div>
+              <div class="campus-loc">&#128205; Cernusco s/N &middot; Campo Comunale Via Buonarroti 44</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-sport">Calcio</span></div>
+          </div>
+          <p class="campus-desc">Camp calcio ufficiale AC Milan con metodologia Milan Academy. Due allenamenti al giorno, welcome kit Puma Milan, torneo finale e attestato. Aperto a tutti i livelli.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#9917; Calcio</span>
+            <span class="campus-tag">6&ndash;15 anni</span>
+            <span class="campus-tag">8:30&ndash;17:30</span>
+            <span class="campus-tag">&#128198; Giu 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Date:</strong> 15&ndash;19 giu &middot; 22&ndash;26 giu 2026</div>
+            <div class="campus-detail-row"><strong>Staff:</strong> Tecnici certificati AC Milan Academy</div>
+            <div class="campus-detail-row"><strong>Include:</strong> Welcome kit Puma Milan, pranzo, torneo</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.promosmilancamp.it/cernusco-sul-naviglio" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Iscriviti</a>
+            <span style="font-size:0.8rem;color:var(--text3)">&#127942; Milan Academy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSI MULTISPORT -->
+      <div class="campus-card reveal" data-cat="sport">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#0ea5e9,#38bdf8)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">CSI Multisport Estate</div>
+              <div class="campus-loc">&#128205; Varie sedi &middot; Adda Martesana</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-sport">Multisport</span></div>
+          </div>
+          <p class="campus-desc">Il Centro Sportivo Italiano organizza campus multisport in decine di oratori e sedi sportive della zona. Calcio, basket, volley, nuoto, beach volley, rugby e tanto altro. Formula flessibile per settimane.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">4&ndash;17 anni</span>
+            <span class="campus-tag">&#9917; Calcio &#127944; Basket &#127953; Nuoto</span>
+            <span class="campus-tag">&#128198; Giu&ndash;Ago 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Costo:</strong> &euro;45&ndash;95/settimana</div>
+            <div class="campus-detail-row"><strong>Format:</strong> Day camp settimanale, lun&ndash;ven</div>
+            <div class="campus-detail-row"><strong>Sedi:</strong> Cerca la tua via il sito CSI Milano</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.csi.milano.it/societa-iscritte.html" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Trova sede</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- NUOTO CASSANO -->
+      <div class="campus-card reveal" data-cat="sport">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#0ea5e9,#22d3ee)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Campus Nuoto &mdash; Cassano d&rsquo;Adda</div>
+              <div class="campus-loc">&#128205; Cassano d&rsquo;Adda</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-sport">Nuoto</span></div>
+          </div>
+          <p class="campus-desc">Centri estivi dedicati al nuoto a Cassano d&rsquo;Adda e dintorni. Corsi per bambini e ragazzi con istruttori FIN qualificati, giochi acquatici e progressione tecnica.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127953; Nuoto</span>
+            <span class="campus-tag">5&ndash;16 anni</span>
+            <span class="campus-tag">Estate 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Cerca:</strong> Tutte le piscine della zona su Orangogo</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.orangogo.it/centri-estivi/cassano-dadda/nuoto" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Vedi strutture</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGO TEATRO -->
+      <div class="campus-card reveal" data-cat="arte">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#a855f7,#d946ef)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">AGO Teatro &mdash; [generAZIONI]</div>
+              <div class="campus-loc">&#128205; Cassano d&rsquo;Adda</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-arte">Teatro</span></div>
+          </div>
+          <p class="campus-desc">Seminario residenziale intensivo di recitazione, drammaturgia e improvvisazione. Un laboratorio in cui i ragazzi costruiscono e portano in scena uno spettacolo originale.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127914; Teatro</span>
+            <span class="campus-tag">Residenziale</span>
+            <span class="campus-tag">&#128198; 1&ndash;5 Lug 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Periodo:</strong> 1&ndash;5 luglio 2026</div>
+            <div class="campus-detail-row"><strong>Formato:</strong> Laboratorio intensivo, residenziale</div>
+            <div class="campus-detail-row"><strong>Output:</strong> Spettacolo finale</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.agoteatro.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; AGO Teatro</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEATRO CASSANESE -->
+      <div class="campus-card reveal" data-cat="arte">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#a855f7,#818cf8)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Teatro Cassanese (TeCa)</div>
+              <div class="campus-loc">&#128205; Cassano d&rsquo;Adda</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-arte">Arti Sceniche</span></div>
+          </div>
+          <p class="campus-desc">Il Teatro Cassanese offre corsi di arti sceniche e un&rsquo;accademia musicale. In estate propone percorsi intensivi per giovani che vogliono avvicinarsi al mondo della scena e della musica dal vivo.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127914; Recitazione</span>
+            <span class="campus-tag">&#127925; Musica</span>
+            <span class="campus-tag">All ages</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Info:</strong> Contattare direttamente per il programma estivo</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://teatrocassanese.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Teatro Cassanese</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AD ARTEM -->
+      <div class="campus-card reveal" data-cat="arte">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#ec4899,#a855f7)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Ad Artem &mdash; Campus Creativi</div>
+              <div class="campus-loc">&#128205; Milano &middot; raggiungibile da tutta l&rsquo;area</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-arte">Arte &amp; Creativit&agrave;</span></div>
+          </div>
+          <p class="campus-desc">Campus di arte visiva, espressione creativa e laboratori museali per bambini e ragazzi. Formula settimanale lun&ndash;ven, giugno&ndash;settembre 2026. Ideali per chi vuole esplorare pittura, scultura, disegno e arti digitali.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#127912; Arte Visiva</span>
+            <span class="campus-tag">6&ndash;14 anni</span>
+            <span class="campus-tag">&#128198; Giu&ndash;Set 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Formato:</strong> Settimane lun&ndash;ven, luglio&ndash;agosto</div>
+            <div class="campus-detail-row"><strong>Dove:</strong> Sede Milano, raggiungibile da Adda Martesana</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://adartem.it/ITA/collection/campus-estivi-milano-2026.aspx" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Ad Artem</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE SUMMER CAMP STEM -->
+      <div class="campus-card reveal" data-cat="stem">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#6366f1,#8b5cf6)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Experience Summer Camp &mdash; STEM</div>
+              <div class="campus-loc">&#128205; Varie sedi Lombardia</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-stem">STEM</span></div>
+          </div>
+          <p class="campus-desc">Camp tecnici tematici su robotica, coding, intelligenza artificiale, astronomia e scienze applicate. Didattica hands-on per ragazzi che vogliono capire come funziona il futuro.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#129302; Robotica</span>
+            <span class="campus-tag">&#128187; Coding</span>
+            <span class="campus-tag">&#129504; AI</span>
+            <span class="campus-tag">8&ndash;17 anni</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Formato:</strong> Settimane tematiche, residenziale o day camp</div>
+            <div class="campus-detail-row"><strong>Periodo:</strong> Giugno &ndash; Agosto 2026</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.experiencecamp.it/i-camp-tecnici/" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Scopri i camp</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BELLA FRA ORATORI FOM -->
+      <div class="campus-card reveal" data-cat="oratorio">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#10b981,#34d399)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">&#8220;Bella Fra&#8221; &mdash; Oratori FOM 2026</div>
+              <div class="campus-loc">&#128205; Tutti i paesi dell&rsquo;Adda Martesana</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-oratorio">Oratorio</span></div>
+          </div>
+          <p class="campus-desc">Tema unico 2026 della Fondazione Oratori Milanesi per gli 800 anni dalla morte di San Francesco d&rsquo;Assisi. Settimane di gioco, amicizia, sport e crescita personale in ogni oratorio del territorio.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#128081; FOM 2026</span>
+            <span class="campus-tag">6&ndash;18 anni</span>
+            <span class="campus-tag">&#128198; Giu&ndash;Lug</span>
+            <span class="campus-tag">Gratuito / offerta libera</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Tema:</strong> 800&deg; anniversario morte San Francesco d&rsquo;Assisi</div>
+            <div class="campus-detail-row"><strong>Dove:</strong> Ogni parrocchia della diocesi ambrosiana</div>
+            <div class="campus-detail-row"><strong>Info:</strong> Contatta il tuo oratorio locale</div>
+          </div>
+          <div class="campus-footer">
+            <a href="https://www.oratorioestivo.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Oratorio Estivo 2026</a>
+            <a href="https://www.chiesadimilano.it/pgfom/" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; FOM</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORATORIO VAPRIO D'ADDA -->
+      <div class="campus-card reveal" data-cat="oratorio">
+        <div class="campus-card-accent" style="background:linear-gradient(90deg,#10b981,#059669)"></div>
+        <div class="campus-card-body">
+          <div class="campus-card-top">
+            <div>
+              <div class="campus-name">Oratorio Estivo &mdash; Vaprio d&rsquo;Adda</div>
+              <div class="campus-loc">&#128205; Vaprio d&rsquo;Adda</div>
+            </div>
+            <div class="campus-badges"><span class="badge badge-oratorio">Oratorio</span></div>
+          </div>
+          <p class="campus-desc">Oratorio estivo della parrocchia di Vaprio d&rsquo;Adda con programma strutturato di quattro settimane. Giochi, sport, catechesi e uscite. Apertura accoglienza dalle 8:00, attivit&agrave; fino alle 17:00.</p>
+          <div class="campus-tags">
+            <span class="campus-tag">&#128081; Parrocchia San Nicol&ograve;</span>
+            <span class="campus-tag">8:00&ndash;17:00</span>
+            <span class="campus-tag">&#128198; 9 Giu &ndash; 3 Lug 2026</span>
+          </div>
+          <div class="campus-details">
+            <div class="campus-detail-row"><strong>Periodo:</strong> 9 giugno &ndash; 3 luglio 2026</div>
+            <div class="campus-detail-row"><strong>Orario:</strong> 8:00 &ndash; 17:00</div>
+            <div class="campus-detail-row"><strong>Contatto:</strong> oratorioestivo@parrocchiavaprio.it &middot; 378 081 4002</div>
+          </div>
+          <div class="campus-footer">
+            <a href="http://www.parrocchiavaprio.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Parrocchia Vaprio</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /campus-grid -->
+
+    <!-- INFO BANNER -->
+    <div class="reveal" style="margin-top:52px;padding:28px 32px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(16,185,129,0.06));border:1px solid rgba(245,158,11,0.2);display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+      <div style="font-size:2rem;flex-shrink:0;">&#128161;</div>
+      <div>
+        <div style="font-weight:700;font-size:1rem;margin-bottom:8px;color:var(--gold)">Come scegliere il campus giusto</div>
+        <p style="color:var(--text2);font-size:0.9rem;line-height:1.7;margin:0;">I campus estivi non sono &ldquo;solo baby-sitting&rdquo;: sport, arte e coding in et&agrave; formativa sviluppano competenze trasversali spendibili nella scelta della scuola superiore. Un campus STEM in 3&ordf; media pu&ograve; consolidare la vocazione tecnica; uno teatrale pu&ograve; rivelare attitudini umanistiche inaspettate. Scegli in base agli <strong>interessi del ragazzo</strong>, non solo alla comodit&agrave; logistica.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- TIMELINE -->
 <section id="timeline">
   <div class="container">
@@ -1279,7 +1711,7 @@ document.addEventListener('click', function(e) {
 });
 
 /* == NAV ACTIVE STATE (scroll-based, piu' affidabile di IO per sezioni alte) == */
-var NAV_TARGETS = ['quiz', 'schools', 'intl-banner', 'timeline', 'risorse'];
+var NAV_TARGETS = ['quiz', 'schools', 'intl-banner', 'campus', 'timeline', 'risorse'];
 
 function updateNavActive() {
   var scrollY  = window.scrollY || window.pageYOffset;
@@ -1433,6 +1865,16 @@ function restartQuiz() {
   var first = document.querySelector('.quiz-step[data-step="1"]');
   if (first) first.classList.add('active');
   document.getElementById('quizProgress').style.width = '20%';
+}
+
+/* == CAMPUS FILTER == */
+function filterCampus(btn, filter) {
+  document.querySelectorAll('#campus .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.campus-card').forEach(function(card) {
+    if (filter === 'all') { card.classList.remove('hidden'); return; }
+    card.classList.toggle('hidden', card.dataset.cat !== filter);
+  });
 }
 
 /* == SCHOOL FILTER == */
