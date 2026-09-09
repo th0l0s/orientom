@@ -619,6 +619,108 @@
       *, *::before, *::after { animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
       html { scroll-behavior:auto; }
     }
+    /* == BUS: PIANIFICATORE DELLE CORSE ==
+       Dati orari dei gestori (SAI/Bergamo Trasporti, NET, ATM), verificati il
+       9 settembre 2026. Vedi BUS_TRIPS nello script in fondo alla pagina. */
+    .bus-wrap { margin-top:64px; }
+    .bus-head { max-width:760px; margin-bottom:24px; }
+    .bus-h {
+      font-family:'Space Grotesk',sans-serif; font-weight:800;
+      font-size:clamp(1.5rem,3.2vw,2.1rem); margin:12px 0 10px;
+    }
+    .bus-p { color:var(--text2); font-size:1rem; }
+
+    .bus-tool {
+      background:var(--card-bg); border:1px solid var(--glass-border);
+      border-radius:var(--radius-lg); padding:24px;
+    }
+    .bus-form { display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:end; }
+    .bus-field { display:flex; flex-direction:column; gap:6px; min-width:0; }
+    .bus-field label {
+      font-size:0.72rem; font-weight:700; letter-spacing:0.08em;
+      text-transform:uppercase; color:var(--text3);
+    }
+    .bus-field select, .bus-field input[type="time"] {
+      width:100%; padding:12px 14px; border-radius:12px;
+      font-family:inherit; font-size:0.95rem; font-weight:600;
+      background:rgba(255,255,255,0.05); border:1px solid var(--glass-border);
+      color:var(--text); cursor:pointer;
+    }
+    .bus-field select:focus, .bus-field input:focus { outline:2px solid var(--primary); outline-offset:2px; }
+    .bus-swap {
+      width:46px; height:46px; border-radius:12px; flex:0 0 auto;
+      background:var(--glass); border:1px solid var(--glass-border);
+      color:var(--text2); font-size:1.15rem; line-height:1; transition:var(--transition);
+    }
+    .bus-swap:hover { color:var(--text); border-color:var(--primary); transform:rotate(180deg); }
+    .bus-when { display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; margin-top:14px; }
+    .bus-when .bus-field { flex:0 0 auto; width:150px; }
+    .bus-now {
+      padding:12px 18px; border-radius:12px; font-size:0.84rem; font-weight:700;
+      background:var(--glass); border:1px solid var(--glass-border); color:var(--text2);
+      transition:var(--transition);
+    }
+    .bus-now:hover { color:var(--text); border-color:var(--cyan); }
+
+    .bus-results { margin-top:20px; display:flex; flex-direction:column; gap:10px; }
+    .bus-run {
+      display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:center;
+      padding:14px 16px; border-radius:14px;
+      background:rgba(255,255,255,0.03); border:1px solid var(--card-border);
+    }
+    .bus-run.next { border-color:rgba(34,211,238,0.45); background:rgba(34,211,238,0.07); }
+    .bus-dep {
+      font-family:'Space Grotesk',sans-serif; font-size:1.5rem; font-weight:700;
+      font-variant-numeric:tabular-nums; line-height:1.1; white-space:nowrap;
+    }
+    .bus-dep small {
+      display:block; font-family:'Inter',sans-serif; font-size:0.7rem; font-weight:700;
+      color:var(--cyan); letter-spacing:0.03em; margin-top:2px;
+    }
+    .bus-legs { display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:0.8rem; color:var(--text3); min-width:0; }
+    .bus-legs .sep { color:var(--text3); }
+    .bus-arr { text-align:right; font-size:0.76rem; color:var(--text3); white-space:nowrap; }
+    .bus-arr strong {
+      display:block; font-family:'Space Grotesk',sans-serif; font-size:1.05rem;
+      color:var(--text); font-variant-numeric:tabular-nums; font-weight:700;
+    }
+    .line-badge {
+      display:inline-flex; align-items:center; padding:3px 9px; border-radius:8px;
+      font-size:0.74rem; font-weight:800; letter-spacing:0.02em; color:#08111f; white-space:nowrap;
+    }
+    .bus-empty {
+      padding:24px; text-align:center; color:var(--text2); font-size:0.9rem;
+      border:1px dashed var(--glass-border); border-radius:14px;
+    }
+    .bus-foot {
+      display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+      margin-top:16px; padding-top:14px; border-top:1px solid var(--card-border);
+      font-size:0.78rem; color:var(--text3);
+    }
+    .bus-legend { display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:16px; font-size:0.76rem; color:var(--text3); }
+    .bus-legend span.k { display:inline-flex; align-items:center; gap:6px; }
+    .bus-dot { width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+
+    @media (max-width:720px) {
+      .bus-form { grid-template-columns:1fr; }
+      .bus-swap { width:100%; height:40px; }
+      .bus-swap:hover { transform:none; }
+      .bus-run { grid-template-columns:auto 1fr; row-gap:10px; }
+      .bus-arr { grid-column:1/-1; text-align:left; }
+      .bus-arr strong { display:inline; font-size:0.95rem; }
+      .bus-tool { padding:18px 16px; }
+    }
+    .bus-times {
+      font-variant-numeric:tabular-nums; font-size:0.84rem; color:var(--text2);
+      line-height:1.9; margin:8px 0 0; word-spacing:0.1em;
+    }
+    .bus-times b { color:var(--text); font-weight:700; }
+    .bus-sub {
+      font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700;
+      margin:40px 0 6px;
+    }
+    .bus-note { font-size:0.85rem; color:var(--text2); margin-top:12px; }
+
   </style>
 </head>
 <body>
@@ -2808,6 +2910,230 @@ Servono, ma sono anche pubblicit&agrave;: quel giorno la scuola si mette in tiro
       </div>
 
     </div>
+
+    <!-- ===== BUS: ORARI REALI + PIANIFICATORE ===== -->
+    <div class="bus-wrap reveal" id="bus">
+      <div class="bus-head">
+        <div class="section-tag">&#128652; Orari dei gestori &middot; non stime</div>
+        <h3 class="bus-h">Fara, Canonica, Vaprio, Treviglio, Cassano e la M2: le corse una per una</h3>
+        <p class="bus-p">Scegli da dove parti e dove vai: qui sotto compaiono le prossime corse, con il cambio gi&agrave; calcolato. Serve per la prova del mercoled&igrave; prima di scegliere la scuola &mdash; e poi ogni mattina per cinque anni.</p>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-title">&#128260; La rete &egrave; cambiata il 3 agosto 2026 &mdash; e cambia ancora il 14 settembre</span>
+        La storica <strong>linea F &egrave; diventata B812</strong> (Verdellino&ndash;Vaprio&ndash;Treviglio) e adesso <strong>passa anche da Vaprio d'Adda</strong>, con capolinea a Verdellino dove si prende il nuovo E-BRT per Bergamo. Le corse scolastiche da e per Bergamo restano sui percorsi storici, quindi <em>senza</em> Vaprio.
+        Attenzione alla data: gli orari qui sotto sono quelli <strong>estivi, in vigore fino al 13 settembre 2026</strong>. Dal <strong>14 settembre</strong> entra l'orario scolastico, con parecchie corse in pi&ugrave;: quelle elencate qui restano, ma non sono tutte.
+        <span class="src">Fonte: <a href="https://www.saiautolinee.it/uploads/news-attachments/AVVISO-UTENZA-EBRT-DAL-03-08-2026-6a6a08ccc01be.pdf" target="_blank" rel="noopener noreferrer">SAI Autolinee &mdash; avviso all'utenza E-BRT dal 03/08/2026</a></span>
+      </div>
+
+      <div class="bus-tool">
+        <div class="bus-form">
+          <div class="bus-field">
+            <label for="busFrom">Parto da</label>
+            <select id="busFrom" onchange="busRender()"></select>
+          </div>
+          <button type="button" class="bus-swap" onclick="busSwap()" aria-label="Inverti partenza e arrivo" title="Inverti">&#8646;</button>
+          <div class="bus-field">
+            <label for="busTo">Arrivo a</label>
+            <select id="busTo" onchange="busRender()"></select>
+          </div>
+        </div>
+        <div class="bus-when">
+          <div class="bus-field">
+            <label for="busTime">A partire dalle</label>
+            <input type="time" id="busTime" onchange="busRender()" />
+          </div>
+          <button type="button" class="bus-now" onclick="busSetNow()">&#128337; Adesso</button>
+          <button type="button" class="bus-now" id="busAllBtn" onclick="busToggleAll()">Vedi tutte le corse</button>
+        </div>
+
+        <div id="busNotice"></div>
+        <div class="bus-results" id="busResults" aria-live="polite"></div>
+
+        <div class="bus-foot">
+          <span>Cambio minimo calcolato: <strong>8 minuti</strong> alla fermata di interscambio. Il segno &laquo;&asymp;&raquo; indica un orario ricavato dai tempi di percorrenza dichiarati dal gestore, non stampato sul libretto.</span>
+        </div>
+        <div class="bus-legend">
+          <span class="k"><span class="bus-dot" style="background:#fb923c"></span> B812 SAI</span>
+          <span class="k"><span class="bus-dot" style="background:#34d399"></span> T10 SAI</span>
+          <span class="k"><span class="bus-dot" style="background:#60a5fa"></span> Z309 NET</span>
+          <span class="k"><span class="bus-dot" style="background:#c084fc"></span> Z311 NET</span>
+          <span class="k"><span class="bus-dot" style="background:#4ade80"></span> M2 metro</span>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-title">&#128161; Come leggere i risultati</span>
+        Gli orari valgono <strong>da luned&igrave; a venerd&igrave;</strong>. Il sabato le corse calano, la domenica restano solo <strong>Z311</strong> (Vaprio&ndash;Gessate), <strong>z405</strong> (Cassano&ndash;Gessate&ndash;Treviglio) e la <strong>M2</strong>: B812, T10 e Z309 non garantiscono corse festive. I libretti dei gestori dichiarano gli orari <em>indicativi</em>: il traffico li sposta. Se la corsa &egrave; l'unica utile, arriva alla fermata cinque minuti prima.
+      </div>
+
+      <div class="callout good">
+        <span class="callout-title">&#128506;&#65039; Ti serve la mappa della rete?</span>
+        Su <a href="https://move.privix.org/" target="_blank" rel="noopener noreferrer"><strong>move.privix.org</strong></a> c'&egrave; il progetto gemello di questa guida: mappa delle cinque linee, matrice di tutte le combinazioni fra Fara, Vaprio, Canonica, Treviglio, Cassano, Trezzo e Gessate, e il <strong>confronto fra l'arrivo del bus e il treno successivo</strong> a Treviglio e a Cassano. Qui trovi gli orari e gli abbonamenti, l&igrave; la geografia della rete e le coincidenze.
+      </div>
+
+      <h4 class="bus-sub">Le otto tratte, in sintesi</h4>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Quanto ci metti davvero, e con quale linea &mdash; orario feriale</caption>
+          <thead><tr><th>Tratta</th><th>Linea</th><th class="num">Durata</th><th>Quante corse</th><th>Alternativa</th></tr></thead>
+          <tbody>
+            <tr><td>Fara &harr; Vaprio</td><td><strong>B812</strong> via Canonica</td><td class="num">12 min</td><td>13 al giorno per senso</td><td>T10, ~15 min</td></tr>
+            <tr><td>Fara &harr; Treviglio</td><td><strong>B812</strong></td><td class="num">20 min</td><td>13, di pi&ugrave; da settembre</td><td>T10, ~30 min</td></tr>
+            <tr><td>Canonica &harr; Treviglio</td><td><strong>B812</strong>, Via Lodi 40</td><td class="num">17 min</td><td>come B812</td><td>T10, Via Matteotti</td></tr>
+            <tr><td>Vaprio &harr; Treviglio</td><td><strong>B812</strong> o <strong>T10</strong></td><td class="num">29 min</td><td>13 + 16 corse</td><td>Z309 e z405 via Cassano</td></tr>
+            <tr><td>Vaprio &harr; Cassano</td><td><strong>Z309</strong></td><td class="num">13&ndash;18 min</td><td>ogni 30&ndash;60 min, 6&ndash;21</td><td>T10, poche corse via Fara</td></tr>
+            <tr><td>Fara &harr; Cassano</td><td><strong>B812 + Z309</strong>, cambio a Vaprio</td><td class="num">~40 min</td><td>segue le due linee</td><td>T10 diretta <span class="pill-todo">da verificare</span></td></tr>
+            <tr><td>Vaprio &harr; Cernusco s/N</td><td><strong>Z311 + M2</strong></td><td class="num">35&ndash;45 min</td><td>Z311 ogni 15&ndash;30 min</td><td>Z309, z405 e M2</td></tr>
+            <tr><td>Fara &harr; Cernusco s/N</td><td><strong>B812 + Z311 + M2</strong></td><td class="num">50&ndash;60 min</td><td>segue le tre linee</td><td>T10, z405 e M2 via Cassano</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Nessun bus arriva a Cernusco: il collegamento reale &egrave; il bus fino a <strong>Gessate</strong> e da l&igrave; la <strong>metropolitana M2</strong> verso Milano &mdash; Gorgonzola, Cassina de' Pecchi, Bussero, Villa Pompea, Cernusco: cinque fermate, circa 11 minuti.</p>
+
+      <h4 class="bus-sub">Le linee, con gli orari completi</h4>
+
+      <details class="faq">
+        <summary><span class="line-badge" style="background:#fb923c">B812</span> Treviglio &ndash; Fara &ndash; Canonica &ndash; Vaprio &ndash; Verdellino</summary>
+        <div class="faq-body">
+          <p><strong>Gestore:</strong> SAI / Bergamo Trasporti &middot; <strong>Giorni:</strong> luned&igrave;&ndash;sabato, nessuna corsa festiva &middot; <strong>Orario riportato:</strong> estivo, 3 agosto &ndash; 13 settembre 2026. &Egrave; la ex linea F. Fermate utili: Treviglio V.le De Gasperi alla stazione, Badalasco, Fara Via Locatelli 11 e 12, Canonica Via Lodi 40 e Via Bergamo, Vaprio via Perego.</p>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>Verso Vaprio e Verdellino</caption>
+              <thead><tr><th>Treviglio FS</th><th>Fara</th><th>Canonica &asymp;</th><th>Vaprio</th></tr></thead>
+              <tbody>
+                <tr><td>06:15</td><td>06:33</td><td>06:38</td><td>06:45</td></tr>
+                <tr><td>07:00</td><td>07:18</td><td>07:23</td><td>07:30</td></tr>
+                <tr><td>08:15</td><td>08:33</td><td>08:38</td><td>08:45</td></tr>
+                <tr><td>09:00</td><td>09:18</td><td>09:23</td><td>09:30</td></tr>
+                <tr><td>10:45</td><td>11:03</td><td>11:08</td><td>11:15</td></tr>
+                <tr><td>11:15</td><td>11:33</td><td>11:38</td><td>11:45</td></tr>
+                <tr><td>12:30</td><td>12:48</td><td>12:53</td><td>13:00</td></tr>
+                <tr><td>13:15</td><td>13:33</td><td>13:38</td><td>13:45</td></tr>
+                <tr><td>14:30</td><td>14:48</td><td>14:53</td><td>15:00</td></tr>
+                <tr><td>16:30</td><td>16:48</td><td>16:53</td><td>17:00</td></tr>
+                <tr><td>17:30</td><td>17:48</td><td>17:53</td><td>18:00</td></tr>
+                <tr><td>18:30</td><td>18:48</td><td>18:53</td><td>19:00</td></tr>
+                <tr><td>19:15</td><td>19:33</td><td>19:38</td><td>19:45</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>Verso Treviglio</caption>
+              <thead><tr><th>Vaprio</th><th>Canonica &asymp;</th><th>Fara</th><th>Treviglio FS</th></tr></thead>
+              <tbody>
+                <tr><td>05:45</td><td>05:51</td><td>05:55</td><td>06:14</td></tr>
+                <tr><td>06:27</td><td>06:33</td><td>06:37</td><td>06:56</td></tr>
+                <tr><td>07:36</td><td>07:42</td><td>07:46</td><td>08:05</td></tr>
+                <tr><td>08:26</td><td>08:32</td><td>08:36</td><td>08:55</td></tr>
+                <tr><td>09:41</td><td>09:47</td><td>09:51</td><td>10:10</td></tr>
+                <tr><td>10:21</td><td>10:27</td><td>10:31</td><td>10:50</td></tr>
+                <tr><td>12:06</td><td>12:12</td><td>12:16</td><td>12:35</td></tr>
+                <tr><td>12:36</td><td>12:42</td><td>12:46</td><td>13:05</td></tr>
+                <tr><td>13:56</td><td>14:02</td><td>14:06</td><td>14:25</td></tr>
+                <tr><td>14:36</td><td>14:42</td><td>14:46</td><td>15:05</td></tr>
+                <tr><td>15:56</td><td>16:02</td><td>16:06</td><td>16:25</td></tr>
+                <tr><td>17:56</td><td>18:02</td><td>18:06</td><td>18:25</td></tr>
+                <tr><td>18:51</td><td>18:57</td><td>19:01</td><td>19:20</td></tr>
+                <tr><td>19:51</td><td>19:57</td><td>20:01</td><td>20:20</td></tr>
+                <tr><td>20:36</td><td>20:42</td><td>&mdash;</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="bus-note">La colonna <strong>Canonica</strong> &egrave; calcolata sullo scarto dichiarato dal gestore: +5 minuti da Fara andando verso Vaprio, +6 minuti da Vaprio andando verso Treviglio. L'ultima partenza da Vaprio delle 20:36 non ha orari pubblicati oltre Canonica.</p>
+          <p class="bus-note"><strong>Dal 14 settembre 2026</strong> si aggiungono le corse scolastiche, sigle S5, S6 e SSab. Da Fara verso Treviglio compaiono anche le 06:41, 09:16, 10:46, 13:11, 14:16, 15:08 e 16:16. Alcune corse scolastiche da e per Bergamo passano da Fara e Canonica <strong>senza</strong> toccare Vaprio.</p>
+          <span class="src">Fonti: <a href="https://www.saiautolinee.it/uploads/lines/LINEA-B812-in-vigore-dal-03-08-2026-6a6858305f4c3.pdf" target="_blank" rel="noopener noreferrer">PDF B812 dal 03/08/2026</a> &middot; <a href="https://www.saiautolinee.it/uploads/lines/LINEA-B812-in-vigore-dal-14-09-2026-6a8e15811eec3.pdf" target="_blank" rel="noopener noreferrer">PDF B812 dal 14/09/2026</a></span>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span class="line-badge" style="background:#34d399">T10</span> Trezzo &ndash; Vaprio &ndash; Canonica &ndash; Fara &ndash; Treviglio</summary>
+        <div class="faq-body">
+          <p><strong>Gestore:</strong> SAI / Bergamo Trasporti &middot; <strong>Giorni:</strong> luned&igrave;&ndash;sabato. &Egrave; la seconda strada per Treviglio: pi&ugrave; lenta della B812, ma con pi&ugrave; corse nel pomeriggio. Il libretto stampa per intero solo i capolinea, quindi gli orari intermedi qui sotto sono ricavati dai tempi di percorrenza dichiarati e portano il segno &asymp;.</p>
+          <div class="table-wrap">
+            <table class="data">
+              <caption>Verso Treviglio &mdash; partenze da Vaprio via Perego</caption>
+              <thead><tr><th>Vaprio</th><th>Canonica &asymp;</th><th>Treviglio FS &asymp;</th></tr></thead>
+              <tbody>
+                <tr><td>06:55</td><td>06:56</td><td>07:25</td></tr>
+                <tr><td>07:58</td><td>07:59</td><td>08:28</td></tr>
+                <tr><td>08:40</td><td>08:41</td><td>09:10</td></tr>
+                <tr><td>09:00</td><td>09:01</td><td>09:30</td></tr>
+                <tr><td>09:35</td><td>09:36</td><td>10:05</td></tr>
+                <tr><td>10:35</td><td>10:36</td><td>11:05</td></tr>
+                <tr><td>13:13</td><td>13:14</td><td>13:43</td></tr>
+                <tr><td>14:18</td><td>14:19</td><td>14:48</td></tr>
+                <tr><td>14:50</td><td>14:51</td><td>15:20</td></tr>
+                <tr><td>15:23</td><td>15:24</td><td>15:53</td></tr>
+                <tr><td>16:13</td><td>16:14</td><td>16:43</td></tr>
+                <tr><td>16:40</td><td>16:41</td><td>17:10</td></tr>
+                <tr><td>17:08</td><td>17:09</td><td>17:38</td></tr>
+                <tr><td>17:50</td><td>17:51</td><td>18:20</td></tr>
+                <tr><td>18:50</td><td>18:51</td><td>19:20</td></tr>
+                <tr><td>19:50</td><td>19:51</td><td>20:20</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="bus-times"><b>Verso Trezzo, partenze da Treviglio FS:</b> 06:28 &middot; 06:48 &middot; 08:10 &middot; 08:30 &middot; 09:00 &middot; 10:00 &middot; 12:15 &middot; 13:20 &middot; 14:15 &middot; 14:20 &middot; 14:25 &middot; 15:15 &middot; 15:20 &middot; 16:10 &middot; 17:20 &middot; 18:20 &middot; 18:53 &middot; 19:20. Vaprio via Perego &asymp; 25 minuti dopo, Canonica un minuto prima di Vaprio.</p>
+          <p class="bus-note"><strong>Il ramo per Cassano d'Adda</strong> esiste, servizio Treviglio&ndash;Badalasco&ndash;Fara&ndash;Cassano, ma ha pochissime corse concentrate a met&agrave; giornata e in serata: Cassano Liceo 12:35, 13:35, 14:12, 14:32; Cassano FS 18:25; Bivio Colonnella 12:41, 13:42, 14:19, 14:39; Fara Via Locatelli 12:44, 13:30, 13:48, 14:44, 15:19, 18:39, 19:09, 19:38. <span class="pill-todo">da verificare</span> l'abbinamento fra andata e ritorno non si legge con certezza dal libretto: per Fara&ndash;Cassano, tutti i giorni, conviene <strong>B812 fino a Vaprio e poi Z309</strong>.</p>
+          <p class="bus-note"><strong>Le sigle sul libretto:</strong> S5, S6 e SSab valgono solo nei giorni di scuola; NS5 e NS6 solo quando la scuola &egrave; chiusa; F5 e F6 sono feriali tutto l'anno; AGO &egrave; la corsa che c'&egrave; anche ad agosto.</p>
+          <span class="src">Fonte: <a href="https://www.bergamotrasporti.it/percorsi/invernale/linea-t10.pdf" target="_blank" rel="noopener noreferrer">Bergamo Trasporti &mdash; PDF linea T10</a></span>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span class="line-badge" style="background:#60a5fa">Z309</span> Cassano d'Adda &ndash; Groppello &ndash; Vaprio &ndash; Trezzo</summary>
+        <div class="faq-body">
+          <p><strong>Gestore:</strong> NET, Nord Est Trasporti &middot; <strong>Giorni:</strong> luned&igrave;&ndash;venerd&igrave; e sabato, nessuna corsa festiva &middot; <strong>Orario riportato:</strong> invernale, in vigore dal 14 settembre 2026. &Egrave; il collegamento buono fra Vaprio e Cassano, con fermate alla stazione, al Liceo e in C.so Europa. A Vaprio ferma a C.na Badia, via Perego e via Marconi.</p>
+          <p class="bus-times"><b>Da Cassano FS verso Vaprio e Trezzo, lun&ndash;ven:</b> 06:12 &middot; 06:32 &middot; 06:52 &middot; 07:15 &middot; 07:35 &middot; 08:05 &middot; 08:50 &middot; 09:50 &middot; 10:50 &middot; 11:50 &middot; 12:35 &middot; 13:10 &middot; 13:30 &middot; 14:00 &middot; 14:10 &middot; 14:50 &middot; 15:50 &middot; 16:50 &middot; 17:50 &middot; 18:20 &middot; 18:50 &middot; 19:20 &middot; 19:50 &middot; 20:20. A Vaprio circa 13 minuti dopo. Il sabato si va dalle 06:52 alle 20:20, all'incirca ogni ora.</p>
+          <p class="bus-times"><b>Da Trezzo verso Vaprio e Cassano FS, lun&ndash;ven:</b> 07:45 &middot; 08:35 &middot; 09:25 &middot; 10:25 &middot; 11:25 &middot; 12:25 &middot; 13:13 &middot; 13:40 &middot; 14:13 &middot; 14:30 &middot; 14:48 &middot; 15:30 &middot; 16:30 &middot; 17:25 &middot; 18:25 &middot; 18:55 &middot; 19:25 &middot; 19:55 &middot; 20:55. Vaprio via Marconi &asymp; 6 minuti dopo, Cassano FS &asymp; 18 minuti dopo. Prima delle 07:45 ci sono altre corse mattutine, che arrivano a Cassano fra le 06:04 e le 07:54. Il sabato dalle 07:25 alle 20:55, circa ogni ora.</p>
+          <span class="src">Fonte: <a href="https://www.nordesttrasporti.it/media/2636/z309_20260914.pdf" target="_blank" rel="noopener noreferrer">NET &mdash; PDF Z309 dal 14/09/2026</a></span>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span class="line-badge" style="background:#c084fc">Z311</span> Vaprio &ndash; Pozzo d'Adda &ndash; Gessate M2</summary>
+        <div class="faq-body">
+          <p><strong>Gestore:</strong> NET, Nord Est Trasporti &middot; <strong>Giorni:</strong> tutti, <strong>festivi compresi</strong> &middot; Vaprio&ndash;Gessate in 14 minuti, ritorno in 23. &Egrave; la porta d'ingresso alla M2, e quindi a Cernusco, Gorgonzola, Cologno e Milano.</p>
+          <p class="bus-times"><b>Vaprio via Perego &rarr; Gessate M2, lun&ndash;ven:</b> 04:05 &middot; 04:35 &middot; 05:30 &middot; 05:50 &middot; 06:12 &middot; 06:27 &middot; 06:42 &middot; 06:57 &middot; 07:12 &middot; 07:27 &middot; 07:42 &middot; 07:57 &middot; 08:12 &middot; 08:27 &middot; 08:47 &middot; 09:15 &middot; 10:15 &middot; 11:15 &middot; 12:15 &middot; 12:51 &middot; 13:21 &middot; 13:45 &middot; 14:09 &middot; 14:33 &middot; 14:57 &middot; 15:21 &middot; 15:45 &middot; 16:09 &middot; 16:24 &middot; 16:39 &middot; 16:54 &middot; 17:09 &middot; 17:24 &middot; 17:39 &middot; 17:54 &middot; 18:09 &middot; 18:24 &middot; 18:42 &middot; 19:02 &middot; 19:22 &middot; 19:42 &middot; 20:02 &middot; 20:32 &middot; 20:56 &middot; 21:40 &middot; 22:27</p>
+          <p class="bus-times"><b>Gessate M2 &rarr; Vaprio via Perego, lun&ndash;ven:</b> 04:21 &middot; 05:10 &middot; 05:55 &middot; 06:20 &middot; 06:40 &middot; 06:55 &middot; 07:10 &middot; 07:25 &middot; 07:40 &middot; 07:55 &middot; 08:10 &middot; 08:25 &middot; 08:40 &middot; 08:55 &middot; 09:20 &middot; 09:45 &middot; 10:45 &middot; 11:45 &middot; 12:45 &middot; 13:30 &middot; 13:54 &middot; 14:18 &middot; 14:42 &middot; 15:06 &middot; 15:30 &middot; 15:54 &middot; 16:18 &middot; 16:42 &middot; 16:57 &middot; 17:12 &middot; 17:27 &middot; 17:42 &middot; 17:57 &middot; 18:12 &middot; 18:27 &middot; 18:42 &middot; 18:57 &middot; 19:14 &middot; 19:34 &middot; 19:54 &middot; 20:14 &middot; 20:34 &middot; 20:54 &middot; 21:20 &middot; 22:08 &middot; 22:40</p>
+          <p class="bus-note">Il sabato e i festivi la cadenza scende a circa un'ora, festivo dalle 04:35 alle 20:36. Gli orari qui sopra sono quelli invernali del libretto 2025/26, in vigore anche dal 14 settembre 2026.</p>
+          <span class="src">Fonte: <a href="https://www.nordesttrasporti.it/media/2475/z311_20250912.pdf" target="_blank" rel="noopener noreferrer">NET &mdash; PDF Z311</a> &middot; <a href="https://www.nordesttrasporti.it/percorsi-e-orari/" target="_blank" rel="noopener noreferrer">tutti i percorsi NET</a></span>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary><span class="line-badge" style="background:#fcd34d">z405</span> Gessate M2 &ndash; Cassano &ndash; Treviglio, l'unica che va anche di domenica</summary>
+        <div class="faq-body">
+          <p><strong>Gestore:</strong> Autoguidovie, Milano Sud Est &middot; <strong>Giorni:</strong> tutti, domenica compresa &middot; <strong>Servizio:</strong> dalle 05:30 circa fino alle 00:05.</p>
+          <p>Frequenza fra 10 e 30 minuti nei feriali, 15&ndash;30 minuti il sabato. Fermate utili a Cassano: stazione FS, Q.no di Vona, Pola e Via Milano. Esempio di sabato dalla stazione di Cassano: 06:05, 06:50, 07:35, 08:20 e poi ogni 45 minuti fino alle 00:05; da Gessate M2 si parte dalla palina 5 con cadenza simile. Alcune corse feriali scolastiche proseguono fino a <strong>Treviglio FS</strong>: da Treviglio fra le 07:35 e le 08:20, rientri fra le 12:25 e le 15:20.</p>
+          <p class="bus-note">Con la M2 &egrave; la via pi&ugrave; rapida fra Cassano e Cernusco, circa 45 minuti in tutto. <span class="pill-todo">da verificare</span> gli orari corsa per corsa non sono in questa pagina: la linea va a frequenza e cambia fra estate, sabato e periodo scolastico. Per questo la z405 non compare fra i risultati del pianificatore qui sopra.</p>
+          <span class="src">Fonte: <a href="https://milanosudest.autoguidovie.it/" target="_blank" rel="noopener noreferrer">Autoguidovie Milano Sud Est</a></span>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>&#127979; I servizi scolastici dedicati &mdash; Groppello, Cassano, istituti di Treviglio, Caravaggio</summary>
+        <div class="faq-body">
+          <p>Linea SAI in vigore dal 3 novembre 2025, pensata su misura per chi va agli istituti superiori. <strong>La mattina:</strong> Groppello 07:00, Cassano Liceo 07:02, C.so Europa 07:03&ndash;07:08, Bivio Colonnella 07:18, poi Treviglio &mdash; Buonarroti 07:24, Stazione Ovest 07:25, FS 07:30, P.za Popolo 07:32, Mentana 07:34, Ospedale e ITIS 07:43 &mdash; e Caravaggio 07:50.</p>
+          <p><strong>I rientri</strong> partono da Caravaggio fra le 12:05 e le 15:35, con arrivo a Cassano Liceo alle 12:35, 12:38, 13:39, 14:36, 15:36 e 16:13. Alcune corse passano da <strong>Fara e Badalasco</strong>.</p>
+          <p>Esiste anche una <strong>linea urbana di Cassano</strong>, Cascine S. Pietro &ndash; Cassano FS, con sei corse al giorno: 06:42, 08:52, 11:30, 12:35, 14:05, 14:50 e 17:20.</p>
+          <span class="src">Fonte: <a href="https://www.saiautolinee.it/uploads/lines/LINEA-CASSANO-in-vigore-dal-03-11-2025-6a74a2ebeee11.pdf" target="_blank" rel="noopener noreferrer">SAI &mdash; PDF linea Cassano dal 03/11/2025</a></span>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>&#127903;&#65039; Biglietti, rivendite e numeri da chiamare</summary>
+        <div class="faq-body">
+          <p><strong>SAI e Bergamo Trasporti</strong>, cio&egrave; B812 e T10: si paga con l'app <strong>MooneyGo</strong>, dal conducente con sovrapprezzo, oppure nelle rivendite &mdash; a Fara la Effeg in Via Locatelli 17, a Canonica l'edicola Marcandalli in Via Bergamo, a Vaprio le edicole di P.za Chiesa e Via Perego. Tariffe aggiornate dal 1&deg; settembre 2026. Informazioni allo <strong>800 139 392</strong> da telefono fisso o al <strong>340 5085907</strong>.</p>
+          <p><strong>NET</strong>, cio&egrave; Z309 e Z311: numero verde <strong>800 90 51 50</strong>, tutti i giorni dalle 7:30 alle 19:30.</p>
+          <p>Per gli <strong>abbonamenti studenti</strong> e le agevolazioni di famiglia guarda le tre schede qui sopra: STIBM per il lato milanese, ATB per quello bergamasco, &laquo;Io Viaggio in Famiglia&raquo; se in casa ci sono pi&ugrave; pendolari. Occhio alle due scadenze bergamasche: <strong>31 ottobre</strong> per il cumulativo studenti, <strong>19 dicembre</strong> per la tariffa convenzionata.</p>
+          <p>Per sapere se il bus &egrave; in ritardo <em>quel</em> giorno servono le app <strong>Moovit</strong> o <strong>Muoversi in Lombardia</strong>. Questa pagina riporta l'orario pubblicato, non la posizione dei mezzi.</p>
+        </div>
+      </details>
+    </div>
+
   </div>
 </section>
 
@@ -3168,6 +3494,12 @@ Servono, ma sono anche pubblicit&agrave;: quel giorno la scuola si mette in tiro
     <div class="chg-list">
 
       <div class="chg-entry first">
+        <div class="chg-date">9 SETTEMBRE 2026</div>
+        <div class="chg-title">&#128652; Orari dei bus, con il calcolo delle coincidenze</div>
+        <div class="chg-desc">Nella sezione Trasporti sono arrivati gli <strong>orari veri</strong> di B812, T10, Z309, Z311 e z405 fra Fara Gera d'Adda, Canonica, Vaprio, Treviglio, Cassano e la M2 di Gessate, presi dai libretti dei gestori. Scegli partenza e arrivo e la pagina calcola le prossime corse e il cambio. Segnalato il riassetto della rete del 3 agosto 2026, con la vecchia linea F diventata B812, e il passaggio all'orario scolastico del 14 settembre.</div>
+      </div>
+
+      <div class="chg-entry">
         <div class="chg-date">9 SETTEMBRE 2026</div>
         <div class="chg-title">&#128205; Mappa a 24 istituti, filtro per indirizzo e &laquo;La tua lista&raquo;</div>
         <div class="chg-desc">Da 16 a <strong>24 istituti statali</strong> in 13 comuni, fino a Dalmine e Crema, pi&ugrave; due paritarie con indirizzi che nello statale non ci sono. Nuovo filtro per indirizzo di studio (25 voci), lista interattiva che si ricorda a che punto sei, e canali locali delle date verificati uno per uno. Testi riscritti dal &laquo;voi&raquo; ai genitori al &laquo;tu&raquo; a te; tolti la parte sull'estate e i percorsi per adulti.</div>
@@ -3566,6 +3898,303 @@ function resetSchoolFilters() {
 
 /* Avvio della lista: in fondo a tutto, cosi' le costanti PLAN_* sono gia' assegnate. */
 initPlan();
+
+/* =============================================================
+   BUS — pianificatore delle corse fra Fara, Canonica, Vaprio,
+   Treviglio, Cassano, Gessate M2 e Cernusco s/N.
+
+   Orari presi dai libretti ufficiali dei gestori (SAI/Bergamo
+   Trasporti, NET, ATM), verificati il 9 settembre 2026.
+   Valgono da lunedi' a venerdi'. Il sabato il servizio cala,
+   la domenica restano solo Z311 e la M2 (piu' la z405, che va a
+   frequenza e per questo non e' modellata qui).
+
+   Struttura di un percorso in BUS_TRIPS:
+     stops  fermate in ordine di marcia
+     off    minuti di ciascuna fermata rispetto all'orario "ancora"
+     corse  orari ancora; "20:36*2" = corsa che serve solo le
+            prime 2 fermate
+     stima  fermate il cui orario e' calcolato dagli scarti
+            dichiarati dal gestore, non stampato sul libretto
+   Per aggiornare gli orari basta toccare "corse" e "off".
+   ============================================================= */
+var BUS_STOPS = [
+  { id:'fara',      nome:"Fara Gera d'Adda",      dett:'Via Locatelli' },
+  { id:'canonica',  nome:"Canonica d'Adda",       dett:'Via Lodi / Matteotti' },
+  { id:'vaprio',    nome:"Vaprio d'Adda",         dett:'via Perego' },
+  { id:'treviglio', nome:'Treviglio',             dett:'stazione FS' },
+  { id:'cassano',   nome:"Cassano d'Adda",        dett:'stazione FS' },
+  { id:'gessate',   nome:'Gessate',               dett:'capolinea M2' },
+  { id:'cernusco',  nome:'Cernusco sul Naviglio', dett:'fermata M2' }
+];
+
+var BUS_LINEE = {
+  B812: { col:'#fb923c' },
+  T10:  { col:'#34d399' },
+  Z309: { col:'#60a5fa' },
+  Z311: { col:'#c084fc' },
+  M2:   { col:'#4ade80' }
+};
+
+var BUS_TRIPS = [
+  { linea:'B812', stops:['treviglio','fara','canonica','vaprio'], off:[0,18,23,30], stima:['canonica'],
+    corse:['06:15','07:00','08:15','09:00','10:45','11:15','12:30','13:15','14:30','16:30','17:30','18:30','19:15'] },
+
+  { linea:'B812', stops:['vaprio','canonica','fara','treviglio'], off:[0,6,10,29], stima:['canonica'],
+    corse:['05:45','06:27','07:36','08:26','09:41','10:21','12:06','12:36','13:56','14:36','15:56','17:56','18:51','19:51','20:36*2'] },
+
+  { linea:'T10', stops:['vaprio','canonica','treviglio'], off:[0,1,30], stima:['canonica','treviglio'],
+    corse:['06:55','07:58','08:40','09:00','09:35','10:35','13:13','14:18','14:50','15:23','16:13','16:40','17:08','17:50','18:50','19:50'] },
+
+  { linea:'T10', stops:['treviglio','canonica','vaprio'], off:[0,24,25], stima:['canonica','vaprio'],
+    corse:['06:28','06:48','08:10','08:30','09:00','10:00','12:15','13:20','14:15','14:20','14:25','15:15','15:20','16:10','17:20','18:20','18:53','19:20'] },
+
+  { linea:'Z309', stops:['cassano','vaprio'], off:[0,13], stima:['vaprio'],
+    corse:['06:12','06:32','06:52','07:15','07:35','08:05','08:50','09:50','10:50','11:50','12:35','13:10','13:30','14:00','14:10','14:50','15:50','16:50','17:50','18:20','18:50','19:20','19:50','20:20'] },
+
+  /* ancora = partenza da Trezzo: Vaprio +6, Cassano FS +18 */
+  { linea:'Z309', stops:['vaprio','cassano'], off:[6,18], stima:['vaprio','cassano'],
+    corse:['07:45','08:35','09:25','10:25','11:25','12:25','13:13','13:40','14:13','14:30','14:48','15:30','16:30','17:25','18:25','18:55','19:25','19:55','20:55'] },
+
+  { linea:'Z311', stops:['vaprio','gessate'], off:[0,14], stima:['gessate'],
+    corse:['04:05','04:35','05:30','05:50','06:12','06:27','06:42','06:57','07:12','07:27','07:42','07:57','08:12','08:27','08:47','09:15','10:15','11:15','12:15','12:51','13:21','13:45','14:09','14:33','14:57','15:21','15:45','16:09','16:24','16:39','16:54','17:09','17:24','17:39','17:54','18:09','18:24','18:42','19:02','19:22','19:42','20:02','20:32','20:56','21:40','22:27'] },
+
+  { linea:'Z311', stops:['gessate','vaprio'], off:[0,23], stima:['vaprio'],
+    corse:['04:21','05:10','05:55','06:20','06:40','06:55','07:10','07:25','07:40','07:55','08:10','08:25','08:40','08:55','09:20','09:45','10:45','11:45','12:45','13:30','13:54','14:18','14:42','15:06','15:30','15:54','16:18','16:42','16:57','17:12','17:27','17:42','17:57','18:12','18:27','18:42','18:57','19:14','19:34','19:54','20:14','20:34','20:54','21:20','22:08','22:40'] }
+];
+
+var BUS_HUBS      = ['vaprio','cassano','treviglio','canonica','gessate'];
+var BUS_CAMBIO    = 8;   /* minuti minimi per cambiare bus */
+var BUS_ATTESA_MAX= 75;  /* oltre questa attesa il cambio non e' un'opzione */
+var BUS_M2_CORSA  = 11;  /* Gessate - Cernusco, 5 fermate */
+var BUS_M2_ATTESA = 5;   /* la M2 passa spesso: attesa tipica */
+var BUS_GIORNI    = ['domenica','luned&igrave;','marted&igrave;','mercoled&igrave;','gioved&igrave;','venerd&igrave;','sabato'];
+var busShowAll    = false;
+var busForzaFer   = false;  /* di domenica: mostra comunque l'orario feriale */
+
+function busMin(s) { var p = s.split(':'); return (+p[0]) * 60 + (+p[1]); }
+function busHHMM(m) {
+  m = Math.round(m);
+  var h = Math.floor(m / 60), q = m % 60;
+  return (h < 10 ? '0' : '') + h + ':' + (q < 10 ? '0' : '') + q;
+}
+function busStop(id) {
+  for (var i = 0; i < BUS_STOPS.length; i++) if (BUS_STOPS[i].id === id) return BUS_STOPS[i];
+  return { id:id, nome:id, dett:'' };
+}
+
+/* espande le corse in orari per fermata (null = fermata non servita) */
+function busBuild() {
+  BUS_TRIPS.forEach(function(t) {
+    t.runs = t.corse.map(function(c) {
+      var pz   = c.split('*');
+      var fino = pz.length > 1 ? +pz[1] : t.stops.length;
+      var base = busMin(pz[0]);
+      return t.stops.map(function(_, i) { return i < fino ? base + t.off[i] : null; });
+    });
+  });
+}
+
+/* tutte le corse dirette fra due fermate, ordinate per partenza */
+function busSegments(from, to) {
+  var out = [];
+  BUS_TRIPS.forEach(function(t) {
+    var i = t.stops.indexOf(from), j = t.stops.indexOf(to);
+    if (i < 0 || j < 0 || j <= i) return;
+    t.runs.forEach(function(r) {
+      if (r[i] === null || r[j] === null) return;
+      out.push({
+        linea: t.linea, from: from, to: to, dep: r[i], arr: r[j],
+        sdep: t.stima.indexOf(from) >= 0, sarr: t.stima.indexOf(to) >= 0
+      });
+    });
+  });
+  return out.sort(function(a, b) { return a.dep - b.dep; });
+}
+
+/* viaggi in bus con al massimo un cambio */
+function busCore(from, to, dopo) {
+  var res = [];
+  busSegments(from, to).forEach(function(s) {
+    if (s.dep >= dopo) res.push({ dep:s.dep, arr:s.arr, legs:[s] });
+  });
+  BUS_HUBS.forEach(function(h) {
+    if (h === from || h === to) return;
+    var l1 = busSegments(from, h), l2 = busSegments(h, to);
+    l1.forEach(function(s1) {
+      if (s1.dep < dopo) return;
+      for (var k = 0; k < l2.length; k++) {
+        if (l2[k].dep < s1.arr + BUS_CAMBIO) continue;
+        if (l2[k].dep - s1.arr <= BUS_ATTESA_MAX) res.push({ dep:s1.dep, arr:l2[k].arr, legs:[s1, l2[k]] });
+        break;
+      }
+    });
+  });
+  return res;
+}
+
+/* Cernusco non ha bus: si aggancia a Gessate con la M2 */
+function busJourneys(from, to, dopo) {
+  var testaM2 = (from === 'cernusco'), codaM2 = (to === 'cernusco');
+  var a = testaM2 ? 'gessate' : from;
+  var b = codaM2  ? 'gessate' : to;
+  if (a === b) return [];
+
+  var dopoCore = testaM2 ? dopo + BUS_M2_ATTESA + BUS_M2_CORSA + BUS_CAMBIO : dopo;
+  var out = [];
+
+  busCore(a, b, dopoCore).forEach(function(j) {
+    var legs = j.legs.slice(), dep = j.dep, arr = j.arr;
+    if (testaM2) {
+      var d = j.dep - BUS_CAMBIO - BUS_M2_CORSA;
+      legs.unshift({ linea:'M2', from:'cernusco', to:'gessate', dep:d, arr:d + BUS_M2_CORSA, sdep:true, sarr:true });
+      dep = d;
+    }
+    if (codaM2) {
+      var p = j.arr + BUS_M2_ATTESA;
+      legs.push({ linea:'M2', from:'gessate', to:'cernusco', dep:p, arr:p + BUS_M2_CORSA, sdep:true, sarr:true });
+      arr = p + BUS_M2_CORSA;
+    }
+    out.push({ dep:dep, arr:arr, legs:legs });
+  });
+
+  /* scarta le soluzioni dominate: parte prima e arriva dopo di un'altra */
+  out.sort(function(x, y) { return y.dep - x.dep || x.arr - y.arr; });
+  var best = Infinity, keep = [];
+  out.forEach(function(j) { if (j.arr < best) { best = j.arr; keep.push(j); } });
+  keep.reverse();
+  return keep;
+}
+
+function busLegHTML(l) {
+  var c = BUS_LINEE[l.linea] ? BUS_LINEE[l.linea].col : '#94a3b8';
+  return '<span class="line-badge" style="background:' + c + '">' + l.linea + '</span>' +
+         '<span>' + busStop(l.from).nome + ' ' + (l.sdep ? '&asymp;' : '') + busHHMM(l.dep) +
+         ' &rarr; ' + busStop(l.to).nome + ' ' + (l.sarr ? '&asymp;' : '') + busHHMM(l.arr) + '</span>';
+}
+
+/* adesso = l'orario di riferimento e' l'ora corrente, quindi "fra X min" ha senso */
+function busRunHTML(j, primo, rif, adesso) {
+  var html = '<div class="bus-run' + (primo ? ' next' : '') + '">';
+  var fra  = j.dep - rif;
+  html += '<div class="bus-dep">' + busHHMM(j.dep);
+  if (primo && adesso && fra >= 0 && fra <= 180) {
+    html += '<small>' + (fra === 0 ? 'adesso' : 'fra ' + fra + ' min') + '</small>';
+  }
+  html += '</div><div class="bus-legs">';
+  j.legs.forEach(function(l, i) {
+    if (i > 0) {
+      var att = l.dep - j.legs[i - 1].arr;
+      html += '<span class="sep">&rarr; cambio a ' + busStop(l.from).nome + ', ' + att + ' min &rarr;</span>';
+    }
+    html += busLegHTML(l);
+  });
+  var cambi = j.legs.length - 1;
+  html += '</div><div class="bus-arr">arrivo <strong>' + busHHMM(j.arr) + '</strong>' +
+          (j.arr - j.dep) + ' min, ' +
+          (cambi === 0 ? 'diretto' : cambi === 1 ? '1 cambio' : cambi + ' cambi') +
+          '</div></div>';
+  return html;
+}
+
+function busSetNow() {
+  var d = new Date();
+  var el = document.getElementById('busTime');
+  if (el) el.value = (d.getHours() < 10 ? '0' : '') + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+  busShowAll = false;
+  busRender();
+}
+
+function busSwap() {
+  var a = document.getElementById('busFrom'), b = document.getElementById('busTo');
+  if (!a || !b) return;
+  var t = a.value; a.value = b.value; b.value = t;
+  busRender();
+}
+
+function busForzaFeriale() {
+  busForzaFer = true;
+  busRender();
+}
+
+function busToggleAll() {
+  busShowAll = !busShowAll;
+  var b = document.getElementById('busAllBtn');
+  if (b) b.innerHTML = busShowAll ? 'Solo le prossime' : 'Vedi tutte le corse';
+  busRender();
+}
+
+function busRender() {
+  var selF = document.getElementById('busFrom'), selT = document.getElementById('busTo');
+  var box  = document.getElementById('busResults'), avv = document.getElementById('busNotice');
+  if (!selF || !selT || !box) return;
+
+  var oggi    = new Date();
+  var dow     = oggi.getDay();
+  var festivo = (dow === 0);
+  var note    = [];
+
+  note.push('<strong>Oggi &egrave; ' + BUS_GIORNI[dow] + '.</strong> ' + (
+    festivo ? 'Di domenica e nei festivi B812, T10 e Z309 non circolano: restano solo Z311, z405 e la metropolitana.'
+    : dow === 6 ? 'Il sabato tutte le linee circolano, ma con meno corse: gli orari elencati sono quelli da luned&igrave; a venerd&igrave;, quindi controlla il libretto del gestore.'
+    : 'Gli orari qui sotto sono quelli feriali, da luned&igrave; a venerd&igrave;.'));
+
+  if (oggi >= new Date(2026, 8, 14)) {
+    note.push('<strong>Dal 14 settembre 2026</strong> &egrave; in vigore l\'orario scolastico: le corse della B812 sono di pi&ugrave; di quelle elencate qui. Controlla il PDF del gestore prima di contarci.');
+  }
+  if (avv) avv.innerHTML = '<div class="callout warn" style="margin:18px 0 0">' + note.join('<br>') + '</div>';
+
+  var from = selF.value, to = selT.value;
+  if (from === to) {
+    box.innerHTML = '<div class="bus-empty">Partenza e arrivo coincidono: scegli due comuni diversi.</div>';
+    return;
+  }
+
+  /* La domenica gli orari feriali non valgono: meglio dirlo che mostrarli. */
+  if (festivo && !busForzaFer) {
+    box.innerHTML = '<div class="bus-empty">Di domenica restano in servizio la <strong>Z311</strong> fra Vaprio e Gessate, la <strong>z405</strong> fra Cassano, Gessate e Treviglio, e la <strong>M2</strong>. ' +
+      'Vanno a cadenza di circa un\'ora, con orari diversi da quelli feriali: qui non ci sono, li trovi sul ' +
+      '<a href="https://www.nordesttrasporti.it/percorsi-e-orari/" target="_blank" rel="noopener noreferrer">libretto NET</a>. ' +
+      'B812, T10 e Z309 non circolano.<br><br>' +
+      '<button type="button" class="bus-now" onclick="busForzaFeriale()">Mostra comunque l\'orario feriale</button></div>';
+    return;
+  }
+
+  var tEl = document.getElementById('busTime');
+  var rif = (tEl && tEl.value) ? busMin(tEl.value) : 0;
+  var adesso = Math.abs(rif - (oggi.getHours() * 60 + oggi.getMinutes())) <= 1;
+  var js  = busJourneys(from, to, busShowAll ? 0 : rif);
+
+  if (!js.length) {
+    box.innerHTML = '<div class="bus-empty">Nessuna corsa ' + (busShowAll ? '' : 'dopo le ' + busHHMM(rif) + ' ') +
+      'con un solo cambio. Prova a spostare l\'orario, o guarda le tabelle complete qui sotto.</div>';
+    return;
+  }
+
+  var lista = busShowAll ? js.slice(0, 40) : js.slice(0, 5);
+  var testa = (festivo && busForzaFer)
+    ? '<div class="bus-empty" style="text-align:left">Stai guardando l\'<strong>orario feriale</strong>: oggi &egrave; domenica e queste corse non ci sono.</div>' : '';
+  box.innerHTML = testa + lista.map(function(j, i) { return busRunHTML(j, i === 0 && !busShowAll && !festivo, rif, adesso); }).join('');
+}
+
+function busInit() {
+  var selF = document.getElementById('busFrom'), selT = document.getElementById('busTo');
+  if (!selF || !selT) return;
+  BUS_STOPS.forEach(function(s) {
+    [selF, selT].forEach(function(sel) {
+      var o = document.createElement('option');
+      o.value = s.id;
+      o.textContent = s.nome + ' — ' + s.dett;
+      sel.appendChild(o);
+    });
+  });
+  selF.value = 'fara';
+  selT.value = 'treviglio';
+  busBuild();
+  busSetNow();
+}
+
+busInit();
 </script>
 </body>
 </html>

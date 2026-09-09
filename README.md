@@ -8,6 +8,10 @@ ottobre–dicembre 2026, iscrizioni gennaio 2027).
 
 Sito pubblicato su **https://edu.privix.org** via GitHub Pages + GitHub Actions.
 
+Progetto gemello: **[move.privix.org](https://move.privix.org)** (repo `move`) — mappa della rete
+bus del quadrangolo Fara–Vaprio–Treviglio–Cassano, matrice delle tratte e coincidenze con i treni.
+Stessa area, stesso criterio editoriale, stessa catena di pubblicazione.
+
 ## Cosa contiene
 
 - **24 istituti statali** in 13 comuni (Melzo, Cassano d'Adda, Cernusco s/N, Gorgonzola,
@@ -40,6 +44,10 @@ Sito pubblicato su **https://edu.privix.org** via GitHub Pages + GitHub Actions.
   Dote Scuola di Regione Lombardia (Materiale didattico, Buono Scuola, Merito)
 - **Trasporti**: tariffe STIBM e ATB per studenti, agevolazioni "Io Viaggio in Famiglia",
   e la differenza di costo fra il lato milanese e quello bergamasco
+- **Orari dei bus** fra Fara Gera d'Adda, Canonica, Vaprio, Treviglio, Cassano e la M2 di
+  Gessate: linee B812 (ex F), T10, Z309, Z311 e z405, con tabelle complete e un **pianificatore**
+  che calcola le prossime corse e le coincidenze (un cambio, più la coda in metropolitana per
+  Cernusco). Dati in `BUS_TRIPS`, in fondo allo script: per aggiornarli bastano `corse` e `off`
 - **Dopo il diploma**: ITS Academy raggiungibili, filiera 4+2, passerelle IeFP
 - **Calendario** delle scadenze da settembre 2026 a gennaio 2028
 
@@ -86,6 +94,10 @@ Le voci che invecchiano più in fretta, in ordine:
 3. **Bandi Dote Scuola** — Merito a settembre, Buono Scuola a novembre, Materiale didattico a marzo.
 4. **Tetti di spesa dei libri** — decreto ministeriale a marzo.
 5. **Tariffe di trasporto** — adeguamenti tipicamente a settembre.
+6. **Orari dei bus** — i più volatili di tutti. SAI e NET cambiano libretto a metà settembre
+   (orario scolastico) e a giugno (estivo). Quelli in pagina sono **estivi per la B812**, in
+   vigore fino al 13 settembre 2026, e invernali per Z309 e Z311. Il tool avvisa da solo quando
+   la data supera il 14 settembre 2026, ma i dati vanno rifatti sui PDF dei gestori.
 
 Ultima verifica delle fonti: **9 settembre 2026**.
 
