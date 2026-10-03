@@ -95,23 +95,34 @@ Le voci che invecchiano più in fretta, in ordine:
 4. **Tetti di spesa dei libri** — decreto ministeriale a marzo.
 5. **Tariffe di trasporto** — adeguamenti tipicamente a settembre.
 6. **Orari dei bus** — i più volatili di tutti. SAI e NET cambiano libretto a metà settembre
-   (orario scolastico) e a giugno (estivo). Quelli in pagina sono **estivi per la B812**, in
-   vigore fino al 13 settembre 2026, e invernali per Z309 e Z311. Il tool avvisa da solo quando
-   la data supera il 14 settembre 2026, ma i dati vanno rifatti sui PDF dei gestori.
+   (orario scolastico) e a giugno (estivo). Quelli in pagina per la B812 sono le corse base in vigore
+   dal 3 agosto 2026 (dal 14 settembre si aggiungono le corse scolastiche), invernali per Z309
+   e Z311. I dati vanno rifatti sui PDF dei gestori a ogni cambio di libretto.
+7. **Canali video** — nel footer di ogni scheda c'è il link YouTube/Vimeo della scuola. Senza
+   etichetta = linkato dal sito ufficiale; `non verificato` = trovato ma non linkato dal sito.
 
-Ultima verifica delle fonti: **9 settembre 2026**.
+Ultima verifica delle fonti: **3 ottobre 2026**.
 
 Due eventi segnalati e **non confermati** dalle fonti: un «Salone dell'Isola Bergamasca» a
 Ponte San Pietro (nessuna traccia: per quell'area il riferimento resta la Fiera di Bergamo) e un
 «Campus in rete» al Centro Omnicomprensivo di Vimercate (l'evento esiste ma si chiama *Giornata
 dell'Orientamento Rete TreVi* e si tiene all'ECFOP di Velasca). Entrambi sono dichiarati nel sito.
 
-### Stato al 9 settembre 2026
+### Stato al 3 ottobre 2026
 
-Nessuna delle scuole censite aveva ancora pubblicato le date dei propri open day. Sono invece
-già confermate le date dei saloni: YOUNG a Erba (12–14 novembre), Festival Orientamenti a
-Genova (17–20 novembre), JOB&Orienta a Verona (25–28 novembre). La Fiera dell'Orientamento
-della Provincia di Bergamo e il Campus Orienta di Melzo sono marcati come *da confermare*.
+Regola: **una data non confermata alla fonte non si scrive**. Occhio alle pagine «Open day
+a.s. 2026/27»: parlano dell'autunno 2025 (controllare sempre il giorno della settimana).
+
+Open day pubblicati: Giordano Bruno (7 e 28 novembre), Nizzola (28 novembre, 12 dicembre,
+16 gennaio), Sant'Agostino (24 ottobre, 14 novembre, 12 dicembre), Don Bosco (14 novembre,
+12 dicembre, 16 gennaio). Saloni: Campus Orienta Melzo e Rete TreVi Velasca il 17 ottobre,
+Treviglio Orienta il 24–25 ottobre, YOUNG a Erba il 12–14 novembre, Festival Orientamenti a
+Genova il 17–20 novembre, JOB&Orienta a Verona il 25–28 novembre, Fiera dell'Orientamento di
+Bergamo il 27–28 novembre. Tutte le altre scuole non avevano ancora date nuove.
+
+La sezione di apertura «Tre strade, i prossimi appuntamenti» (`#eventi3`) raccoglie gli eventi
+per liceo scientifico, informatica ed economia AFM: ogni evento è un `.fx-ev` con `data-date`
+(ISO) e `data-path` (`sci`, `info`, `afm`).
 
 ---
 
