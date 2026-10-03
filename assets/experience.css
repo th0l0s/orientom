@@ -211,3 +211,52 @@ footer{padding-bottom:110px;color:var(--text3)}
 @media(max-width:800px){.container{padding:0 22px}nav{padding:0 22px}#hero{padding-top:120px}.hero-layout{grid-template-columns:1fr;gap:15px}.hero-content{max-width:600px}.hero-title{font-size:clamp(3.5rem,10vw,5.4rem)}.hero-sub{max-width:570px}.future-board{height:450px;max-width:500px;width:100%;justify-self:center;margin-top:25px}.future-card{width:200px}.future-think{left:5%}.future-do{left:14%;top:248px}.future-build{right:4%;top:105px}.board-star{right:22px}.future-sticker{right:1%}.hero-strip{margin-top:15px;flex-wrap:wrap;gap:18px}.hero-strip>div{font-size:.7rem}.routes-section{padding:60px 0}#quiz>.container{display:block}#quiz .section-header{position:static}#quiz .section-sub{max-width:600px}.quiz-card{margin:25px 0}#quiz .callout{margin-top:20px}.visit-layout{grid-template-columns:1fr;gap:30px}.visit-section .section-title{font-size:2.3rem}.compare-columns{grid-template-columns:1fr}.compare-item{padding:18px}.compare-dialog{padding:20px}.route-foot{grid-template-columns:1fr}.route-foot .src{grid-column:auto}.school-info-guides{grid-template-columns:1fr}}
 @media(max-width:540px){.nav-logo{font-size:1.25rem}.nav-right{gap:8px}nav .nav-cta{display:none}#hero{padding-top:111px}.hero-title{font-size:3.65rem;letter-spacing:-.06em}.hero-sub{font-size:.93rem}.hero-sub br{display:none}.hero-badge{font-size:.66rem;margin-bottom:21px}.hero-actions{flex-direction:column;align-items:stretch;gap:10px}.hero-actions button{justify-content:space-between;padding:14px 19px}.hero-note{font-size:.68rem}.future-board{height:390px;margin-top:20px}.future-card{width:165px;padding:16px}.future-card strong{font-size:1.1rem}.future-card svg{height:42px;width:52px}.future-think{left:3%;top:40px}.future-build{right:2%;top:91px}.future-do{left:8%;top:216px}.future-sticker{font-size:.56rem;right:0;bottom:15px;padding:10px}.future-sticker strong{font-size:.63rem}.board-star{font-size:72px;top:15px;right:14px}.board-caption{font-size:.48rem;left:8px;top:0}.hero-strip{padding-top:20px;margin-top:12px}.strip-divider{margin:0 9px}.hero-strip>div{font-size:.63rem}.hero-strip strong{font-size:1.1rem}.route-grid{grid-template-columns:1fr;gap:14px}.route-card{padding:23px}.route-top{margin-bottom:17px}.route-card h3{font-size:1.65rem}.route-card p{margin-bottom:12px}.route-card dl{display:grid;grid-template-columns:80px 1fr;gap:6px}.route-card dt{margin:0}.route-card button{margin-top:18px}.section-title{font-size:2rem}.section-sub{font-size:.87rem}#quiz{padding:52px 0}.quiz-card{padding:23px 18px}.quiz-options{grid-template-columns:1fr}.quiz-opt{padding:13px 15px;display:flex;align-items:center;gap:12px}.quiz-opt .opt-icon{margin:0;min-width:23px}.quiz-q{font-size:1.1rem}.quiz-nav{margin-top:20px}.quiz-counter{font-size:.74rem}#schools{padding:55px 0}.school-tools{padding:17px}.search-row{flex-wrap:wrap;gap:10px}.search-box{flex-basis:100%}.saved-filter{padding:9px 13px;font-size:.74rem}.ind-bar{align-items:stretch;gap:10px}.ind-bar label,.ind-bar select{width:100%}.schools-grid{grid-template-columns:1fr}.school-card-body{padding:21px}.school-card-top{flex-direction:row;flex-wrap:wrap}.school-badges{flex-direction:row}.school-name{font-size:1.2rem}.school-actions a,.save-school{font-size:.76rem}.school-details summary{font-size:.8rem}.compare-dock{bottom:12px;gap:15px;padding-left:17px}.compare-dock span{font-size:.7rem}.compare-dock button{padding:10px 15px;font-size:.72rem}.compare-head h2{font-size:1.4rem}.visit-section{padding:45px 0}.visit-section .section-title{font-size:2.3rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.future-card:hover{transform:none}svg animate,svg animateTransform{display:none}}
+
+/* Essential edition: directory first, compact cards, optional help. */
+#hero{padding:116px 0 48px}
+.hero-layout{grid-template-columns:1fr 200px;gap:40px}
+.hero-title{font-size:clamp(2.8rem,5.4vw,4.4rem);margin-bottom:20px}
+.hero-badge{margin-bottom:17px}.hero-sub{font-size:1rem;margin-bottom:22px;line-height:1.65}
+.hero-note{margin-top:16px}.hero-signal{height:185px;width:185px;border-radius:34px;background:var(--lime);color:var(--bg);font-size:9rem;line-height:1;display:flex;align-items:center;justify-content:center;position:relative;transform:rotate(-7deg)}
+.hero-signal>span{position:absolute;bottom:20px;font-size:.58rem;letter-spacing:.11em;font-weight:700}
+#schools{padding:28px 0 55px}.section-header{margin-bottom:24px}
+.section-title{font-size:clamp(1.7rem,3vw,2.4rem)}.section-sub{font-size:.87rem}
+.school-tools{padding:18px;margin-bottom:22px}.search-row{margin-bottom:14px}
+.ind-bar{gap:10px}.ind-bar select{padding:9px 11px}.filter-bar{margin-bottom:14px}
+.school-card-body{padding:20px}.school-card-top{gap:8px;margin-bottom:12px}
+.school-name{font-size:1.1rem;line-height:1.3;margin-bottom:5px}.school-city{font-size:.72rem}
+.school-badges .badge{background:#26372a;border:1px solid #42563b;color:var(--text2);font-size:.61rem}
+.school-programs{min-height:50px;align-content:start;margin:14px 0}.prog-tag{font-size:.68rem;padding:4px 8px;line-height:1.55}
+.school-official-links{margin-top:14px}
+.official-school-link{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:12px 15px;border-radius:10px;background:var(--lime);color:#101917;font-size:.8rem;font-weight:700;text-decoration:none!important;transition:background .2s}
+.official-school-link:hover{background:#e2ff8e}.official-school-link:focus-visible{outline-offset:4px}
+.official-school-link span{font-size:1.25rem;line-height:1}
+.school-actions{border:0;margin-top:12px;padding:0}.save-school{border:0;padding:4px 0;color:var(--text3);font-size:.69rem}
+.save-school[aria-pressed=true]{padding:4px 10px}.school-details{margin-top:10px;padding-top:10px;border-color:#354437}
+.school-details summary{font-size:.71rem}.school-details .more-programs{min-height:0;margin:12px 0 0}
+.school-pagination{display:flex;flex-direction:column;align-items:center;gap:10px;margin:26px 0 0}
+.school-pagination p{font-size:.75rem;color:var(--text3)}.school-pagination p:empty{display:none}
+.school-pagination button{font-size:.8rem;padding:12px 25px}
+.routes-section{padding:45px 0}.route-card{padding:21px}.route-card h3{font-size:1.4rem;margin-bottom:7px}
+.route-duration{font-size:.7rem;opacity:.75;margin-bottom:13px}.route-card p{font-size:.8rem;margin-bottom:0}
+.route-card button{margin-top:17px;padding-top:13px}.route-note{margin-top:18px;font-size:.74rem;color:var(--text3);max-width:940px}.route-note a{white-space:normal}
+#quiz{padding:0 0 42px;border:0;background:var(--bg)}
+#quiz>.container{display:block}.quiz-disclosure{border:1px solid var(--card-border);border-radius:15px}
+.quiz-disclosure>summary,.practical-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px 23px;list-style:none;cursor:pointer;font-weight:600;font-size:.95rem}
+.quiz-disclosure>summary span,.practical-disclosure>summary span{font-size:.73rem;color:var(--lime);font-weight:500}
+.quiz-disclosure[open]>summary{border-bottom:1px solid var(--card-border);margin-bottom:20px}
+#quiz .quiz-disclosure>.container{display:grid;grid-template-columns:.7fr 1.3fr;gap:30px;padding:8px 23px 23px}
+#quiz .section-header{position:static;margin:0}.quiz-card{padding:25px}.quiz-disclosure .quiz-card{margin:0}
+#quiz .section-title{font-size:1.9rem}.quiz-disclosure .section-tag{display:none}
+.simple-visit{padding:42px 0;border-top:1px solid var(--card-border)}
+.simple-visit>.container{display:grid;grid-template-columns:1fr 1fr;gap:45px}
+.simple-visit p{color:var(--text2);font-size:.84rem;max-width:400px}
+.simple-visit ol{padding-left:20px;display:grid;gap:12px;color:var(--text2);font-size:.82rem}
+.simple-visit strong{color:var(--text);font-weight:600}
+#pratiche{padding:0 0 45px}.practical-disclosure{background:#18241f;border:1px solid var(--card-border);border-radius:15px}
+.practical-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding:7px 23px 25px}
+.practical-grid h3{font-size:1.1rem;margin-bottom:10px}.practical-grid p{font-size:.8rem;color:var(--text2);margin-bottom:12px}
+.practical-grid a{font-size:.77rem;color:var(--lime)}
+footer{padding:30px 22px 85px}.footer-logo{display:inline-block;font-size:1.15rem}.footer-meta{font-size:.7rem;line-height:1.65}
+@media(max-width:800px){.hero-layout{grid-template-columns:1fr 150px;gap:25px}.hero-signal{width:140px;height:140px;font-size:7rem;border-radius:24px}.hero-signal>span{font-size:.45rem;bottom:12px}.hero-title{font-size:3.4rem}#quiz .quiz-disclosure>.container{display:block}.quiz-disclosure .quiz-card{margin-top:20px}.simple-visit>.container{grid-template-columns:1fr;gap:23px}.practical-grid{grid-template-columns:1fr;gap:24px}.practical-grid article{border-top:1px solid var(--card-border);padding-top:17px}}
+@media(max-width:540px){#hero{padding:105px 0 28px}.hero-layout{grid-template-columns:1fr}.hero-signal{display:none}.hero-title{font-size:3.2rem}.hero-sub{font-size:.95rem}.hero-sub br{display:none}.hero-actions{flex-direction:row;flex-wrap:wrap;gap:8px}.hero-actions button{padding:12px 16px;font-size:.75rem;gap:10px}.hero-note{font-size:.64rem}#schools{padding:20px 0 36px}.section-title{font-size:1.85rem}.school-tools{padding:14px}.school-card-body{padding:19px}.schools-grid{gap:13px}.school-card-top{gap:9px;flex-direction:column}.school-programs{min-height:0;margin:13px 0}.official-school-link{font-size:.84rem;padding:13px 15px}.school-details summary{font-size:.74rem}.route-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.route-card{padding:16px 13px}.route-card h3{font-size:1.2rem}.route-duration{font-size:.63rem}.route-card p{font-size:.75rem;line-height:1.6}.route-card button{font-size:.69rem}.route-card dl{display:none}.route-note{font-size:.69rem}.quiz-disclosure>summary,.practical-disclosure>summary{padding:17px;align-items:flex-start;flex-direction:column;gap:5px;font-size:.88rem}.quiz-disclosure>summary span,.practical-disclosure>summary span{font-size:.7rem}#quiz .quiz-disclosure>.container{padding:0 15px 18px}.quiz-disclosure .quiz-card{padding:19px 14px}#quiz .section-title{font-size:1.65rem}.routes-section{padding:35px 0}#quiz{padding-bottom:28px}.simple-visit{padding:32px 0}.simple-visit .section-title{font-size:1.8rem}.practical-grid{padding:0 17px 21px}.school-pagination{margin-top:20px}}

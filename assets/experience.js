@@ -8,6 +8,8 @@ var searchQuery = '';
 var curArea = 'all';
 var shortlistOnly = false;
 var toastTimer;
+var schoolPageSize = 6;
+var schoolPageLimit = schoolPageSize;
 
 function plain(value) {
   return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -98,24 +100,25 @@ function schoolCourses(card) {
     scientifico:/scientifico|scienze applicate/, classico:/classico/, linguistico:/linguistico/,
     scienzeumane:/scienze umane|economico.sociale|\bles\b/, artistico:/artistico/, sportivo:/sportiv/,
     economico:/\bafm\b|\brim\b|\bsia\b|tecnico economico|tecnico.*economico/,
-    informatica:/informatica/, elettronica:/elettronica|elettrotecnica|automazione/,
-    meccanica:/meccanica|meccatronica|meccanico|saldocarpentiere/, chimica:/chimica|biotecnologie/,
+    informatica:/informatica/, elettronica:/elettronica|elettrotecnica|automazione|impianti|elettrici|termoidraulici/,
+    meccanica:/meccanica|meccatronica|meccanico|saldocarpentiere|riparazione veicoli/, chimica:/chimica|biotecnologie/,
     costruzioni:/costruzioni/, manutenzione:/manutenzione/, logistica:/logistica/,
-    commerciale:/servizi commerciali/, turismo:/turismo|turistico/,
+    commerciale:/servizi commerciali|vendita|e-commerce/, turismo:/turismo|turistico/,
     sociosanitario:/sanita|assistenza sociale/, sanitarietecniche:/odontotecnico|ottico/,
-    alberghiero:/enogastronomia|ospitalita|sala e vendita/,
+    alberghiero:/enogastronomia|ospitalita|sala e vendita|ristorazione|cucina|panificazione|pasticceria|sala e bar/,
     grafica:/grafica|servizi culturali|spettacolo/, moda:/moda|tessile/,
     agrario:/agrari|agroaliment|agricoltura|rurale|gestione dell.ambiente|produzioni e trasform|vivaismo|verde/,
-    iefp:/iefp|cnos-fap/
+    benessere:/benessere|estetica|acconciatura/, iefp:/iefp|cnos-fap/
   };
   var pairs = [];
+  if (card.dataset.type === 'cfp') pairs.push('cfp:iefp');
   var tags = card.querySelectorAll('.prog-tag');
   if (!tags.length) {
     (card.dataset.ind || '').split(' ').filter(Boolean).forEach(function(ind) { pairs.push(card.dataset.type + ':' + ind); });
   }
   tags.forEach(function(tag) {
     var text = plain(tag.textContent);
-    var type = /iefp|cnos-fap/.test(text) ? 'cfp'
+    var type = card.dataset.type === 'cfp' || /iefp|cnos-fap/.test(text) ? 'cfp'
       : /liceo|scientifico|scienze applicate|scienze umane|economico.sociale|\bles\b|linguistico|classico|artistico/.test(text) ? 'liceo'
       : /\bprof\b|professionale|servizi commerciali|sanita|assistenza sociale|servizi culturali|spettacolo|enogastronomia|ospitalita|odontotecnico|ottico|made in italy|manutenzione|sala e vendita/.test(text) ? 'professionale' : 'tecnico';
     Object.keys(patterns).forEach(function(ind) {
@@ -129,17 +132,11 @@ function schoolCourses(card) {
 
 function initSchoolExperience() {
   var grid = document.getElementById('schoolsGrid');
-  var guides = node('div', 'school-info-guides');
-  grid.after(guides);
   grid.querySelectorAll('.school-card').forEach(function(card) {
     var name = card.querySelector('.school-name').textContent.trim();
-    if (name.indexOf('Indirizzi rari:') === 0 || name === 'Scuole paritarie') {
-      guides.appendChild(card);
-      return;
-    }
     var id = plain(name).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     var footer = card.querySelector('.school-footer');
-    var primaryLink = footer && footer.querySelector('a');
+    var primaryLink = card.querySelector('.official-school-link') || (footer && footer.querySelector('a'));
     var programs = Array.from(card.querySelectorAll('.prog-tag')).map(function(p) { return p.textContent.trim(); });
     if (!programs.length) programs = Array.from(card.querySelectorAll('.intl-item-name')).map(function(p) { return p.textContent.trim(); });
     var coursePairs = schoolCourses(card);
@@ -149,6 +146,7 @@ function initSchoolExperience() {
       id: id, card: card, name: name,
       city: card.querySelector('.school-city').textContent.trim().replace(/^📍\s*/, ''),
       programs: programs, types: types.length ? types : [card.dataset.type],
+      programNodes: Array.from(card.querySelectorAll('.prog-tag')),
       href: primaryLink ? primaryLink.href : '', intl: card.dataset.intl === 'true',
       paritaria: card.dataset.paritaria === 'true',
       searchText: plain(card.textContent + ' ' + card.dataset.ind)
@@ -157,26 +155,26 @@ function initSchoolExperience() {
     card.dataset.types = school.types.join(' ');
     card.dataset.coursePairs = coursePairs.join(' ');
     card.dataset.ind = Array.from(new Set((card.dataset.ind || '').split(' ').concat(coursePairs.map(function(pair) { return pair.split(':')[1]; })))).join(' ');
+    var badges = card.querySelector('.school-badges');
+    badges.replaceChildren();
+    var typeNames = {liceo:'Liceo', tecnico:'Tecnico', professionale:'Professionale', cfp:'CFP / IeFP'};
+    badges.appendChild(node('span', 'badge', school.types.map(function(type) { return typeNames[type]; }).join(' · ')));
+    if (school.paritaria) badges.appendChild(node('span', 'badge', 'Paritaria'));
     var body = card.querySelector('.school-card-body');
     var details = node('details', 'school-details');
-    details.appendChild(node('summary', '', 'Open day, contatti e dettagli'));
+    details.appendChild(node('summary', '', 'Altri indirizzi'));
     Array.from(body.children).forEach(function(child) {
-      if (!child.matches('.school-card-top, .school-desc, .school-programs')) details.appendChild(child);
+      if (!child.matches('.school-card-top, .school-programs, .school-official-links')) details.appendChild(child);
     });
+    var extraPrograms = node('div', 'school-programs more-programs');
+    Array.from(card.querySelectorAll('.school-programs .prog-tag')).slice(3).forEach(function(tag) { extraPrograms.appendChild(tag); });
+    if (extraPrograms.children.length) details.appendChild(extraPrograms);
     var actions = node('div', 'school-actions');
     school.saveButton = button('♡ Salva', 'save-school', function() { toggleSaved(id); });
     school.saveButton.setAttribute('aria-pressed', 'false');
     actions.appendChild(school.saveButton);
-    if (primaryLink) {
-      var link = node('a', '', 'Sito ufficiale ↗');
-      link.href = primaryLink.href;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.setAttribute('aria-label', 'Sito ufficiale: ' + name);
-      actions.appendChild(link);
-    }
     body.appendChild(actions);
-    body.appendChild(details);
+    if (details.children.length > 1) body.appendChild(details);
     schoolIndex.push(school);
   });
 
@@ -193,11 +191,12 @@ function initSchoolExperience() {
   input.id = 'schoolSearch';
   input.placeholder = 'Una scuola, un comune, una materia…';
   input.autocomplete = 'off';
-  input.addEventListener('input', function() { searchQuery = plain(input.value.trim()); applySchoolFilters(); });
+  input.addEventListener('input', function() { searchQuery = plain(input.value.trim()); schoolPageLimit = schoolPageSize; applySchoolFilters(); });
   searchBox.appendChild(input);
   searchRow.appendChild(searchBox);
   var savedFilter = button('♡ Le tue scelte (0)', 'saved-filter', function() {
     shortlistOnly = !shortlistOnly;
+    schoolPageLimit = schoolPageSize;
     savedFilter.setAttribute('aria-pressed', String(shortlistOnly));
     applySchoolFilters();
   });
@@ -218,13 +217,12 @@ function initSchoolExperience() {
     item.value = option[0];
     areaSelect.appendChild(item);
   });
-  areaSelect.addEventListener('change', function() { curArea = areaSelect.value; applySchoolFilters(); });
+  areaSelect.addEventListener('change', function() { curArea = areaSelect.value; schoolPageLimit = schoolPageSize; applySchoolFilters(); });
   indBar.insertBefore(areaLabel, document.getElementById('indCount'));
   indBar.insertBefore(areaSelect, document.getElementById('indCount'));
   document.getElementById('indCount').setAttribute('role', 'status');
   document.getElementById('indCount').setAttribute('aria-live', 'polite');
   filters.querySelectorAll('button').forEach(function(b) { b.setAttribute('aria-pressed', String(b.classList.contains('active'))); });
-  tools.after(node('p', 'school-guide-note', 'Salva fino a tre scelte e confrontale. Alcune schede raccolgono più centri CFP: apri i dettagli per distinguere sedi e corsi. Le tue scelte restano su questo dispositivo, senza account.'));
   choices = readChoices();
   refreshChoices();
   applySchoolFilters();
@@ -245,17 +243,22 @@ function matchesInd(card) {
 }
 function applySchoolFilters() {
   var visible = 0;
+  var shown = 0;
   var terms = searchQuery.split(/\s+/).filter(Boolean);
   schoolIndex.forEach(function(s) {
     var show = matchesChip(s.card) && matchesInd(s.card)
       && (curArea === 'all' || s.card.dataset.area === curArea)
       && (!shortlistOnly || !!choiceFor(s.id))
       && terms.every(function(term) { return s.searchText.indexOf(term) !== -1; });
-    s.card.classList.toggle('hidden', !show);
     if (show) visible++;
+    var onPage = show && visible <= schoolPageLimit;
+    s.card.classList.toggle('hidden', !onPage);
+    if (onPage) { shown++; updateProgramPreview(s); }
   });
   var count = document.getElementById('indCount');
   if (count) count.textContent = visible + (visible === 1 ? ' scheda trovata' : ' schede trovate');
+  document.getElementById('moreSchools').hidden = shown >= visible;
+  document.getElementById('schoolPageCount').textContent = shown < visible ? shown + ' di ' + visible + ' scuole e centri' : '';
   var active = curFilter !== 'all' || curInd !== 'all' || curArea !== 'all' || !!searchQuery || shortlistOnly;
   document.getElementById('indReset').hidden = !active;
   document.querySelectorAll('#schools .filter-btn').forEach(function(b) {
@@ -271,8 +274,27 @@ function applySchoolFilters() {
     document.getElementById('schoolsGrid').appendChild(empty);
   } else if (visible && empty) empty.remove();
 }
+function updateProgramPreview(school) {
+  var family = ['liceo', 'tecnico', 'professionale', 'cfp'].indexOf(curFilter) !== -1 ? curFilter : '';
+  var preferred = [], rest = [];
+  school.programNodes.forEach(function(tag) {
+    var pairs = schoolCourses({dataset:school.card.dataset, querySelectorAll:function() { return [tag]; }});
+    var matches = pairs.some(function(pair) {
+      var parts = pair.split(':');
+      return (!family || parts[0] === family) && (curInd === 'all' || parts[1] === curInd);
+    });
+    (matches ? preferred : rest).push(tag);
+  });
+  var ordered = preferred.concat(rest);
+  var main = school.card.querySelector('.school-card-body > .school-programs');
+  var extra = school.card.querySelector('.more-programs');
+  main.replaceChildren();
+  if (extra) extra.replaceChildren();
+  ordered.forEach(function(tag, i) { if (i < 3) main.appendChild(tag); else if (extra) extra.appendChild(tag); });
+}
 function resetSchoolFilters() {
   curFilter = 'all'; curInd = 'all'; curArea = 'all'; searchQuery = ''; shortlistOnly = false;
+  schoolPageLimit = schoolPageSize;
   document.getElementById('indFilter').value = 'all';
   document.getElementById('areaFilter').value = 'all';
   document.getElementById('schoolSearch').value = '';
@@ -280,6 +302,10 @@ function resetSchoolFilters() {
   document.querySelectorAll('#schools .filter-btn').forEach(function(b) {
     b.classList.toggle('active', b.dataset.filter === 'all');
   });
+  applySchoolFilters();
+}
+function showMoreSchools() {
+  schoolPageLimit += schoolPageSize;
   applySchoolFilters();
 }
 function exploreType(type) {
@@ -336,7 +362,6 @@ function renderComparison() {
     var list = node('dl');
     [['Percorsi presenti', school.types.map(function(t) { return typeNames[t]; }).join(' · ')],
       ['Indirizzi nella scheda', school.programs.join(' · ') || 'Apri i dettagli per vedere i percorsi.'],
-      ['Esperienze all’estero', school.intl ? 'Programmi indicati nella scheda: verifica destinatari e disponibilità.' : 'Nessun programma segnalato in questa guida. Chiedi alla scuola.'],
       ['Da controllare insieme ai tuoi', school.paritaria ? 'Retta, eventuali borse, libri e trasporti.' : 'Libri, trasporti, materiali ed eventuali contributi.']].forEach(function(row) {
       list.appendChild(node('dt', '', row[0])); list.appendChild(node('dd', '', row[1]));
     });
@@ -354,7 +379,10 @@ function renderComparison() {
     article.appendChild(button('Apri la scheda →', 'empty-reset', function() {
       document.getElementById('compareDialog').close();
       resetSchoolFilters();
-      school.card.querySelector('.school-details').open = true;
+      schoolPageLimit = schoolIndex.length;
+      applySchoolFilters();
+      var details = school.card.querySelector('.school-details');
+      if (details) details.open = true;
       navTo(school.card.id);
       school.saveButton.focus({ preventScroll: true });
     }));
