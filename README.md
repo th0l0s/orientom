@@ -30,6 +30,14 @@ Stessa area, stesso criterio editoriale, stessa catena di pubblicazione.
   dell'Orientamento della Provincia di Bergamo e i tre saloni nazionali
 - **Due filtri combinabili** sulle schede: per tipo/zona (chip) e **per indirizzo di studio**
   (menu con 25 voci, dal liceo classico all'odontotecnico alla IeFP)
+- **Nuova esperienza per chi fa terza media**: apertura visiva, quattro percorsi spiegati
+  in breve, quiz con tre piste da esplorare e domande concrete da fare agli open day
+- **Ricerca e confronto**: cerca per nome, comune o materia (anche senza accenti), combina
+  tipo di percorso, indirizzo e zona, salva fino a tre schede e confrontale con appunti
+  su viaggio e impressioni. Le schede dei CFP possono raccogliere più centri, dichiarati
+  nei dettagli. Preferite e appunti restano sul dispositivo, senza account né invio di dati
+- **Schede più leggibili**: panoramica, indirizzi e sito ufficiale subito visibili;
+  programmi internazionali, date, contatti e fonti dentro dettagli apribili
 - **«Dove escono le date per prime»**: i canali reali da cui arrivano gli open day —
   la scuola media, il comitato genitori, Comune ed ente fiera, le reti fra scuole
 - **«La tua lista»**: nove mosse da spuntare da qui a gennaio, con barra di avanzamento.
@@ -78,12 +86,35 @@ state pubblicate.
 
 ## Struttura tecnica
 
-File singolo `index.html`, senza dipendenze esterne tranne Google Fonts.
-CSS e JS inline, nessun framework, nessun tracker, nessuna pubblicità.
+Sito statico con `index.html` e asset locali in `assets/`, senza build e senza dipendenze
+esterne tranne Google Fonts. Nessun framework, nessun tracker, nessuna pubblicità.
+`assets/experience.css` contiene la nuova identità visiva e i layout responsive;
+`assets/experience.js` gestisce ricerca, filtri combinati, preferite, confronto e quiz.
+I contenuti, le fonti e i dati dei trasporti restano in `index.html`.
 CSP restrittiva via meta tag (`_headers` per gli header lato server, se si passa a Cloudflare o Netlify).
 
-Verifiche eseguite: nessun errore JS in console, nessuno scroll orizzontale a 390px,
-tutti i filtri e il quiz funzionanti, link esterni controllati.
+Le coppie tipo/indirizzo dei filtri vengono ricavate dalle etichette `.prog-tag`: un
+istituto con liceo e tecnico compare in entrambi, ma il filtro «Liceo + Informatica»
+non deve restituire il suo corso tecnico. Aggiornando gli indirizzi, controllare anche
+la funzione `schoolCourses` e i suoi riconoscimenti delle etichette.
+
+Il quiz applica regole semplici: contano soprattutto interessi e attività preferite.
+Non è un test psicologico validato, non misura capacità o rendimento e non assegna
+automaticamente un percorso a chi risponde «non lo so».
+
+Salvataggi: `orientom.choices.v1` per le tre scelte e gli appunti;
+`orientom.plan.v1` per la lista delle nove mosse. Dati locali, senza rete. Se lo storage
+è bloccato, le preferite funzionano comunque in memoria finché la pagina resta aperta.
+
+Per l'anteprima locale: `python -m http.server 4173 --bind 127.0.0.1`, poi aprire
+`http://127.0.0.1:4173/`. GitHub Pages pubblica anche gli asset, con la stessa Action.
+
+Verifiche della nuova esperienza: quiz completo e collegamenti ai filtri, ricerca senza
+accenti, combinazioni tipo/indirizzo/zona, limite delle tre scelte, confronto, appunti
+persistenti dopo il reload, rimozione delle scelte, menu e chiusura con Escape,
+layout desktop e smartphone a 390px. Le verifiche delle fonti dei contenuti rimangono
+quelle indicate nelle singole sezioni; il redesign non equivale a una nuova verifica
+completa di date, prezzi o orari.
 
 ## Manutenzione
 
