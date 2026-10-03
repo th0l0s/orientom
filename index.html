@@ -582,6 +582,37 @@
       padding-top:16px; border-top:1px solid var(--glass-border); }
     .plan-note { font-size:0.78rem; color:var(--text3); }
 
+    /* == FOCUS: TRE STRADE, PROSSIMI APPUNTAMENTI == */
+    #eventi3 { padding:80px 0 40px; }
+    .fx-filters { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:0 0 26px; }
+    .fx-btn { font:inherit; font-size:0.9rem; font-weight:600; cursor:pointer; padding:9px 16px; border-radius:999px;
+      background:var(--glass); border:1px solid var(--glass-border); color:var(--text2); }
+    .fx-btn:hover { color:var(--text); }
+    .fx-btn[aria-pressed="true"] { background:var(--primary); border-color:var(--primary); color:#fff; }
+    .fx-list { list-style:none; max-width:820px; margin:0 auto; padding:0; }
+    .fx-ev { display:flex; gap:16px; align-items:flex-start; padding:16px 18px; margin-bottom:10px; border-radius:14px;
+      background:var(--card-bg); border:1px solid var(--card-border); }
+    .fx-ev[hidden] { display:none; }
+    .fx-when { flex:0 0 74px; text-align:center; font-family:'Space Grotesk',sans-serif; line-height:1.15; }
+    .fx-day { display:block; font-size:1.5rem; font-weight:700; color:var(--text); }
+    .fx-mon { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); }
+    .fx-body { flex:1; min-width:0; }
+    .fx-title { font-weight:700; font-size:1rem; color:var(--text); margin-bottom:3px; }
+    .fx-desc { font-size:0.88rem; color:var(--text2); line-height:1.55; overflow-wrap:anywhere; }
+    .fx-desc a { color:var(--cyan); }
+    .fx-tags { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+    .fx-tag { font-size:0.7rem; font-weight:700; padding:2px 9px; border-radius:999px; border:1px solid var(--glass-border); color:var(--text2); }
+    .fx-tag.sci { color:#a5b4fc; border-color:rgba(99,102,241,0.45); }
+    .fx-tag.info { color:#67e8f9; border-color:rgba(34,211,238,0.4); }
+    .fx-tag.afm { color:#6ee7b7; border-color:rgba(16,185,129,0.4); }
+    .fx-badge { display:none; font-size:0.7rem; font-weight:700; padding:2px 9px; border-radius:999px; margin-left:8px; vertical-align:middle; }
+    .fx-ev.fx-next { border-color:var(--gold); box-shadow:0 0 0 1px var(--gold-glow); }
+    .fx-ev.fx-next .fx-badge.next { display:inline-block; background:var(--gold); color:#1a1205; }
+    .fx-ev.fx-past { opacity:0.45; }
+    .fx-ev.fx-past .fx-badge.past { display:inline-block; background:var(--glass); color:var(--text2); border:1px solid var(--glass-border); }
+    .fx-wrap { max-width:820px; margin:0 auto; }
+    @media (max-width:520px) { .fx-ev { gap:12px; padding:14px; } .fx-when { flex-basis:56px; } .fx-day { font-size:1.25rem; } }
+
     /* == CHANGELOG NEL FOOTER == */
     .chg { max-width:720px; margin:36px auto 0; text-align:left; }
     .chg > summary { cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:700; color:var(--text2);
@@ -739,7 +770,8 @@
 <nav id="mainNav">
   <div class="nav-logo">Orien<span>Tom</span></div>
   <div class="nav-links" id="navLinks">
-    <button type="button" class="nav-link" data-target="quiz"      onclick="navTo('quiz')">Quiz</button>
+    <button type="button" class="nav-link" data-target="eventi3"   onclick="navTo('eventi3')">Appuntamenti</button>
+      <button type="button" class="nav-link" data-target="quiz"      onclick="navTo('quiz')">Quiz</button>
     <button type="button" class="nav-link" data-target="schools"   onclick="navTo('schools')">Scuole</button>
     <button type="button" class="nav-link" data-target="orientamento" onclick="navTo('orientamento')">Orientamento</button>
     <button type="button" class="nav-link" data-target="iscrizioni" onclick="navTo('iscrizioni')">Iscrizioni</button>
@@ -758,6 +790,7 @@
 
 <!-- MOBILE DRAWER -->
 <div class="mobile-drawer" id="mobileDrawer" role="navigation" aria-label="Menu mobile">
+  <button type="button" class="nav-link" onclick="navTo('eventi3');toggleDrawer()">&#128205; Appuntamenti</button>
   <button type="button" class="nav-link" onclick="navTo('quiz');toggleDrawer()">&#127919; Quiz</button>
   <button type="button" class="nav-link" onclick="navTo('schools');toggleDrawer()">&#127978; Scuole</button>
   <button type="button" class="nav-link" onclick="navTo('intl-banner');toggleDrawer()">&#127758; Internazionale</button>
@@ -794,6 +827,151 @@
   <div class="scroll-hint"><span>Scorri</span><div class="arrow"></div></div>
 </section>
 
+<!-- FOCUS: TRE STRADE, PROSSIMI APPUNTAMENTI -->
+<section id="eventi3">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:28px">
+      <div class="section-tag">&#128205; Da qui si parte</div>
+      <h2 class="section-title">Tre strade, i prossimi appuntamenti</h2>
+      <p class="section-sub">Liceo scientifico, informatica, economia. Qui sotto trovi dove andare a vedere di persona, in ordine di data. Tutto ricontrollato sui siti delle scuole il 3 ottobre 2026.</p>
+    </div>
+
+    <div class="fx-filters" role="group" aria-label="Scegli la strada">
+      <button type="button" class="fx-btn" data-fx="all" aria-pressed="true" onclick="fxFilter('all')">Tutte</button>
+      <button type="button" class="fx-btn" data-fx="sci" aria-pressed="false" onclick="fxFilter('sci')">&#128300; Scientifico</button>
+      <button type="button" class="fx-btn" data-fx="info" aria-pressed="false" onclick="fxFilter('info')">&#128187; Informatica</button>
+      <button type="button" class="fx-btn" data-fx="afm" aria-pressed="false" onclick="fxFilter('afm')">&#128202; Economia AFM</button>
+    </div>
+
+    <div class="fx-wrap">
+    <div class="callout warn reveal" style="margin-top:0">
+      <span class="callout-title">&#9888;&#65039; &laquo;Informatica&raquo; vuol dire due cose diverse</span>
+      Al <strong>Nizzola di Trezzo</strong> l'informatica si chiama <strong>SIA</strong>, Sistemi Informativi Aziendali: &egrave; un indirizzo di economia con dentro l'informatica (programmi, dati e reti <em>per le aziende</em>). Le ore di informatica sono 2 a settimana nel biennio, poi 4, poi 5 in quinta.
+      <br><br>Se invece vuoi che programmare sia la materia principale, quello &egrave; l'indirizzo <strong>Informatica e Telecomunicazioni</strong>, e in zona lo trovi al <strong>Marconi di Gorgonzola</strong>, al <strong>Marie Curie di Cernusco</strong> e all'<strong>Archimede di Treviglio</strong>. Non &egrave; meglio l'uno o l'altro: sono due scuole diverse. Chiedilo all'open day.
+      <span class="src">Fonte: <a href="https://www.jacoponizzola.edu.it/indirizzo-di-studio/sistemi-informativi-aziendali/" target="_blank" rel="noopener noreferrer">ITE Nizzola &mdash; quadro orario SIA</a></span>
+    </div>
+    </div>
+
+    <ol class="fx-list reveal" id="fxList">
+      <li class="fx-ev" data-date="2026-10-17" data-path="sci info afm">
+        <div class="fx-when"><span class="fx-day">17</span><span class="fx-mon">sab &middot; ott</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Campus Orienta &mdash; Melzo<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Le superiori della Martesana tutte insieme, nella scuola media di Via Mascagni 11. <strong>Serve prenotare</strong>: il modulo chiude venerd&igrave; 16 ottobre alle 13. <a href="https://scuolamascagni.edu.it/novita/notizie/campus-orienta-sabato-17-ottobre-2026" target="_blank" rel="noopener noreferrer">Prenota qui</a></div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span><span class="fx-tag info">Informatica</span><span class="fx-tag afm">Economia AFM</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-10-17" data-path="sci info afm">
+        <div class="fx-when"><span class="fx-day">17</span><span class="fx-mon">sab &middot; ott</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Giornata dell'Orientamento Rete TreVi &mdash; Velasca<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Le superiori della rete Trezzo&ndash;Vimercate all'ECFOP, Via De Amicis 10, dalle 9:30 alle 17:00. &Egrave; <strong>lo stesso giorno</strong> del Campus Orienta: vai a quello pi&ugrave; vicino a casa. Se abiti verso Trezzo, &egrave; questo. <a href="https://www.liceobanfi.edu.it/aree-tematiche/orientamento-ingresso" target="_blank" rel="noopener noreferrer">Calendario della rete</a></div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span><span class="fx-tag info">Informatica</span><span class="fx-tag afm">Economia AFM</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-10-19" data-path="sci">
+        <div class="fx-when"><span class="fx-day">19</span><span class="fx-mon">lun &middot; ott</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Si aprono le prenotazioni &mdash; Giordano Bruno<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Da oggi puoi prenotare gli open day del liceo. Massimo due persone per famiglia. <a href="https://www.liceo-melzocassano.edu.it/open-day-e-giornate-tra-i-banchi-2/" target="_blank" rel="noopener noreferrer">Pagina del liceo</a></div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-11-03" data-path="sci">
+        <div class="fx-when"><span class="fx-day">3</span><span class="fx-mon">mar &middot; nov</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Si aprono le prenotazioni &mdash; Giornate tra i banchi<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Per le mattine di lezione vera al Giordano Bruno. Quando prenoti devi dire quale indirizzo e quale sede (Melzo o Cassano). <a href="https://www.liceo-melzocassano.edu.it/open-day-e-giornate-tra-i-banchi-2/" target="_blank" rel="noopener noreferrer">Pagina del liceo</a></div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-11-07" data-path="sci">
+        <div class="fx-when"><span class="fx-day">7</span><span class="fx-mon">sab &middot; nov</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Open day &mdash; Liceo Giordano Bruno<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc"><strong>Melzo alle 10:30</strong>, <strong>Cassano alle 14:30</strong>. Tutti gli indirizzi: scientifico, scienze applicate, linguistico.</div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-11-21" data-path="sci">
+        <div class="fx-when"><span class="fx-day">14&middot;21</span><span class="fx-mon">sab &middot; nov</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Giornate tra i banchi &mdash; Giordano Bruno<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Due sabati di laboratori e lezioni vere. &Egrave; il modo migliore per capire se il liceo fa per te: un'ora in classe dice pi&ugrave; di qualsiasi presentazione.</div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-11-28" data-path="sci">
+        <div class="fx-when"><span class="fx-day">28</span><span class="fx-mon">sab &middot; nov</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Open day &mdash; Liceo Giordano Bruno<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Seconda e ultima data: <strong>Melzo alle 10:30</strong>, <strong>Cassano alle 14:30</strong>.</div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-11-28" data-path="info afm">
+        <div class="fx-when"><span class="fx-day">28</span><span class="fx-mon">sab &middot; nov</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Open day &mdash; ITE Nizzola, Trezzo<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Via Nenni 10. Tre turni, 150 posti per turno, prenotazione con modulo online. Presentati 15 minuti prima. <strong>Occhio:</strong> &egrave; lo stesso giorno del Giordano Bruno. Se ti interessano tutti e due, scegli turni che non si sovrappongono. <a href="https://www.jacoponizzola.edu.it/orientamento/" target="_blank" rel="noopener noreferrer">Turni e moduli</a></div>
+          <div class="fx-tags"><span class="fx-tag info">Informatica</span><span class="fx-tag afm">Economia AFM</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-12-12" data-path="info afm">
+        <div class="fx-when"><span class="fx-day">12</span><span class="fx-mon">sab &middot; dic</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Open day &mdash; ITE Nizzola, Trezzo<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Ancora tre turni, stesse regole. <a href="https://www.jacoponizzola.edu.it/orientamento/" target="_blank" rel="noopener noreferrer">Turni e moduli</a></div>
+          <div class="fx-tags"><span class="fx-tag info">Informatica</span><span class="fx-tag afm">Economia AFM</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2026-12-12" data-path="sci">
+        <div class="fx-when"><span class="fx-day">12</span><span class="fx-mon">sab &middot; dic</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Giornata tra i banchi &mdash; Giordano Bruno<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Terza mattina di lezioni e laboratori.</div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2027-01-09" data-path="sci">
+        <div class="fx-when"><span class="fx-day">9</span><span class="fx-mon">sab &middot; gen</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Giornata tra i banchi &mdash; Giordano Bruno<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">L'ultima prima delle iscrizioni.</div>
+          <div class="fx-tags"><span class="fx-tag sci">Scientifico</span></div>
+        </div>
+      </li>
+      <li class="fx-ev" data-date="2027-01-16" data-path="info afm">
+        <div class="fx-when"><span class="fx-day">16</span><span class="fx-mon">sab &middot; gen</span></div>
+        <div class="fx-body">
+          <div class="fx-title">Open day &mdash; ITE Nizzola, Trezzo<span class="fx-badge next">il prossimo</span><span class="fx-badge past">gi&agrave; passato</span></div>
+          <div class="fx-desc">Un turno solo: &egrave; l'ultima occasione prima di mandare la domanda. <a href="https://www.jacoponizzola.edu.it/orientamento/" target="_blank" rel="noopener noreferrer">Modulo</a></div>
+          <div class="fx-tags"><span class="fx-tag info">Informatica</span><span class="fx-tag afm">Economia AFM</span></div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="fx-wrap">
+    <div class="callout good reveal">
+      <span class="callout-title">&#129514; I ministage del Nizzola: prova una lezione</span>
+      Sono pomeriggi in cui entri in classe davvero. Si comincia alle 14:10 in auditorium. Per <strong>SIA</strong> fai un laboratorio di 90 minuti, per <strong>AFM</strong> due lezioni da 45. Puoi prenotarne pi&ugrave; di uno, per provare materie diverse. Le date sono sul modulo della scuola.
+      <span class="src"><a href="https://www.jacoponizzola.edu.it/orientamento/" target="_blank" rel="noopener noreferrer">ITE Nizzola &mdash; Orientamento</a> &middot; per disdire: orientamento@jacoponizzola.edu.it</span>
+    </div>
+
+    <div class="callout info reveal">
+      <span class="callout-title">&#128269; Le altre scuole con questi indirizzi: date non ancora uscite</span>
+      Il 3 ottobre queste scuole non avevano ancora date nuove sul sito, oppure mostravano quelle dell'anno scorso. Di solito escono entro fine ottobre.
+      <ul class="checklist" style="margin:10px 0 0">
+        <li><strong>Scientifico:</strong> <a href="https://marconigorgonzola.edu.it/open-day/" target="_blank" rel="noopener noreferrer">Marconi, Gorgonzola</a> &middot; <a href="https://www.itsos-mariecurie.edu.it/pagine/open-day" target="_blank" rel="noopener noreferrer">Marie Curie, Cernusco</a> &middot; <a href="https://www.iismachiavelli.edu.it/" target="_blank" rel="noopener noreferrer">Machiavelli, Pioltello</a></li>
+        <li><strong>Informatica e Telecomunicazioni:</strong> <a href="https://marconigorgonzola.edu.it/open-day/" target="_blank" rel="noopener noreferrer">Marconi, Gorgonzola</a> &middot; <a href="https://www.itsos-mariecurie.edu.it/pagine/open-day" target="_blank" rel="noopener noreferrer">Marie Curie, Cernusco</a> &middot; <a href="https://www.isarchimede.edu.it" target="_blank" rel="noopener noreferrer">Archimede, Treviglio</a></li>
+        <li><strong>Economia AFM:</strong> <a href="https://www.argentiamajorana.edu.it" target="_blank" rel="noopener noreferrer">Argentia, Gorgonzola</a> &middot; <a href="https://www.iismachiavelli.edu.it/" target="_blank" rel="noopener noreferrer">Machiavelli, Pioltello</a> &middot; <a href="https://oberdan.edu.it" target="_blank" rel="noopener noreferrer">Oberdan, Treviglio</a> <span class="pill-todo">da verificare</span></li>
+      </ul>
+      <br>Vuoi vedere tutte le scuole di un indirizzo? <a href="#schools" onclick="navTo('schools');return false;">Vai alle schede e usa il menu &laquo;indirizzo&raquo; &rarr;</a>
+    </div>
+    </div>
+  </div>
+</section>
+
 <!-- AVVISO STAGIONE -->
 <section id="avviso">
   <div class="container">
@@ -801,7 +979,7 @@
       <span class="callout-title">&#9200;&#65039; A che punto siamo &mdash; verifica del 23 settembre 2026</span>
       Le iscrizioni per l'a.s. <strong>2027/28</strong> si apriranno <strong>a gennaio 2027</strong>. La circolare ministeriale con le date esatte esce di norma tra <strong>fine novembre e met&agrave; dicembre 2026</strong>
       (per il 2026/27 &egrave; stata la nota MIM n. 100847 del 17/12/2025, con domande dal 13 gennaio al 14 febbraio 2026).
-      <strong>Al 23 settembre 2026 le prime scuole hanno iniziato a pubblicare le date dei propri Open Day</strong> &mdash; per ora Argentia&ndash;Majorana, Zenale e Butinone, Licei Sant'Agostino e Centro Salesiano Don Bosco &mdash; ma sono ancora una minoranza: la maggior parte degli istituti censiti in questa pagina non le ha ancora pubblicate. Le trovi segnate direttamente nella scheda di ogni scuola, quando ci sono; altrimenti sulle pagine &laquo;Orientamento&raquo; dei singoli istituti, che si aggiornano soprattutto da ottobre.
+      <strong>Al 3 ottobre 2026 hanno pubblicato le date dei propri Open Day</strong> il Liceo Giordano Bruno, l'ITE Nizzola, i Licei Sant'Agostino e il Centro Salesiano Don Bosco, ma sono ancora una minoranza: la maggior parte degli istituti censiti in questa pagina non le ha ancora pubblicate. Le trovi segnate direttamente nella scheda di ogni scuola, quando ci sono; altrimenti sulle pagine &laquo;Orientamento&raquo; dei singoli istituti, che si aggiornano soprattutto da ottobre.
       <span class="src">Fonte: <a href="https://www.mim.gov.it/-/scuola-dal-13-gennaio-al-14-febbraio-aperte-le-iscrizioni-per-l-anno-scolastico-2026-2027" target="_blank" rel="noopener noreferrer">MIM &mdash; Iscrizioni a.s. 2026/27</a></span>
     </div>
 
@@ -816,8 +994,8 @@
       <span class="callout-title">&#128226; Avvisi recenti &mdash; settembre 2026</span>
       <ul class="checklist" style="margin:8px 0 0">
         <li><strong>Saloni gi&agrave; confermati:</strong> YOUNG a Erba <strong>12&ndash;14 novembre</strong>, Festival Orientamenti a Genova <strong>17&ndash;20 novembre</strong>, JOB&amp;Orienta a Verona <strong>25&ndash;28 novembre 2026</strong>.</li>
-        <li><strong>I tre saloni locali da segnare adesso:</strong> Giornata Rete TreVi (met&agrave; ottobre, Vimercate &mdash; utile se abiti sull'Adda), Campus Orienta a Melzo (met&agrave; ottobre), <strong>Treviglio Orienta</strong> a TreviglioFiera (fine ottobre) e la Fiera dell'Orientamento di Bergamo (fine novembre). <a href="#orientamento" onclick="navTo('orientamento');return false;">Tabella completa con date e zone &rarr;</a></li>
-        <li><strong>Quattro scuole hanno gi&agrave; una data di open day</strong> (Argentia&ndash;Majorana, Zenale e Butinone, Sant'Agostino, Don Bosco): le trovi nella loro scheda. Il 23 settembre abbiamo ricontrollato tutte le altre scuole di questa pagina, i Comuni, TreviglioFiera e gli istituti comprensivi: per la maggior parte le date arrivano ancora in ottobre. <a href="#orientamento" onclick="navTo('orientamento');return false;">Dove usciranno per prime &rarr;</a></li>
+        <li><strong>Due saloni locali ora hanno la data, ed &egrave; la stessa: sabato 17 ottobre.</strong> Giornata Rete TreVi a Velasca di Vimercate (9:30&ndash;17:00, utile se abiti sull'Adda) e Campus Orienta a Melzo (con prenotazione entro il 16 ottobre). Ancora da confermare <strong>Treviglio Orienta</strong> (fine ottobre) e la Fiera dell'Orientamento di Bergamo (fine novembre). <a href="#orientamento" onclick="navTo('orientamento');return false;">Tabella completa con date e zone &rarr;</a></li>
+        <li><strong>Quattro scuole hanno gi&agrave; una data di open day</strong> (Giordano Bruno, Nizzola, Sant'Agostino, Don Bosco): le trovi nella loro scheda. <strong>Correzione:</strong> le date che avevamo scritto per Argentia&ndash;Majorana e Zenale e Butinone erano con ogni probabilit&agrave; quelle dell'anno scorso, e le abbiamo tolte. Per la maggior parte delle scuole le date arrivano ancora in ottobre. <a href="#orientamento" onclick="navTo('orientamento');return false;">Dove usciranno per prime &rarr;</a></li>
         <li><strong>Nuove scuole in questa pagina:</strong> quelle di Dalmine e di Crema. A Crema ci sono il liceo artistico pi&ugrave; grande della zona e il liceo sportivo: due cose che nella Martesana non esistono.</li>
       </ul>
     </div>
@@ -1230,6 +1408,9 @@
           <div class="callout warn" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
             <strong>Attenzione:</strong> qui <strong>non</strong> c'&egrave; ESABAC. Il DELF &egrave; una certificazione di francese, non il doppio diploma. Per l'ESABAC in zona: ITSOS Marie Curie, Cernusco.
           </div>
+          <div class="callout good" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
+            <strong>&#128197; Open Day, verificato 03/10:</strong> sabato <strong>7 novembre</strong> e sabato <strong>28 novembre</strong>, a Melzo alle 10:30 e a Cassano alle 14:30 (prenotazioni dal 19 ottobre, massimo due persone per famiglia). <strong>Giornate tra i banchi</strong>, cio&egrave; lezioni e laboratori veri: sabati 14 e 21 novembre, 12 dicembre, 9 gennaio (prenotazioni dal 3 novembre). <a href="https://www.liceo-melzocassano.edu.it/open-day-e-giornate-tra-i-banchi-2/" target="_blank" rel="noopener noreferrer">Pagina del liceo</a>
+          </div>
           <div class="school-footer">
             <a href="https://www.liceo-melzocassano.edu.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Sito ufficiale</a>
             <span style="font-size:0.8rem;color:var(--text3)">&#128222; Melzo 02 9551346 &middot; Cassano 0363 65822</span>
@@ -1316,8 +1497,8 @@
             <div class="intl-item"><span class="intl-item-flag">&#127466;&#127482;</span><div><div class="intl-item-name">Erasmus+ 2021&ndash;2027</div><div class="intl-item-desc"><span class="pill-todo">da verificare</span> la pagina della scuola risulta ferma alla revisione del 2024: chiedete lo stato attuale in segreteria</div></div></div>
             <div class="intl-item"><span class="intl-item-flag">&#128202;</span><div><div class="intl-item-name">RIM &mdash; due lingue straniere</div><div class="intl-item-desc">Indirizzo orientato a commercio estero e marketing internazionale</div></div></div>
           </div>
-          <div class="callout good" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
-            <strong>&#128197; Open Day 2026/27, verificato 23/09:</strong> sede Argentia (Gorgonzola) sabati <strong>8 novembre</strong>, <strong>13 dicembre</strong> e <strong>10 gennaio</strong>, ore 9:00; sede Majorana (Cernusco/Melzo) stesse date, il 10 gennaio alle 10:00.
+          <div class="callout warn" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
+            <strong>&#128197; Open Day: date nuove non ancora uscite</strong> <span class="pill-todo">da ricontrollare</span> Il sito della scuola indica ancora &laquo;sabato 8 novembre, 13 dicembre, 10 gennaio&raquo;, ma quest'anno quei giorni cadono di domenica: sono le date dell'anno scorso. Controllato il 3 ottobre. <a href="https://www.argentiamajorana.edu.it/pagine/open-day-2025-2026" target="_blank" rel="noopener noreferrer">Pagina open day</a>
           </div>
           <div class="school-footer">
             <a href="https://www.argentiamajorana.edu.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Sito istituto</a>
@@ -1392,8 +1573,8 @@
           </div>
           <p class="school-desc">Istituto autonomo, <strong>da non confondere con il Bellisario</strong> anche se condividono il polo scolastico di Trezzo. &Egrave; l'unico <strong>Turismo</strong> e l'unico <strong>Costruzioni Ambiente e Territorio</strong> statali dell'Adda milanese.</p>
           <div class="school-programs">
-            <a href="https://www.jacoponizzola.edu.it/" target="_blank" rel="noopener noreferrer" class="prog-tag">AFM</a>
-            <a href="https://www.jacoponizzola.edu.it/" target="_blank" rel="noopener noreferrer" class="prog-tag">SIA</a>
+            <a href="https://www.jacoponizzola.edu.it/indirizzo-di-studio/amministrazione-finanza-e-marketing/" target="_blank" rel="noopener noreferrer" class="prog-tag">AFM</a>
+            <a href="https://www.jacoponizzola.edu.it/indirizzo-di-studio/sistemi-informativi-aziendali/" target="_blank" rel="noopener noreferrer" class="prog-tag">SIA</a>
             <a href="https://www.jacoponizzola.edu.it/" target="_blank" rel="noopener noreferrer" class="prog-tag">RIM &mdash; Rel. Internazionali</a>
             <a href="https://www.jacoponizzola.edu.it/" target="_blank" rel="noopener noreferrer" class="prog-tag">Turismo &#9992;&#65039;</a>
             <a href="https://www.jacoponizzola.edu.it/" target="_blank" rel="noopener noreferrer" class="prog-tag">Costruzioni, Ambiente e Territorio</a>
@@ -1401,6 +1582,12 @@
           <div class="school-intl">
             <div class="school-intl-title">&#127758; Internazionale</div>
             <div class="intl-item"><span class="intl-item-flag">&#127466;&#127482;</span><div><div class="intl-item-name">Erasmus+ &mdash; progetto WEST</div><div class="intl-item-desc">Partner dell'ITSOS Marie Curie: mobilit&agrave; di 3 settimane in Europa per gli studenti delle quinte</div></div></div>
+          </div>
+          <div class="callout good" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
+            <strong>&#128197; Open Day, verificato 03/10:</strong> sabato <strong>28 novembre</strong> e sabato <strong>12 dicembre</strong> (tre turni), sabato <strong>16 gennaio</strong> (un turno). Massimo 150 posti per turno, prenotazione con modulo online. Ci sono anche i <strong>ministage</strong> del pomeriggio, dalle 14:10. <a href="https://www.jacoponizzola.edu.it/orientamento/" target="_blank" rel="noopener noreferrer">Turni e moduli</a>
+          </div>
+          <div class="callout warn" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
+            <strong>SIA non &egrave; l'ITIS informatico.</strong> &Egrave; economia con l'informatica dentro. Per Informatica e Telecomunicazioni guarda Marconi (Gorgonzola), Marie Curie (Cernusco) o Archimede (Treviglio).
           </div>
           <div class="school-footer">
             <a href="https://www.jacoponizzola.edu.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Sito ufficiale</a>
@@ -1475,8 +1662,8 @@
             <div class="intl-item"><span class="intl-item-flag">&#127468;&#127479;</span><div><div class="intl-item-name">Erasmus+ &mdash; mobilit&agrave; attiva</div><div class="intl-item-desc">Gruppi di studenti in Europa (fra le destinazioni, Argos in Grecia)</div></div></div>
             <div class="intl-item"><span class="intl-item-flag">&#127760;</span><div><div class="intl-item-name">eTwinning e soggiorni linguistici</div><div class="intl-item-desc">Laboratori interculturali e mobilit&agrave; studentesca individuale</div></div></div>
           </div>
-          <div class="callout good" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
-            <strong>&#128197; Open Day 2026/27, verificato 23/09:</strong> <strong>15 novembre</strong> alla succursale di Via Caravaggio (Turismo, 10&ndash;12, senza prenotazione); <strong>13 dicembre</strong> in sede (Grafica e Servizi culturali/spettacolo, 10&ndash;12); <strong>17 gennaio</strong> in sede, tutti gli indirizzi (10&ndash;12).
+          <div class="callout warn" style="margin:14px 0 0;font-size:0.86rem;padding:12px 14px">
+            <strong>&#128197; Open Day: date da ricontrollare</strong> <span class="pill-todo">da ricontrollare</span> Avevamo scritto 15 novembre, 13 dicembre e 17 gennaio, ma quest'anno cadono tutti di domenica, mentre l'anno scorso erano sabati: molto probabilmente sono le date vecchie. Aspetta quelle nuove sul <a href="https://www.zenale.edu.it/pagine/orientamento" target="_blank" rel="noopener noreferrer">sito della scuola</a>.
           </div>
           <div class="school-footer">
             <a href="https://www.zenale.edu.it" target="_blank" rel="noopener noreferrer" class="school-link">&#128279; Sito ufficiale</a>
@@ -2186,15 +2373,15 @@ Tre passaggi, <strong>in quest'ordine</strong>. Uno: capisci cosa ti piace fare.
         <thead><tr><th>Quando</th><th>Cosa</th><th>Dove</th><th>Zona che copre</th></tr></thead>
         <tbody>
           <tr>
-            <td><strong>Met&agrave; ottobre 2026</strong><br><span class="pill-todo">da confermare</span></td>
-            <td><strong>Giornata dell'Orientamento Rete TreVi</strong><br>Le superiori della rete Trezzo&ndash;Vimercate in un posto solo, con prof e studenti che ci vanno gi&agrave;. Nel 2025 fu l'11 ottobre</td>
-            <td>ECFOP, Velasca di Vimercate (MB)</td>
+            <td><strong>Sabato 17 ottobre 2026</strong><br>9:30&ndash;17:00</td>
+            <td><strong>Giornata dell'Orientamento Rete TreVi</strong><br>Le superiori della rete Trezzo&ndash;Vimercate in un posto solo, con prof e studenti che ci vanno gi&agrave;</td>
+            <td>ECFOP, Via De Amicis 10, Velasca di Vimercate (MB)</td>
             <td>Trezzo s/Adda, Vaprio, Cornate, Busnago e tutto il Vimercatese</td>
           </tr>
           <tr>
-            <td><strong>Met&agrave; ottobre 2026</strong><br><span class="pill-todo">da confermare</span></td>
-            <td><strong>Campus Orienta</strong><br>Stand delle superiori della Martesana, organizzato dall'IC Mascagni ma aperto a tutte le medie della zona. 2025: 18 ottobre &middot; 2024: 12 ottobre</td>
-            <td>Melzo &mdash; scuola media di Via Mascagni</td>
+            <td><strong>Sabato 17 ottobre 2026</strong><br>prenotazione entro il 16 ottobre, ore 13</td>
+            <td><strong>Campus Orienta</strong><br>Stand delle superiori della Martesana, organizzato dall'IC Mascagni ma aperto a tutte le medie della zona. <a href="https://scuolamascagni.edu.it/novita/notizie/campus-orienta-sabato-17-ottobre-2026" target="_blank" rel="noopener noreferrer">Prenota</a></td>
+            <td>Melzo &mdash; scuola media di Via Mascagni 11</td>
             <td>Melzo, Cernusco, Gorgonzola, Pioltello, Cassano e l'asse dell'Adda</td>
           </tr>
           <tr>
@@ -2229,7 +2416,7 @@ Tre passaggi, <strong>in quest'ordine</strong>. Uno: capisci cosa ti piace fare.
           </tr>
           <tr>
             <td><strong>Ottobre &ndash; dicembre 2026</strong></td>
-            <td><strong>Gli open day delle singole scuole</strong><br>Al 23 settembre 2026 hanno gi&agrave; una data <strong>Argentia&ndash;Majorana</strong> (8 nov, 13 dic, 10 gen), <strong>Zenale e Butinone</strong> (15 nov, 13 dic, 17 gen), <strong>Licei Sant'Agostino</strong> (24 ott, 14 nov, 12 dic) e <strong>Don Bosco</strong> (14 nov, 12 dic, 16 gen). Le altre scuole di questa pagina non le avevano ancora pubblicate</td>
+            <td><strong>Gli open day delle singole scuole</strong><br>Al 3 ottobre 2026 hanno gi&agrave; una data <strong>Giordano Bruno</strong> (7 e 28 nov), <strong>Nizzola</strong> (28 nov, 12 dic, 16 gen), <strong>Licei Sant'Agostino</strong> (24 ott, 14 nov, 12 dic) e <strong>Don Bosco</strong> (14 nov, 12 dic, 16 gen). Le altre scuole di questa pagina non le avevano ancora pubblicate</td>
             <td>Dentro le scuole</td>
             <td>Ovunque &mdash; sono la cosa pi&ugrave; utile di tutte</td>
           </tr>
@@ -2242,7 +2429,7 @@ Tre passaggi, <strong>in quest'ordine</strong>. Uno: capisci cosa ti piace fare.
       Ci &egrave; stato chiesto di verificare anche un <strong>&laquo;Salone dell'Isola Bergamasca&raquo; a Ponte San Pietro</strong> e un <strong>&laquo;Campus in rete&raquo; a Vimercate</strong>. Ecco cosa abbiamo trovato davvero, perch&eacute; qui non inventiamo niente:
       <br><br>&#8226; <strong>Vimercatese:</strong> l'evento esiste ma si chiama <strong>Giornata dell'Orientamento Rete TreVi</strong> e si tiene all'ECFOP di Velasca, non al Centro Omnicomprensivo. &Egrave; in tabella qui sopra. Rete TreVi sta per <em>Trezzo&ndash;Vimercate</em>: per questo riguarda anche chi abita sull'Adda.
       <br>&#8226; <strong>Isola Bergamasca:</strong> <span class="pill-todo">non verificato</span> non abbiamo trovato nessun salone autonomo a Ponte San Pietro. Per quell'area il riferimento provinciale resta la Fiera dell'Orientamento di Bergamo. Se esiste e ci sfugge, <strong>segnalacelo</strong>.
-      <br><br>Il <strong>23 settembre 2026</strong> abbiamo ricontrollato uno per uno i canali che pubblicano queste date per primi &mdash; calendario eventi del Comune di Treviglio, calendario di TreviglioFiera, sito dell'IC Mascagni di Melzo, pagine orientamento degli istituti comprensivi della zona, oltre alle pagine di ogni singolo istituto: <strong>nessuna edizione 2026 dei saloni locali (Rete TreVi, Campus Orienta, Treviglio Orienta, Fiera di Bergamo) &egrave; ancora annunciata</strong>, mentre un primo gruppo di scuole ha gi&agrave; pubblicato i propri open day (vedi tabella sopra e le schede delle singole scuole). &Egrave; normale che il grosso arrivi ancora fra fine settembre e ottobre. Qui sotto c'&egrave; l'elenco esatto dei posti dove guardare.
+      <br><br>Il <strong>23 settembre 2026</strong> abbiamo ricontrollato uno per uno i canali che pubblicano queste date per primi &mdash; calendario eventi del Comune di Treviglio, calendario di TreviglioFiera, sito dell'IC Mascagni di Melzo, pagine orientamento degli istituti comprensivi della zona, oltre alle pagine di ogni singolo istituto: <strong>a quella data nessun salone locale era ancora annunciato</strong>; il 3 ottobre sono uscite le date di Rete TreVi e Campus Orienta (tutti e due sabato 17 ottobre), mentre Treviglio Orienta e Fiera di Bergamo mancano ancora, mentre un primo gruppo di scuole ha gi&agrave; pubblicato i propri open day (vedi tabella sopra e le schede delle singole scuole). &Egrave; normale che il grosso arrivi ancora fra fine settembre e ottobre. Qui sotto c'&egrave; l'elenco esatto dei posti dove guardare.
     </div>
 
     <div class="section-header reveal" style="margin-top:56px">
@@ -3267,9 +3454,9 @@ Servono, ma sono anche pubblicit&agrave;: quel giorno la scuola si mette in tiro
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-item">
           <div class="tl-year-tag">Evento</div>
-          <div class="tl-date">Met&agrave; ottobre 2026 <span class="pill-todo">da confermare</span></div>
+          <div class="tl-date">Sabato 17 ottobre 2026</div>
           <div class="tl-item-title">&#127978; Campus Orienta &mdash; Melzo</div>
-          <div class="tl-item-desc">Stand delle superiori della Martesana nella scuola media di Via Mascagni, aperto a tutte le medie del territorio. Nel 2025 si &egrave; tenuto il 18 ottobre, nel 2024 il 12 ottobre. La data 2026 viene annunciata sul sito dell'IC Mascagni a fine settembre.</div>
+          <div class="tl-item-desc">Stand delle superiori della Martesana nella scuola media di Via Mascagni, aperto a tutte le medie del territorio. Serve prenotare sul sito dell'IC Mascagni entro venerd&igrave; 16 ottobre alle 13. Lo stesso giorno c'&egrave; anche la Giornata Rete TreVi a Velasca.</div>
         </div>
       </div>
 
@@ -3506,6 +3693,12 @@ Servono, ma sono anche pubblicit&agrave;: quel giorno la scuola si mette in tiro
     <div class="chg-list">
 
       <div class="chg-entry first">
+        <div class="chg-date">3 OTTOBRE 2026</div>
+        <div class="chg-title">&#128205; Tre strade, i prossimi appuntamenti</div>
+        <div class="chg-desc">Nuova sezione in apertura con gli eventi per chi guarda a <strong>liceo scientifico</strong>, <strong>informatica</strong> ed <strong>economia AFM</strong>: open day e giornate di lezione del Giordano Bruno, open day e ministage del Nizzola, e i due saloni di sabato 17 ottobre (Campus Orienta a Melzo, Rete TreVi a Velasca). Spiegata la differenza fra SIA e Informatica e Telecomunicazioni. <strong>Correzione:</strong> le date di open day di Argentia&ndash;Majorana e Zenale e Butinone inserite il 23 settembre erano quelle dell'anno scorso, e sono state tolte.</div>
+      </div>
+
+      <div class="chg-entry">
         <div class="chg-date">23 SETTEMBRE 2026</div>
         <div class="chg-title">&#128197; Prime date di Open Day verificate</div>
         <div class="chg-desc">Ricontrollate una per una tutte le scuole di questa pagina, i poli CFP e i saloni locali. Quattro istituti hanno gi&agrave; pubblicato le date dei propri open day 2026/27 &mdash; <strong>IIS Argentia&ndash;Majorana</strong>, <strong>ISIS Zenale e Butinone</strong>, <strong>Licei Sant'Agostino</strong> e <strong>Centro Salesiano Don Bosco</strong> &mdash; e sono ora nelle rispettive schede. Le altre scuole, i poli CFP e i saloni locali (Rete TreVi, Campus Orienta, Treviglio Orienta, Fiera di Bergamo) non avevano ancora una data.</div>
@@ -3590,7 +3783,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 /* == NAV ACTIVE STATE (scroll-based, piu' affidabile di IO per sezioni alte) == */
-var NAV_TARGETS = ['quiz', 'schools', 'iscrizioni', 'costi', 'dopo', 'timeline', 'risorse'];
+var NAV_TARGETS = ['eventi3', 'quiz', 'schools', 'iscrizioni', 'costi', 'dopo', 'timeline', 'risorse'];
 
 function updateNavActive() {
   var scrollY = window.scrollY || window.pageYOffset;
@@ -4207,6 +4400,34 @@ function busInit() {
 }
 
 busInit();
+
+/* == FOCUS TRE STRADE: filtro per strada, evento prossimo, eventi passati == */
+function fxFilter(path) {
+  var evs = document.querySelectorAll('#fxList .fx-ev');
+  for (var i = 0; i < evs.length; i++) {
+    var p = ' ' + (evs[i].getAttribute('data-path') || '') + ' ';
+    evs[i].hidden = !(path === 'all' || p.indexOf(' ' + path + ' ') !== -1);
+  }
+  var btns = document.querySelectorAll('.fx-btn');
+  for (var j = 0; j < btns.length; j++) {
+    btns[j].setAttribute('aria-pressed', btns[j].getAttribute('data-fx') === path ? 'true' : 'false');
+  }
+  fxMark();
+}
+function fxMark() {
+  var d = new Date();
+  var oggi = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  var evs = document.querySelectorAll('#fxList .fx-ev');
+  var trovato = false;
+  for (var i = 0; i < evs.length; i++) {
+    var passato = evs[i].getAttribute('data-date') < oggi;
+    evs[i].classList.toggle('fx-past', passato);
+    var prossimo = !passato && !evs[i].hidden && !trovato;
+    evs[i].classList.toggle('fx-next', prossimo);
+    if (prossimo) trovato = true;
+  }
+}
+fxMark();
 </script>
 </body>
 </html>
