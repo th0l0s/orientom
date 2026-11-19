@@ -2,3 +2,51 @@
 Thumbs.db
 *.log
 node_modules/
+
+# Hygiene / anti-leak guard
+# OS & editor
+.vscode/
+.vs/
+.obsidian/
+*.swp
+*.tmp
+*.bak
+
+# Dependencies & caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Agent & internal workspace folders
+.claude/
+.codex/
+.agents/
+/aborted/
+
+# Secrets, credentials, local DBs, logs & archives
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.kdbx
+*.token
+*.secret
+*.private
+*.cred.xml
+secrets.*
+credentials.*
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.zip
+*.7z
+*.tar.gz
+*.tgz
